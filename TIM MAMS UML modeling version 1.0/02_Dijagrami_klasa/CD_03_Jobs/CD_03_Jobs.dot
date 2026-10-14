@@ -1,0 +1,24 @@
+digraph CD_03_Jobs {
+  graph [label="CD_03 – Jobs modeli", labelloc=t, rankdir=LR];
+  node [shape=record];
+
+  Company [label="{external Company|id}"];
+  User [label="{external User|id}"];
+  Skill [label="{external Skill|id}"];
+  JobAd [label="{JobAd|name; description; type; location; application_deadline; created_at; updated_at; status; removal_reason}"];
+  JobAdSkill [label="{JobAdSkill|composite PK; required_level}"];
+  Application [label="{Application|applied_at; cv_path; skills; education; cover_message; status; unique(user,job_ad)}"];
+  FavoriteJobAd [label="{FavoriteJobAd|composite PK}"];
+  FavoriteCandidate [label="{FavoriteCandidate|composite PK}"];
+
+  Company -> JobAd [label="1 : 0..*"];
+  JobAd -> JobAdSkill [label="1 : 0..*"];
+  Skill -> JobAdSkill [label="1 : 0..*"];
+  User -> Application [label="1 : 0..*"];
+  JobAd -> Application [label="1 : 0..*"];
+  User -> FavoriteJobAd [label="1 : 0..*"];
+  JobAd -> FavoriteJobAd [label="1 : 0..*"];
+  Company -> FavoriteCandidate [label="1 : 0..*"];
+  User -> FavoriteCandidate [label="1 : 0..*"];
+  JobAd -> FavoriteCandidate [label="1 : 0..*"];
+}

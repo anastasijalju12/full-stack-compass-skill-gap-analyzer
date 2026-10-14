@@ -1,0 +1,75 @@
+@startuml
+title CD_02 – Careers modeli
+hide methods
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+package careers {
+
+class "«external: accounts»\nUser" as User {
+  - id: AutoField
+}
+
+class Career {
+  - id: AutoField
+  - name: CharField(150) {unique}
+  - description: TextField [0..1]
+}
+
+class Skill {
+  - id: AutoField
+  - name: CharField(100)
+  - description: TextField [0..1]
+}
+
+class CareerSkill {
+  - pk: CompositePrimaryKey(career_id, skill_id)
+  - required_level: IntegerField {1..5}
+  - weight: DecimalField(3,2) = 1.00
+}
+
+class UserSkill {
+  - pk: CompositePrimaryKey(user_id, skill_id)
+  - level: IntegerField {1..5}
+}
+
+class Resource {
+  - id: AutoField
+  - name: CharField(255)
+  - url: CharField(500) [0..1]
+  - level: CharField(50) [0..1]
+}
+
+class CareerProject {
+  - id: AutoField
+  - name: CharField(255)
+  - description: TextField [0..1]
+  - level: CharField(100) [0..1]
+  - file_path: CharField(500) [0..1]
+}
+
+class FavoriteCareer {
+  - pk: CompositePrimaryKey(user_id, career_id)
+}
+
+Career "1" -- "0..*" CareerSkill : career
+Skill "1" -- "0..*" CareerSkill : skill
+User "1" -- "0..*" UserSkill : user
+Skill "1" -- "0..*" UserSkill : skill
+Skill "1" -- "0..*" Resource : skill
+Career "1" -- "0..*" CareerProject : career
+User "1" -- "0..*" FavoriteCareer : user
+Career "1" -- "0..*" FavoriteCareer : career
+
+note bottom of CareerSkill
+Vezna klasa za M:N odnos Career–Skill.
+Čuva potreban nivo i težinu veštine.
+end note
+
+note bottom of UserSkill
+Vezna klasa za M:N odnos User–Skill.
+Čuva nivo znanja korisnika.
+end note
+}
+@enduml

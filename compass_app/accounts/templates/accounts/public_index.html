@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% block title %}Kompas{% endblock %}
+{% block content %}
+<div class="container">
+
+    <!-- HERO -->
+    <section class="k-hero">
+        <span class="k-eyebrow">Career navigation platform</span>
+        <div class="page-header p-0">
+            <h1 class="display-4">Welcome to Kompas</h1>
+        </div>
+        <h2 class="mt-4">A platform for recommending careers, internships, and job opportunities</h2>
+        <p class="k-lead mt-3">
+            Explore careers, browse current job ads, get to know companies, and find options that match your interests and skills.
+        </p>
+        <div class="k-hero__actions">
+            <a href="{% url 'registration_choice' %}" class="custom-btn">Start registration</a>
+            <a href="#zanimanja" class="k-btn k-btn--ghost">Explore careers</a>
+        </div>
+    </section>
+
+    <!-- CAREERS -->
+    <div id="zanimanja" class="row justify-content-center mt-5">
+        <div class="col-12 customCard px-4 px-md-5 py-4 py-md-5">
+            <div class="section-title">Career options</div>
+            <p>An overview of the career categories and fields available on the platform.</p>
+            <p class="text-muted">Guests can browse this section, but need to log in to see details about a specific career.</p>
+
+            <div class="row g-3 mt-2">
+                {% for career in careers %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="k-tile">
+                        <h5>{{ career.name }}</h5>
+                        <p>{{ career.description|default:"" }}</p>
+                        {% if user_role %}
+                            <a href="{% url 'career_details' career.id %}" class="custom-btn">Learn more</a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="custom-btn">Learn more</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12"><p class="k-empty mb-0">No careers have been added yet.</p></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- JOB ADS -->
+    <div id="oglasi" class="row justify-content-center mt-4">
+        <div class="col-12 customCard px-4 px-md-5 py-4 py-md-5">
+            <div class="section-title">Current internships and positions</div>
+
+            <div class="row g-3 mt-2">
+                {% for job in job_ads %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="k-tile">
+                        <h5>{{ job.name }}</h5>
+                        <p>{{ job.company.name }} | {% if job.type == 'internship' %}Internship{% else %}Junior position{% endif %}</p>
+                        <a href="{% url 'login' %}" class="custom-btn">View job ad</a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12"><p class="k-empty mb-0">There are no active job ads at the moment.</p></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPANIES -->
+    <div id="kompanije" class="row justify-content-center mt-4">
+        <div class="col-12 customCard px-4 px-md-5 py-4 py-md-5">
+            <div class="section-title">About our companies</div>
+            <p>An overview of the companies registered on the platform, with a short description of their field of business.</p>
+
+            <div class="row g-3 mt-2">
+                {% for company in companies %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="k-tile">
+                        <h5>{{ company.name }}</h5>
+                        <p class="mb-0">{{ company.description|default:company.industry }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12"><p class="k-empty mb-0">There are no registered companies at the moment.</p></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- SMART FILTERING -->
+    <div id="filtriranje" class="row justify-content-center mt-4">
+        <div class="col-12 customCard px-4 px-md-5 py-4 py-md-5">
+            <div class="section-title">Smart filtering</div>
+            <p>Choose criteria to find the job ads that suit you best.</p>
+
+            <form method="get" action="{% url 'public_index' %}#filtriranje">
+                <div class="row mt-3">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Industry</label>
+                        <select class="form-select" name="oblast">
+                            <option value="">All industries</option>
+                            {% for industry in industries %}
+                            <option value="{{ industry }}" {% if industry == selected_industry %}selected{% endif %}>{{ industry }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Engagement type</label>
+                        <select class="form-select" name="tip">
+                            <option value="">All types</option>
+                            <option value="internship" {% if selected_type == 'internship' %}selected{% endif %}>Internship</option>
+                            <option value="junior" {% if selected_type == 'junior' %}selected{% endif %}>Junior position</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Skill level</label>
+                        <select class="form-select" name="nivo">
+                            <option value="">All levels</option>
+                            <option value="beginner" {% if selected_level == 'beginner' %}selected{% endif %}>Beginner</option>
+                            <option value="intermediate" {% if selected_level == 'intermediate' %}selected{% endif %}>Intermediate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <button type="submit" class="custom-btn">Apply filter</button>
+                </div>
+            </form>
+
+            {% if filtering %}
+            <div class="mt-4">
+                <h5>Results:</h5>
+                <div class="row g-3 mt-1">
+                    {% for job in filtered_job_ads %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="k-tile">
+                            <h6>{{ job.name }}</h6>
+                            <p>{{ job.company.name }}</p>
+                            <a href="{% url 'login' %}" class="custom-btn">Details</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12"><p class="k-empty mb-0">No job ads match the selected criteria.</p></div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- ABOUT US -->
+    <div id="onama" class="row justify-content-center mt-4 mb-5">
+        <div class="col-12 customCard px-4 px-md-5 py-4 py-md-5">
+            <div class="section-title">About us</div>
+            <p>
+                Kompas is a platform designed to connect users with career opportunities, internships, and companies.
+            </p>
+            <p>
+                Our goal is to help users more easily find a professional path that matches their interests and knowledge.
+            </p>
+            <p>
+                Contact: <a href="mailto:kompas@platforma.rs">kompas@platforma.rs</a>
+            </p>
+            <div class="text-center mt-4">
+                <a href="{% url 'about_us' %}" class="custom-btn">Learn more</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

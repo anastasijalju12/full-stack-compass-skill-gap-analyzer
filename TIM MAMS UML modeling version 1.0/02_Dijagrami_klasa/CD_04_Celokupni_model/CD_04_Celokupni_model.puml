@@ -1,0 +1,55 @@
+@startuml
+title CD_04 – Celokupni model aplikacije Kompas
+hide methods
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+package accounts {
+class User
+class Company
+class Administrator
+class Subscription
+class PasswordReset
+}
+package careers {
+class Career
+class Skill
+class CareerSkill
+class UserSkill
+class Resource
+class CareerProject
+class FavoriteCareer
+}
+package jobs {
+class JobAd
+class JobAdSkill
+class Application
+class FavoriteJobAd
+class FavoriteCandidate
+}
+
+User "1" -- "0..*" Administrator
+User "1" -- "0..*" Subscription
+Company "1" -- "0..*" Subscription
+User "1" -- "0..*" PasswordReset
+Company "1" -- "0..*" PasswordReset
+Career "1" -- "0..*" CareerSkill
+Skill "1" -- "0..*" CareerSkill
+User "1" -- "0..*" UserSkill
+Skill "1" -- "0..*" UserSkill
+Skill "1" -- "0..*" Resource
+Career "1" -- "0..*" CareerProject
+User "1" -- "0..*" FavoriteCareer
+Career "1" -- "0..*" FavoriteCareer
+Company "1" -- "0..*" JobAd
+JobAd "1" -- "0..*" JobAdSkill
+Skill "1" -- "0..*" JobAdSkill
+User "1" -- "0..*" Application
+JobAd "1" -- "0..*" Application
+User "1" -- "0..*" FavoriteJobAd
+JobAd "1" -- "0..*" FavoriteJobAd
+Company "1" -- "0..*" FavoriteCandidate
+User "1" -- "0..*" FavoriteCandidate
+JobAd "1" -- "0..*" FavoriteCandidate
+@enduml

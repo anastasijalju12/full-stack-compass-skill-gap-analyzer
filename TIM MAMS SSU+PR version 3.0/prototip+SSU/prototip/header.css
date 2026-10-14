@@ -1,0 +1,37 @@
+/*autor: Anastasija Ljubičić 0312/2023*/
+body {
+    padding-top: 100px; 
+}
+
+#navHeader {
+    background-color: #f2a65a;
+}
+
+.nav-link {
+    color: #000000 !important;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+}
+
+#navMenuCompanyName {
+    color: #000000;
+    font-size: clamp(20px, 6vw, 35px);
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+}
+
+.page-header {
+    color: #000000;
+    font-size: clamp(24px, 6vw, 70px);
+    font-family: 'Playfair Display', serif;
+}
+
+
+/*#esteticLine {
+    height: 20px;
+    background-color: #e9c46a;
+}*/

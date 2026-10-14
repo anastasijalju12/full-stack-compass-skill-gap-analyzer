@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Kompas - Home{% endblock %}
+{% block content %}
+<div class="container">
+    <section class="k-hero mb-5">
+        <span class="k-eyebrow">Dashboard</span>
+        <div class="page-header p-0">
+            <h1 class="display-4">Welcome back{% if current_display_name %}, {{ current_display_name }}{% endif %}</h1>
+        </div>
+
+        <h2 class="mt-4">Your personalized platform overview</h2>
+        <p class="k-lead mt-3">
+            Explore recommended careers, current job ads, smart skill analysis, and your saved favorites.
+        </p>
+
+        {% if user_role == 'user' %}
+            <div class="k-quick-links">
+                <a href="{% url 'skill_match' %}" class="k-quick-link">Analysis</a>
+                <a href="{% url 'favourites' %}" class="k-quick-link">Favorites</a>
+                <a href="{% url 'subscription_view' %}" class="k-quick-link">Subscription</a>
+            </div>
+        {% elif user_role == 'company' %}
+            <div class="k-quick-links">
+                <a href="{% url 'company_main' %}" class="k-quick-link">Dashboard</a>
+                <a href="{% url 'company_ads' %}" class="k-quick-link">My job ads</a>
+                <a href="{% url 'subscription_view' %}" class="k-quick-link">Subscription</a>
+            </div>
+        {% elif user_role == 'admin' %}
+            <div class="k-quick-links">
+                <a href="{% url 'administration:dashboard' %}" class="k-quick-link">Admin panel</a>
+            </div>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

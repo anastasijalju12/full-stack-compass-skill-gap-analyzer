@@ -1,0 +1,368 @@
+<!-- Author: Milica Pavlovic, student ID: 2023/0148 -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kompas - Company registrations{% endblock %}
+
+{% block extra_head %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-company-requests.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-theme.css' %}"
+    >
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-subnav-wrap">
+    <div class="container-fluid">
+        <div class="admin-subnav">
+            <div class="admin-subnav-title">Administration</div>
+
+            <div class="admin-subnav-links">
+                <a href="{% url 'administration:dashboard' %}"
+                   class="admin-subnav-link">
+                    Admin panel
+                </a>
+
+                <a href="{% url 'administration:create_account' %}"
+                   class="admin-subnav-link">
+                    Create accounts
+                </a>
+
+                <a href="{% url 'administration:company_requests' %}"
+                   class="admin-subnav-link active">
+                    Company registrations
+                </a>
+
+                <a href="{% url 'administration:moderation' %}"
+                   class="admin-subnav-link">
+                    Job moderation
+                </a>
+
+                <a href="{% url 'administration:manage_accounts' %}"
+                   class="admin-subnav-link">
+                    Accounts & roles
+                </a>
+
+                <a href="{% url 'administration:manage_careers' %}"
+                   class="admin-subnav-link">
+                    Careers & skills
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-header text-center">
+    <h1 class="display-4">Company registrations</h1>
+</div>
+
+<div class="container pb-5">
+
+    {% if messages %}
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-12">
+                {% for message in messages %}
+                    <div class="alert
+                        {% if message.tags == 'success' %}
+                            alert-success
+                        {% elif message.tags == 'error' %}
+                            alert-danger
+                        {% else %}
+                            alert-info
+                        {% endif %}
+                    ">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+            <div class="sectionTitle">
+                Requests awaiting review
+            </div>
+
+            <div class="row g-4">
+
+                {% for company in pending_companies %}
+                    <div class="col-lg-6">
+
+                        <div class="requestPreviewCard h-100
+                            {% if selected_company and selected_company.id == company.id %}
+                                selectedRequestCard
+                            {% endif %}
+                        ">
+
+                            <div class="requestPreviewHeader">
+                                <div>
+                                    <div class="requestName">
+                                        {{ company.name }}
+                                    </div>
+
+                                    <div class="requestMeta">
+                                        Status:
+                                        <strong>Pending</strong>
+                                    </div>
+                                </div>
+
+                                <span class="statusBadge pending">
+                                    Pending
+                                </span>
+                            </div>
+
+                            <p class="mb-2">
+                                <strong>Username:</strong>
+                                {{ company.username }}
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>E-mail:</strong>
+                                {{ company.email|default:"Not provided" }}
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Industry:</strong>
+                                {{ company.industry|default:"Not provided" }}
+                            </p>
+
+                            <p class="mb-3">
+                                <strong>Contact:</strong>
+                                {{ company.contact|default:"Not provided" }}
+                            </p>
+
+                            <a
+                                href="{% url 'administration:company_requests' %}?company={{ company.id }}"
+                                class="buttonAboutJoabAd previewBtn text-decoration-none"
+                            >
+                                Review
+                            </a>
+
+                        </div>
+                    </div>
+
+                {% empty %}
+
+                    <div class="col-12">
+                        <div class="selectedCompanyInfo">
+                            There are no new company registrations awaiting review.
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    {% if selected_company %}
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Company application details
+                </div>
+
+                <div class="selectedCompanyInfo">
+                    Currently reviewing the company application:
+                    {{ selected_company.name }}
+                </div>
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">Company name</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="{{ selected_company.name }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">Username</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="{{ selected_company.username }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">Contact email</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="{{ selected_company.email|default:'' }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">Contact</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="{{ selected_company.contact|default:'' }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">Industry</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="{{ selected_company.industry|default:'' }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">Current status</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="Pending"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-12">
+                        <label class="labelTitle">Company description</label>
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            readonly
+                        >{{ selected_company.description|default:'' }}</textarea>
+                    </div>
+
+                </div>
+
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label
+                            for="rejectionReason"
+                            class="labelTitle"
+                        >
+                            Administrator note or rejection reason
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="3"
+                            id="rejectionReason"
+                            name="rejection_reason"
+                            placeholder="A reason is required only when rejecting the registration"
+                        >{{ selected_company.rejection_reason|default:'' }}</textarea>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd"
+                            formaction="{% url 'administration:approve_company' selected_company.id %}"
+                        >
+                            Approve registration
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd rejectBtn"
+                            formaction="{% url 'administration:reject_company' selected_company.id %}"
+                        >
+                            Reject registration
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd secondaryBtn"
+                            formaction="{% url 'administration:keep_company_pending' selected_company.id %}"
+                        >
+                            Keep pending
+                        </button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+            <div class="sectionTitle">
+                Decision history
+            </div>
+
+            {% for company in processed_companies %}
+
+                <div class="historyRow
+                    {% if company.status == 'active' %}
+                        approved
+                    {% else %}
+                        rejected
+                    {% endif %}
+                ">
+
+                    <div>
+                        <strong>{{ company.name }}</strong><br>
+
+                        <span class="historyMeta">
+                            {% if company.status == 'active' %}
+                                Registration approved.
+                            {% else %}
+                                Registration rejected.
+
+                                {% if company.rejection_reason %}
+                                    Reason: {{ company.rejection_reason }}
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    {% if company.status == 'active' %}
+                        <span class="statusBadge approved">
+                            Approved
+                        </span>
+                    {% else %}
+                        <span class="statusBadge rejected">
+                            Rejected
+                        </span>
+                    {% endif %}
+
+                </div>
+
+            {% empty %}
+
+                <div class="selectedCompanyInfo">
+                    No company registrations have been processed yet.
+                </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

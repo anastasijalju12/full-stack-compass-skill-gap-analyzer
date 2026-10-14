@@ -1,0 +1,105 @@
+@startuml
+title UC_01 – Nalozi i pristup
+left to right direction
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor white
+  BorderColor #374151
+  ArrowColor #4B5563
+}
+skinparam actor {
+  BorderColor #111827
+  FontColor #111827
+}
+
+actor Gost as Guest
+actor "Registrovani korisnik" as User
+actor Firma as Company
+actor Administrator as Admin
+
+rectangle "KOMPAS – Nalozi i kontrola pristupa" {
+
+  package "Javni pristup" #EFF6FF {
+    usecase "Pregled javnog sadržaja" as UC_Public
+    usecase "Pregled početne stranice" as UC_Home
+    usecase "Pregled stranice „O nama“" as UC_About
+
+    UC_Public ..> UC_Home : <<include>>
+    UC_Public ..> UC_About : <<include>>
+  }
+
+  package "Registracija i autentifikacija" #F0FDF4 {
+    usecase "Izbor vrste registracije" as UC_RegChoice
+    usecase "Registracija korisnika" as UC_RegUser
+    usecase "Registracija firme" as UC_RegCompany
+    usecase "Validacija registracionih podataka" as UC_Validate
+    usecase "Provera dostupnosti\nkorisničkog imena" as UC_Username
+    usecase "Prijava na sistem" as UC_Login
+    usecase "Provera kredencijala\ni vrste naloga" as UC_Credentials
+    usecase "Odjava sa sistema" as UC_Logout
+
+    UC_RegUser ..> UC_RegChoice : <<extend>>
+    UC_RegCompany ..> UC_RegChoice : <<extend>>
+    UC_RegUser ..> UC_Validate : <<include>>
+    UC_RegCompany ..> UC_Validate : <<include>>
+    UC_RegUser ..> UC_Username : <<include>>
+    UC_RegCompany ..> UC_Username : <<include>>
+    UC_Login ..> UC_Credentials : <<include>>
+  }
+
+  package "Reset lozinke" #FFFBEB {
+    usecase "Resetovanje lozinke" as UC_Reset
+    usecase "Podnošenje zahteva\nza reset" as UC_ResetRequest
+    usecase "Generisanje i slanje\njednokratnog tokena" as UC_SendToken
+    usecase "Provera važenja tokena" as UC_Token
+    usecase "Postavljanje nove lozinke" as UC_NewPassword
+
+    UC_Reset ..> UC_ResetRequest : <<include>>
+    UC_ResetRequest ..> UC_SendToken : <<include>>
+    UC_Reset ..> UC_Token : <<include>>
+    UC_Reset ..> UC_NewPassword : <<include>>
+  }
+
+  package "Pretplate" #F5F3FF {
+    usecase "Upravljanje pretplatom" as UC_Subscriptions
+    usecase "Pregled statusa i\nistorije pretplata" as UC_SubHistory
+    usecase "Aktiviranje pretplate" as UC_Subscribe
+    usecase "Evidentiranje uspešnog\nplaćanja" as UC_PaymentSuccess
+    usecase "Evidentiranje neuspešnog\nplaćanja" as UC_PaymentFail
+    usecase "Otkazivanje pretplate" as UC_Cancel
+
+    UC_Subscriptions ..> UC_SubHistory : <<include>>
+    UC_Subscribe ..> UC_Subscriptions : <<extend>>
+    UC_Cancel ..> UC_Subscriptions : <<extend>>
+    UC_PaymentSuccess ..> UC_Subscribe : <<extend>>
+    UC_PaymentFail ..> UC_Subscribe : <<extend>>
+  }
+}
+
+Guest -- UC_Public
+Guest -- UC_RegChoice
+Guest -- UC_Login
+
+User -- UC_Login
+User -- UC_Logout
+User -- UC_Reset
+User -- UC_Subscriptions
+
+Company -- UC_Login
+Company -- UC_Logout
+Company -- UC_Reset
+Company -- UC_Subscriptions
+
+Admin -- UC_Login
+Admin -- UC_Logout
+Admin -- UC_Reset
+
+note bottom
+Profil korisnika i njegove veštine prikazuju se u UC_02.
+Profil i kontrolna tabla firme prikazuju se u UC_03.
+Administratorske funkcionalnosti prikazuju se u UC_04.
+end note
+@enduml

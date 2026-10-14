@@ -1,0 +1,151 @@
+/* Autor: Milica Pavlovic */
+
+body {
+  background: #f3f3f3;
+}
+
+.admin-subnav-wrap {
+  margin-top: 8px;
+  margin-bottom: 18px;
+}
+
+.admin-subnav {
+  background: #f7e5cf;
+  border: 3px solid #f2a65a;
+  border-radius: 20px;
+  padding: 14px 18px;
+}
+
+.admin-subnav-title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.admin-subnav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-subnav-link {
+  text-decoration: none;
+  color: #000;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.admin-subnav-link:hover,
+.admin-subnav-link.active {
+  background: #f2a65a;
+  color: #fff;
+}
+
+.customCard {
+  background-color: #f2a65a;
+  color: #000000;
+  border-radius: 20px;
+  border: solid #000000 3px;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.sectionTitle {
+  font-weight: 700;
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.noteBox {
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px dashed #000;
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.dashboardActionCard {
+  background-color: #f2a65a;
+  border: 3px solid #000000;
+  border-radius: 20px;
+  padding: 24px 22px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.actionTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.actionText {
+  margin-bottom: 0;
+  font-size: 18px;
+}
+
+.actionBtn {
+  display: inline-block;
+  text-align: center;
+  min-width: 170px;
+  padding: 10px 18px;
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.actionBtn:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.statusBox {
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid #000;
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  height: 100%;
+}
+
+.statusNumber {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.statusLabel {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (max-width: 991px) {
+  .sectionTitle {
+    font-size: 22px;
+  }
+
+  .actionTitle {
+    font-size: 22px;
+  }
+
+  .actionText,
+  .customCard {
+    font-size: 16px;
+  }
+
+  .dashboardActionCard {
+    min-height: auto;
+  }
+}

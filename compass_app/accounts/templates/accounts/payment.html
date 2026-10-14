@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Kompas - Account Payment{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="page-header text-center">
+        <h1 class="display-4">Account payment</h1>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-8 col-12 customCard px-4 px-md-5 py-4 py-md-5">
+            <div class="section-title">Transaction summary</div>
+
+            <div class="k-info-box">
+                <p><strong>Service type:</strong> Account creation on the Kompas platform</p>
+                <p><strong>Status:</strong> Registration in progress</p>
+                {% if is_company %}
+                <p><strong>Note:</strong> After a successful payment, the account will be created with the status "pending" until an administrator approves it.</p>
+                {% else %}
+                <p><strong>Note:</strong> After a successful payment, the account will be activated immediately.</p>
+                {% endif %}
+                <p class="mb-0 k-price">Registration fee: 10.00 RSD</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-4 mb-5">
+        <div class="col-lg-8 col-12 customCard px-4 px-md-5 py-4 py-md-5">
+            <div class="section-title">Payment details</div>
+
+            <form method="post" action="{% url 'payment_process' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Card type</label>
+                    <select class="form-select">
+                        <option>VISA</option>
+                        <option>MasterCard</option>
+                        <option>American Express</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Card number</label>
+                    <input type="text" class="form-control" placeholder="Enter the card number">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Expiry date</label>
+                        <input type="text" class="form-control" placeholder="MM/YY">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">CVV</label>
+                        <input type="text" class="form-control" placeholder="Enter the CVV">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Cardholder name</label>
+                    <input type="text" class="form-control" placeholder="Enter the full name">
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" name="action" value="success" class="custom-btn">Confirm payment</button>
+                </div>
+            </form>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'payment_cancel' %}" class="secondary-link">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

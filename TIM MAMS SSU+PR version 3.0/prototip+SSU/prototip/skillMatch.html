@@ -1,0 +1,364 @@
+<!-- autor: Anastasija Ljubičić 0312/2023 -->
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="skillMatch.css">
+    
+</head>
+
+<body>
+
+
+
+    <div class="page-header text-center">
+        <h1 class="display-4">Pametno filtriranje</h1>
+    </div>
+    
+    
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-9 col-12 customCard d-flex align-items-center gap-4 mb-3 px-4 py-3">
+            <div id="skillFieldDiv">
+                <span class="skillField" onclick="toggleSkill(this, 'C')">C</span>
+                <span class="skillField" onclick="toggleSkill(this, 'C#')">C#</span>
+                <span class="skillField" onclick="toggleSkill(this, 'C++')">C++</span>
+                <span class="skillField" onclick="toggleSkill(this, 'CSS')">CSS</span>
+                <span class="skillField" onclick="toggleSkill(this, 'Django')">Django</span>
+                <span class="skillField" onclick="toggleSkill(this, 'Docker')">Docker</span>
+                <span class="skillField" onclick="toggleSkill(this, 'Excel')">Excel</span>
+                <span class="skillField" onclick="toggleSkill(this, 'Figma')">Figma</span>
+                <span class="skillField" onclick="toggleSkill(this, 'Git')">Git</span>
+                <span class="skillField" onclick="toggleSkill(this, 'HTML')">HTML</span>
+                <span class="skillField" onclick="toggleSkill(this, 'Java')">Java</span>
+                <span class="skillField" onclick="toggleSkill(this, 'JavaScript')">JavaScript</span>
+                <span class="skillField" onclick="toggleSkill(this, 'Kotlin')">Kotlin</span>
+                <span class="skillField" onclick="toggleSkill(this, 'MongoDB')">MongoDB</span>
+                <span class="skillField" onclick="toggleSkill(this, 'MySQL')">MySQL</span>
+                <span class="skillField" onclick="toggleSkill(this, 'Node.js')">Node.js</span>
+                <span class="skillField" onclick="toggleSkill(this, 'Python')">Python</span>
+                <span class="skillField" onclick="toggleSkill(this, 'React')">React</span>
+                <span class="skillField" onclick="toggleSkill(this, 'SQL')">SQL</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Skill levels -->
+    <div class="row justify-content-center mt-4" id="skillLevelsDiv" style="display:none">
+        <div class="col-lg-9 col-12 customCard px-4 py-3">
+            <div class="d-flex align-items-center gap-4 mb-3">
+                <div style="min-width:120px; font-weight:500;">HTML</div>
+
+                <div class="flex-grow-1">
+                    <input type="range" class="form-range" min="1" max="5" value="1" oninput="updateSkill(this)">
+                </div>
+
+                <div style="width:30px; text-align:center; font-weight:500;">1</div>
+
+                <div style="min-width:90px; color:rgb(0, 0, 0);">Početnik</div>
+            </div>
+
+            <div class="d-flex align-items-center gap-4 mb-3">
+                <div style="min-width:120px; font-weight:500;">C</div>
+
+                <div class="flex-grow-1">
+                    <input type="range" class="form-range" min="1" max="5" value="1" oninput="updateSkill(this)">
+                </div>
+
+                <div style="width:30px; text-align:center; font-weight:500;">1</div>
+
+                <div style="min-width:90px; color:rgb(0,0,0);">Početnik</div>
+            </div>
+
+            <div class="d-flex align-items-center gap-4 mb-3">
+                <div style="min-width:120px; font-weight:500;">Git</div>
+
+                <div class="flex-grow-1">
+                    <input type="range" class="form-range" min="1" max="5" value="1" oninput="updateSkill(this)">
+                </div>
+
+                <div style="width:30px; text-align:center; font-weight:500;">1</div>
+
+                <div style="min-width:90px; color:rgb(0,0,0);">Početnik</div>
+            </div>
+
+
+            <div class="text-center mt-3">
+                <button type="button" class="buttonAboutJoabAd pe-3 ps-3" onclick="showResultsOfAnalysis()">Analiziraj</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Matching-zanimanje  -->
+    <div class="row justify-content-center mt-4" id="matchingDiv" style="display:none;">
+        <div class="col-lg-9 col-12 customCard p-4">
+            
+            <!-- Naslov i procenat -->
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div style="font-weight: bold; display:flex; align-items:center; gap:6px;">
+                    Frontend Developer
+                    <input type="checkbox" id="careerStarFrontendDeveloper" class="favoriteCheckbox" hidden>
+                    <label for="careerStarFrontendDeveloper" class="starBtn" title="Označi kao omiljeno">★</label>
+                </div>
+                
+                <div style="font-size: 30px; font-weight: bold;">53%</div>
+            </div>
+
+            <!-- Objektivna linija progresa -->
+            <div style="width: 100%; height: 15px; background: #fff; border: 2px solid #000; margin-bottom: 20px;">
+                <div style="width: 53%; height: 100%; background: #000000;"></div>
+            </div>
+
+            <!-- Uputstvo -->
+            <div class="d-flex gap-3 mb-4" style="font-size: 14px;">
+                <div><span style="display:inline-block; width:13px; height:13px; background:#000000; border:1px solid #000;"></span> Tvoj nivo</div>
+
+                <div><span style="display:inline-block; width:13px; height:13px; background:#fff; border:1px solid #000;"></span> Potreban nivo</div>
+            </div>
+
+            <!-- HTML -->
+            <div class="row align-items-center mb-3">
+                <div class="col-2">HTML</div>
+                <div class="col-7">
+                    <div style="position: relative; height: 20px;">
+                        <div style="position: absolute; top:0; width: 80%; height: 8px; background: #000000;"></div>
+                        <div style="position: absolute; bottom:0; width: 80%; height: 8px; background: #fff; border: 1px solid #000;"></div>
+                    </div>
+                </div>
+                <div class="col-3" style="color: green; font-weight: bold;">Zadovoljava</div>
+            </div>
+
+            <!-- C -->
+            <div class="row align-items-center mb-3">
+                <div class="col-2">C</div>
+                <div class="col-7">
+                    <div style="position: relative; height: 20px;">
+                        <div style="position: absolute; top:0; width: 20%; height: 8px; background: #000000;"></div>
+                        <div style="position: absolute; bottom:0; width: 80%; height: 8px; background: #fff; border: 1px solid #000;"></div>
+                    </div>
+                </div>
+                <div class="col-3" style="color: red; font-weight: bold;">Potrebno je još 3 nivoa</div>
+            </div>
+
+            <!-- Git -->
+            <div class="row align-items-center mb-3">
+                <div class="col-2">Git</div>
+                <div class="col-7">
+                    <div style="position: relative; height: 20px;">
+                        <div style="position: absolute; top:0; width: 95%; height: 8px; background: #000000;"></div>
+                        <div style="position: absolute; bottom:0; width: 60%; height: 8px; background: #fff; border: 1px solid #000;"></div>
+                    </div>
+                </div>
+                <div class="col-3" style="color: green; font-weight: bold;">Zadovoljava</div>
+            </div>
+
+            <!-- Dugme Učenje veština -->
+            <div class="text-center mt-3">
+                <button type="button" class="buttonAboutJoabAd pe-3 ps-3" onclick="toggleUcenje('ucenjeZanimanje')">Učenje veština</button>
+            </div>
+
+            <!-- Kursevi za zanimanje -->
+            <div id="ucenjeZanimanje" style="display:none; margin-top:16px;">
+                <hr>
+                <div style="font-weight:600; margin-bottom:10px;">Preporučeni kursevi za nedostajuće veštine:</div>
+
+                <!-- C - nedostaje -->
+                <div class="mb-3">
+                    <div style="font-weight:500;">C<span style="color:black;"> nedostaje 3 nivoa</span></div>
+                    <div style="font-size:14px; color:#333; margin-top:4px;">
+                        📘 <strong>C Programming For Beginners</strong> Nivo: Početnik<br>
+                        <a href="https://www.udemy.com/course/c-programming-for-beginners-/" target="_blank">udemy.com</a>
+                    </div>
+                    <div style="font-size:14px; color:#333; margin-top:4px;">
+                        📗 <strong>Pointers in C and C++</strong> Nivo: Napredni<br>
+                        <a href="https://www.coursera.org/learn/c-for-everyone" target="_blank">coursera.org</a>
+                    </div>
+                </div>
+
+                <div style="font-weight:600; margin-bottom:6px;">Tipični projekti na intervjuima:</div>
+                <div style="font-size:12px; color:#777; margin-bottom:10px; font-style:italic;">
+                    ⚠️ Okvirni primeri — svaka firma može tražiti nešto drugačije.
+                </div>
+
+                <a href="careersProjects/portfolio.zip" download style="text-decoration:none; color:inherit;">📁 download</a>
+                <strong>Portfolio stranica</strong> <span style="font-size:12px; color:#555;">— Praksa, Junior (JetBrains kompanija obezbedila)</span><br>
+
+                <a href="careersProjects/todo_react.zip" download style="text-decoration:none; color:inherit;">📁 download</a>
+                <strong>Todo app u React-u</strong> <span style="font-size:12px; color:#555;">— Junior, Medior (Microsoft kompanija je obezbedila) </span>
+
+                <button
+                    type="button"
+                    class="buttonAboutJoabAd pe-3 ps-3 d-block mx-auto"
+                    onclick="
+                        localStorage.setItem('selectedArrangement', JSON.stringify({
+                            name: 'Frontend Developer',
+                            type: 'Frontend Developer',
+                            description: 'Pridruži se našem timu i radi na frontend sistemima koji koriste milioni korisnika širom sveta.'
+                        }));
+                        window.location.href = 'careers.html#frontendDeveloper';
+                    ">
+                    Pogledaj
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Matching — oglas -->
+    <div class="row justify-content-center mt-4 mb-5" id="matchingJobPostingDiv" style="display:none;">
+        <div class="col-lg-9 col-12 customCard p-4">
+
+            <!-- Naslov oglasa i procenat -->
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div style="font-weight: bold; display:flex; align-items:center; gap:6px;">
+                    Junior Backend Developer JetBrains
+                    <input type="checkbox" id="careerStarJuniorBackendDeveloperJetBrains" class="favoriteCheckbox" hidden>
+                    <label for="careerStarJuniorBackendDeveloperJetBrains" class="starBtn" title="Označi kao omiljeno">★</label>
+                </div>
+                
+                <div style="font-size: 20px; font-weight: bold; color: green;">2/3 veštine</div>
+            </div>
+
+            <div style="font-size:13px; color:#555; margin-bottom:16px;">Tip: Junior pozicija, Lokacija: Beograd, Rok: 30. april 2026.</div>
+
+            <!-- HTML -->
+            <div class="row align-items-center mb-2">
+                <div class="col-2">HTML</div>
+                <div class="col-7" style="font-size:14px; color:#555;">Tražena veština</div>
+                <div class="col-3" style="color: green; font-weight: bold;">Da</div>
+            </div>
+
+            <!-- C -->
+            <div class="row align-items-center mb-2">
+                <div class="col-2">C</div>
+                <div class="col-7" style="font-size:14px; color:#555;">Tražena veština</div>
+                <div class="col-3" style="color:black; font-weight: bold;">Ne</div>
+            </div>
+
+            <!-- Git -->
+            <div class="row align-items-center mb-2">
+                <div class="col-2">Git</div>
+                <div class="col-7" style="font-size:14px; color:#555;">Tražena veština</div>
+                <div class="col-3" style="color: green; font-weight: bold;">Da</div>
+            </div>
+
+            <!-- Dugme Učenje veština -->
+            <div class="text-center mt-3">
+                <button type="button" class="buttonAboutJoabAd pe-3 ps-3" onclick="toggleUcenje('ucenjeOglas')">Učenje veština</button>
+            </div>
+
+            <!-- Kursevi za oglas — sakriveni do klika -->
+            <div id="ucenjeOglas" style="display:none; margin-top:16px;">
+                <hr>
+                <div style="font-weight:600; margin-bottom:10px;">Preporučeni kursevi za veštine koje ne poseduješ:</div>
+
+                <!-- C - nema -->
+                <div class="mb-3">
+                    <div style="font-weight:500;">C <span style="color:black;">ne poseduješ</span></div>
+                    <div style="font-size:14px; color:#333; margin-top:4px;">
+                        📘 <strong>C Programming For Beginners</strong>  Nivo: Početnik<br>
+                        <a href="https://www.udemy.com/course/c-programming-for-beginners-/" target="_blank">udemy.com</a>
+                    </div>
+                    <div style="font-size:14px; color:#333; margin-top:4px;">
+                        📗 <strong>Pointers in C and C++</strong>Nivo: Napredni<br>
+                        <a href="https://www.coursera.org/learn/c-for-everyone" target="_blank">coursera.org</a>
+                    </div>
+                </div>
+
+                <button
+                        type="button"
+                        class="buttonAboutJoabAd pe-3 ps-3 d-block mx-auto"
+                        onclick="
+                            localStorage.setItem('selectedArrangement', JSON.stringify({
+                                name: 'Junior Backend Developer',
+                                company: 'JetBrains',
+                                type: 'Junior pozicija',
+                                deadline: '30. april 2026.',
+                                rating: 4.6,
+                                description: 'Pridruži se našem timu i radi na backend sistemima koji koriste milioni korisnika širom sveta.'
+                            }));
+                            window.location.href = 'jobAds.html#jetBrainsJuniorBackendDeveloper';
+                        ">
+                        Pogledaj
+                </button>
+            </div>
+
+        </div>
+    </div>
+    
+<script>
+function switchTab(tab) {
+    document.getElementById('panelJoabAds').classList.toggle('active', tab === 'oglasi');
+    document.getElementById('panelCareers').classList.toggle('active', tab === 'karijere');
+
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+<script>
+function updateSkill(input) {
+
+    let value = input.value;
+
+    let numberDiv = input.parentElement.nextElementSibling;
+    let textDiv = numberDiv.nextElementSibling;
+
+    numberDiv.innerText = value;
+
+    let tekst = 'Početnik';
+    if (value == 2) tekst = 'Osnovno';
+    if (value == 3) tekst = 'Srednje';
+    if (value == 4) tekst = 'Visoko';
+    if (value == 5) tekst = 'Ekspert';
+
+    textDiv.innerText = tekst;
+}
+</script>
+<script>
+let selectedSkills = [];
+
+function toggleSkill(el, naziv) {
+    if (el.classList.contains('selected')) {
+        el.classList.remove('selected');
+        selectedSkills = selectedSkills.filter(s => s !== naziv);
+    } else {
+        if (selectedSkills.length >= 3) return;
+        el.classList.add('selected');
+        selectedSkills.push(naziv);
+    }
+
+    if (selectedSkills.length === 3) {
+        document.getElementById('skillLevelsDiv').style.display = 'flex';
+    } else {
+        document.getElementById('skillLevelsDiv').style.display = 'none';
+        document.getElementById('matchingDiv').style.display = 'none';
+        document.getElementById('matchingJobPostingDiv').style.display = 'none';
+    }
+}
+
+function showResultsOfAnalysis() {
+    document.getElementById('matchingDiv').style.display = 'flex';
+    document.getElementById('matchingJobPostingDiv').style.display = 'flex';
+}
+
+function toggleUcenje(id) {
+    let div = document.getElementById(id);
+    div.style.display = div.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="navbar.js"></script>
+</body>
+</html>

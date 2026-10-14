@@ -1,0 +1,19 @@
+<!-- Author: Milica Pavlovic, student ID: 2023/0148 -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kompas - {{ page_title }}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'administration/admin-theme.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>{{ page_title }}</h1>
+    <p>This administration feature will be implemented in a future iteration.</p>
+
+    <a href="{% url 'administration:dashboard' %}">
+        Back to the administration dashboard
+    </a>
+{% endblock %}

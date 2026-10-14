@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Kompas - Registration{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="page-header text-center">
+        <h1 class="display-4">Registration</h1>
+    </div>
+
+    <div class="row justify-content-center mt-4 mb-5">
+        <div class="col-lg-8 col-12 customCard px-4 px-md-5 py-4 py-md-5 text-center">
+            <p class="text-muted mb-4">Register as:</p>
+            <div class="k-choice-grid">
+                <a href="{% url 'register_user' %}" class="k-choice">
+                    <span class="k-choice__icon" aria-hidden="true">🧭</span>
+                    <span class="k-choice__title">User (looking for a job)</span>
+                    <span class="k-choice__text">Explore careers, analyze your skills and apply for internships and jobs.</span>
+                    <span class="k-choice__cta">Continue &rarr;</span>
+                </a>
+                <a href="{% url 'register_company' %}" class="k-choice">
+                    <span class="k-choice__icon" aria-hidden="true">🏢</span>
+                    <span class="k-choice__title">Company (offering a job)</span>
+                    <span class="k-choice__text">Publish job ads, review candidates and find new talent.</span>
+                    <span class="k-choice__cta">Continue &rarr;</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

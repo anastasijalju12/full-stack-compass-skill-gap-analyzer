@@ -1,0 +1,68 @@
+{% load static %}
+
+<div id="JobAdForm" class="modal-overlay" style="display: none;">
+    <div class="modal-content p-4 job-ad-modal__box">
+        <button type="button" class="btn-close" onclick="closeAddJobAdForm()">✕</button>
+
+        <h2 id="jobAdFormTitle">New job ad</h2>
+
+        <form
+            id="jobAdForm"
+            action="{% url 'add_job_ad' %}"
+            data-add-url="{% url 'add_job_ad' %}"
+            method="POST"
+        >
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <h3>Required skills</h3>
+
+            <div class="required-skills">
+
+    {% for skill in skills %}
+
+        <div class="required-skill-item">
+
+            <label class="required-skill-item__checkbox">
+                <input
+                    type="checkbox"
+                    name="skills"
+                    value="{{ skill.id }}"
+                    class="required-skill-checkbox"
+                >
+
+                {{ skill.name }}
+            </label>
+
+            <select
+                name="skill_level_{{ skill.id }}"
+                class="form-control required-skill-level"
+            >
+                <option value="1">Basic level</option>
+                <option value="2">Intermediate level</option>
+                <option value="3">Advanced level</option>
+            </select>
+
+        </div>
+
+    {% empty %}
+
+        <p class="text-muted">
+            No skills have been added.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+            <button
+                type="submit"
+                id="jobAdFormSubmitButton"
+                class="btn btn-submit p-3 w-100"
+            >
+                Post job ad
+            </button>
+        </form>
+    </div>
+</div>

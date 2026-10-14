@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+width="2850" height="1850" viewBox="0 0 2850 1850">
+<rect width="100%" height="100%" fill="white"/>
+
+<text x="1425.0" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="bold" fill="#111827">CD_03 – Jobs modeli</text>
+<text x="1425.0" y="94" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="normal" fill="#4b5563">Oglasi, potrebne veštine, prijave i favoriti</text>
+<rect x="65" y="125" width="2720" height="1655" rx="28" fill="#f9fafb" stroke="#9ca3af" stroke-width="3"/>
+<text x="1425" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="29" font-weight="bold" fill="#111827">jobs / modeli oglasa i prijava</text>
+<rect x="130" y="230" width="470" height="128" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+<rect x="130" y="230" width="470" height="62" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+<line x1="130" y1="292" x2="600" y2="292" stroke="#2563eb" stroke-width="3"/>
+<text x="365.0" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#111827">«external: accounts» Company</text>
+<text x="148" y="323" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- id: AutoField</text>
+<rect x="1190" y="215" width="470" height="128" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+<rect x="1190" y="215" width="470" height="62" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+<line x1="1190" y1="277" x2="1660" y2="277" stroke="#2563eb" stroke-width="3"/>
+<text x="1425.0" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#111827">«external: accounts» User</text>
+<text x="1208" y="308" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- id: AutoField</text>
+<rect x="2240" y="230" width="470" height="128" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="3"/>
+<rect x="2240" y="230" width="470" height="62" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+<line x1="2240" y1="292" x2="2710" y2="292" stroke="#16a34a" stroke-width="3"/>
+<text x="2475.0" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#111827">«external: careers» Skill</text>
+<text x="2258" y="323" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- id: AutoField</text>
+<rect x="120" y="590" width="700" height="386" rx="12" fill="#ffffff" stroke="#374151" stroke-width="3"/>
+<rect x="120" y="590" width="700" height="62" rx="12" fill="#fef3c7" stroke="#374151" stroke-width="3"/>
+<line x1="120" y1="652" x2="820" y2="652" stroke="#374151" stroke-width="3"/>
+<text x="470.0" y="630" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#111827">JobAd</text>
+<text x="138" y="683" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- id: AutoField</text>
+<text x="138" y="713" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- name: CharField(150)</text>
+<text x="138" y="743" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- description: TextField [0..1]</text>
+<text x="138" y="773" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- type: internship | junior</text>
+<text x="138" y="803" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- location: CharField(150) [0..1]</text>
+<text x="138" y="833" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- application_deadline: DateField [0..1]</text>
+<text x="138" y="863" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- created_at: DateTimeField [0..1]</text>
+<text x="138" y="893" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- updated_at: DateTimeField [0..1]</text>
+<text x="138" y="923" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- status: active | inactive | pending [0..1]</text>
+<text x="138" y="953" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- removal_reason: TextField [0..1]</text>
+<rect x="1040" y="590" width="770" height="326" rx="12" fill="#ffffff" stroke="#374151" stroke-width="3"/>
+<rect x="1040" y="590" width="770" height="62" rx="12" fill="#fee2e2" stroke="#374151" stroke-width="3"/>
+<line x1="1040" y1="652" x2="1810" y2="652" stroke="#374151" stroke-width="3"/>
+<text x="1425.0" y="630" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#111827">Application</text>
+<text x="1058" y="683" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- id: AutoField</text>
+<text x="1058" y="713" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- applied_at: DateTimeField</text>
+<text x="1058" y="743" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- cv_path: FileField [0..1]</text>
+<text x="1058" y="773" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- skills: CharField(500) [0..1]</text>
+<text x="1058" y="803" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- education: CharField(200) [0..1]</text>
+<text x="1058" y="833" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- cover_message: TextField [0..1]</text>
+<text x="1058" y="863" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- status: active | withdrawn | accepted | denied</text>
+<text x="1058" y="893" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- unique(user, job_ad)</text>
+<rect x="2040" y="650" width="680" height="146" rx="12" fill="#ffffff" stroke="#374151" stroke-width="3"/>
+<rect x="2040" y="650" width="680" height="62" rx="12" fill="#fef3c7" stroke="#374151" stroke-width="3"/>
+<line x1="2040" y1="712" x2="2720" y2="712" stroke="#374151" stroke-width="3"/>
+<text x="2380.0" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#111827">JobAdSkill</text>
+<text x="2058" y="743" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- pk: CompositePrimaryKey(job_ad_id, skill_id)</text>
+<text x="2058" y="773" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- required_level: IntegerField {1..5}</text>
+<rect x="810" y="1360" width="760" height="128" rx="12" fill="#ffffff" stroke="#374151" stroke-width="3"/>
+<rect x="810" y="1360" width="760" height="62" rx="12" fill="#fce7f3" stroke="#374151" stroke-width="3"/>
+<line x1="810" y1="1422" x2="1570" y2="1422" stroke="#374151" stroke-width="3"/>
+<text x="1190.0" y="1400" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#111827">FavoriteJobAd</text>
+<text x="828" y="1453" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- pk: CompositePrimaryKey(user_id, job_ad_id)</text>
+<rect x="1750" y="1360" width="900" height="128" rx="12" fill="#ffffff" stroke="#374151" stroke-width="3"/>
+<rect x="1750" y="1360" width="900" height="62" rx="12" fill="#fce7f3" stroke="#374151" stroke-width="3"/>
+<line x1="1750" y1="1422" x2="2650" y2="1422" stroke="#374151" stroke-width="3"/>
+<text x="2200.0" y="1400" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#111827">FavoriteCandidate</text>
+<text x="1768" y="1453" text-anchor="start" font-family="Arial, sans-serif" font-size="17.5" font-weight="normal" fill="#111827">- pk: CompositePrimaryKey(company_id, user_id, job_ad_id)</text>
+<polyline points="365,382 365,590" fill="none" stroke="#374151" stroke-width="2.8"/>
+<text x="335" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">1</text>
+<text x="335" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">0..*</text>
+<polyline points="1425,367 1425,590" fill="none" stroke="#374151" stroke-width="2.8"/>
+<text x="1395" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">1</text>
+<text x="1395" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">0..*</text>
+<polyline points="2475,382 2475,650" fill="none" stroke="#374151" stroke-width="2.8"/>
+<text x="2445" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">1</text>
+<text x="2445" y="635" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">0..*</text>
+<polyline points="820,840 930,840 930,790 1040,790" fill="none" stroke="#374151" stroke-width="2.8"/>
+<text x="845" y="825" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">1</text>
+<text x="1015" y="775" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">0..*</text>
+<polyline points="820,700 960,700 960,500 1940,500 1940,730 2040,730" fill="none" stroke="#374151" stroke-width="2.8"/>
+<text x="845" y="685" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">1</text>
+<text x="2015" y="715" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">0..*</text>
+<polyline points="1325,367 1325,470 970,470 970,1360" fill="none" stroke="#374151" stroke-width="2.8"/>
+<text x="1300" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">1</text>
+<text x="945" y="1345" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">0..*</text>
+<polyline points="600,1176 600,1270 1190,1270 1190,1360" fill="none" stroke="#374151" stroke-width="2.8"/>
+<text x="575" y="1200" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">1</text>
+<text x="1165" y="1345" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">0..*</text>
+<polyline points="470,382 470,520 80,520 80,1545 1680,1545 1680,1420 1750,1420" fill="none" stroke="#374151" stroke-width="2.8"/>
+<text x="445" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">1</text>
+<text x="1725" y="1405" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">0..*</text>
+<polyline points="1555,367 1555,470 1880,470 1880,1360" fill="none" stroke="#374151" stroke-width="2.8"/>
+<text x="1530" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">1</text>
+<text x="1855" y="1345" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">0..*</text>
+<polyline points="820,1030 900,1030 900,1210 2210,1210 2210,1360" fill="none" stroke="#374151" stroke-width="2.8"/>
+<text x="845" y="1015" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">1</text>
+<text x="2185" y="1345" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">0..*</text>
+</svg>

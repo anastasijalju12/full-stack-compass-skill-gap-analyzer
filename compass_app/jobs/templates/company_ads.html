@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% include 'basing_settings.html' %}
+
+    <link rel="stylesheet" href="{% static 'css/one_add_candidates.css' %}">
+    <link rel="stylesheet" href="{% static 'css/candidate_details.css' %}">
+
+    <!-- CARDS -->
+        <div class="company-ads container mt-4">
+
+            <div class="company-ads-toolbar mb-4">
+
+            <div class="company-ads-toolbar__search">
+                <input
+                    type="text"
+                    id="companyAdSearchInput"
+                    class="form-control"
+                    placeholder="Search job ads..."
+                >
+
+                <button
+                    type="button"
+                    id="companyAdSearchButton"
+                    class="company-ads-toolbar__search-button"
+                >
+                    Search
+                </button>
+            </div>
+
+            <div class="company-ads-toolbar__sort">
+                <label for="companyAdSortSelect">Sort by:</label>
+
+                <select id="companyAdSortSelect" class="form-select">
+                    <option value="default">Default</option>
+                    <option value="titleAsc">Title A-Z</option>
+                    <option value="titleDesc">Title Z-A</option>
+                    <option value="deadlineAsc">Application deadline - earliest first</option>
+                    <option value="deadlineDesc">Application deadline - latest first</option>
+                    <option value="statusAsc">Status A-Z</option>
+                    <option value="statusDesc">Status Z-A</option>
+                </select>
+            </div>
+
+            <div class="company-ads-toolbar__action">
+            <button class="dashboard-card--button p-2 px-3 text-center ms-auto"
+                    onclick="openAddJobAdForm()">
+                ➕ New job ad
+            </button>
+
+            </div>
+
+        </div>
+
+        <div class="row g-4" id="companyAdsRow">
+
+                {% for ad in ads %}
+
+                        <div
+                            class="col-lg-4 col-md-6 col-12 job-ad-column company-ad-item"
+                            data-title="{{ ad.name }}"
+                            data-deadline="{{ ad.application_deadline|date:'Y-m-d' }}"
+                            data-status="{{ ad.status }}"
+                        >
+                    <div class="ad-card__box p-4">
+
+                        <header class="ad-card__header">
+
+                                <div class="ad-card__title">
+                                    <h2>{{ ad.name }}</h2>
+                                </div>
+
+                                <div class="ad-card__media">
+
+                                    <button
+                                        type="button"
+                                        class="ad-card__button"
+                                        data-delete-url="{% url 'delete_job_ad' ad.id %}"
+                                        data-ad-name="{{ ad.name }}"
+                                        onclick="openDeleteJobAdDialog(this)"
+                                    >
+                                        Delete
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="ad-card__button"
+                                        data-update-url="{% url 'update_job_ad' ad.id %}"
+                                        data-name="{{ ad.name }}"
+                                        data-type="{{ ad.type }}"
+                                        data-location="{{ ad.location }}"
+                                        data-deadline="{{ ad.application_deadline|date:'Y-m-d' }}"
+                                        data-status="{{ ad.status }}"
+                                        data-description="{{ ad.description|escape }}"
+                                        onclick="openEditJobAdForm(this)"
+                                    >
+                                        Edit
+                                    </button>
+
+                                        <button type="button" class="ad-card__button" onclick="showCandidatesModalOAC({{ ad.id }})">
+                                                Candidates
+                                        </button>
+
+                                </div>
+
+                        </header>
+
+                        <div class="ad-card__body">
+
+                            <ul class="list-unstyled mb-0">
+
+                                <li>Type: <strong>{{ ad.type }}</strong></li>
+                                <li>Location: <strong>{{ ad.location }}</strong></li>
+                                <li>
+                                    Application deadline:<br>
+                                    <span class="ad-card__status">{{ ad.application_deadline |date:"d.m.Y." }}</span>
+                                </li>
+                                <li>
+                                    Status:
+                                    <span class="ad-card__status">{{ ad.status }}</span>
+                                </li>
+                                <li class="mt-2">
+                                    {{ ad.description }}
+                                </li>
+                                <li>
+                                    <br>Required skills:<br>
+                                    {% for skill in ad.required_skills %}
+                                        {{ skill.skill.name }}{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% empty %}
+
+                <div class="col-12">
+                    <p class="text-muted">You currently have no job ads.</p>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+    </div>
+
+
+    <div id="DeleteJobAdDialog" class="modal-overlay" style="display: none;">
+
+    <div class="modal-content p-4 delete-job-ad-dialog">
+
+        <button
+            type="button"
+            class="btn-close"
+            onclick="closeDeleteJobAdDialog()"
+        >
+            ✕
+        </button>
+
+        <h2>Delete job ad</h2>
+
+        <p>
+            Are you sure you want to delete the job ad
+            <strong id="deleteJobAdName"></strong>?
+        </p>
+
+        <form id="deleteJobAdForm" method="POST">
+            {% csrf_token %}
+
+            <div class="delete-job-ad-dialog__actions">
+                <button
+                    type="button"
+                    class="delete-job-ad-dialog__cancel"
+                    onclick="closeDeleteJobAdDialog()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="delete-job-ad-dialog__confirm"
+                >
+                    Delete
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+    {% for ad in ads %}
+        {% include 'one_add_candidates.html' %}
+    {% endfor %}
+    {% include 'add_job_ad.html' %}
+    <script src="{% static 'js/one_add_candidates.js' %}?v=2"></script>
+
+    <script src="{% static 'js/candidate_details.js' %}?v=2"></script>
+
+{% endblock %}

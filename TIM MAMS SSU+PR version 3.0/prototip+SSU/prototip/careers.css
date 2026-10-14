@@ -1,0 +1,210 @@
+/* MINA OSTOJIC */
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background: #f6f6f6;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 10px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+/* ===== KARTICE ===== */
+.careerCard {
+    background: #f2a65a;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    box-shadow: 4px 4px 0px black;
+}
+
+/* NASLOV */
+.careerCard h3 {
+    margin-top: 0;
+}
+
+/* OPIS */
+.desc {
+    margin: 10px 0;
+}
+
+/* SKILLS */
+.skills {
+    margin-top: 10px;
+}
+
+.skills span {
+    display: inline-block;
+    background: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 5px 5px 0 0;
+
+    font-size: 14px;
+}
+
+/* MINA OSTOJIC */
+
+.careersContainer {
+    padding-top: 100px;
+}
+
+.careerCard {
+    background-color: #f2a65a;
+    color: #000000;
+    border-radius: 20px;
+    border: solid #000000 3px;
+    font-weight: 400;
+    font-size: 20px;
+    margin-top: 20px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 20px;
+
+    height: 100%;
+}
+
+.careerHeader {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+}
+
+.careerHeader h3 {
+    margin: 0;
+}
+
+.careerStar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.starBtn {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    position: static;
+
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+}
+
+.favoriteCheckbox:checked + .starBtn {
+    color: gold;
+    -webkit-text-stroke: 0px;
+}
+
+.careerBody {
+    display: block;
+}
+
+.desc {
+    margin-bottom: 12px;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.skills span {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 12px;
+    padding: 4px 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.careerActions {
+    width: 100%;
+}
+
+.buttonDetails {
+    display: block;
+    width: 100%;
+
+    padding: 8px 16px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.buttonDetails:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.search-sort-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: end;
+}
+
+.search-group {
+    display: flex;
+    gap: 10px;
+}
+
+.search-group input {
+    flex: 1;
+}
+
+.buttonSearch {
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.sort-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sort-group label {
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.sort-group select {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .search-sort-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .search-group,
+    .sort-group {
+        width: 100%;
+    }
+}

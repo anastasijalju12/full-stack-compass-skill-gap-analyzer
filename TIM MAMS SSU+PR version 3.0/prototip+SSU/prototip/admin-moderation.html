@@ -1,0 +1,399 @@
+<!-- Autor: Milica Pavlovic -->
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas - Moderacija oglasa</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="admin-moderation.css">
+</head>
+<body>
+
+    <!---------------- JAVNI HEADER --------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navHeader">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo/compas.png" class="img-fluid" style="height:64px;" alt="logoKompas">
+                <span class="h4 ms-2" id="navMenuCompanyName">Kompas</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navbarNavDropdown" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Početna</a></li>
+                    <li class="nav-item"><a href="careers.html" class="nav-link">Zanimanja</a></li>
+                    <li class="nav-item"><a href="jobAds.html" class="nav-link">Oglasi</a></li>
+                    <li class="nav-item"><a href="skillMatch.html" class="nav-link">Pametno filtriranje</a></li>
+                    <li class="nav-item"><a href="companies.html" class="nav-link">Naše kompanije</a></li>
+                    <li class="nav-item"><a href="aboutUs.html" class="nav-link">O nama</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Avatar</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a href="psiIndex.html" class="dropdown-item">Moj profil</a></li>
+                            <li><a href="favourites.html" class="dropdown-item">Omiljeno</a></li>
+                            <li><a href="#" class="dropdown-item">Odjava</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!---------------- ADMIN HEADER --------------------->
+    <div class="admin-subnav-wrap">
+        <div class="container-fluid">
+            <div class="admin-subnav">
+                <div class="admin-subnav-title">Admin meni</div>
+                <div class="admin-subnav-links">
+                    <a href="admin-dashboard.html" class="admin-subnav-link">Admin panel</a>
+                    <a href="admin-create-account.html" class="admin-subnav-link">Kreiranje naloga</a>
+                    <a href="admin-company-requests.html" class="admin-subnav-link">Registracije firmi</a>
+                    <a href="admin-moderation.html" class="admin-subnav-link active">Moderacija</a>
+                    <a href="admin-manage-accounts.html" class="admin-subnav-link">Nalozi i uloge</a>
+                    <a href="admin-manage-careers.html" class="admin-subnav-link">Karijere i veštine</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header text-center">
+        <h1 class="display-4">Moderacija oglasa</h1>
+    </div>
+
+    <div class="container pb-5">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Oglasi za proveru</div>
+                <div id="adCardsRow" class="row g-3"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4" id="actionChooserRow" style="display:none;">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Izabrana akcija</div>
+                <div class="d-flex flex-wrap gap-3 justify-content-center">
+                    <button type="button" class="buttonAboutJoabAd dangerBtn" onclick="chooseAction('remove')">Ukloni oglas</button>
+                    <button type="button" class="buttonAboutJoabAd warningBtn" onclick="chooseAction('outdated')">Označi kao zastareo</button>
+                    <button type="button" class="buttonAboutJoabAd" onclick="chooseAction('keep')">Ostavi aktivnim</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4" id="detailsRow" style="display:none;">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Detalji izabranog oglasa</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="labelTitle">Naziv oglasa</label>
+                        <input type="text" class="form-control readonlyField" id="adTitle" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Firma</label>
+                        <input type="text" class="form-control readonlyField" id="adCompany" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Tip pozicije</label>
+                        <input type="text" class="form-control readonlyField" id="adType" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Rok prijave</label>
+                        <input type="text" class="form-control readonlyField" id="adDeadline" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Trenutni status</label>
+                        <input type="text" class="form-control readonlyField" id="adStatus" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Razlog provere</label>
+                        <input type="text" class="form-control readonlyField" id="adReason" readonly>
+                    </div>
+                    <div class="col-12">
+                        <label class="labelTitle">Opis oglasa</label>
+                        <textarea class="form-control readonlyField" rows="4" id="adDescription" readonly></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="labelTitle">Napomena administratora</label>
+                        <textarea class="form-control" rows="3" id="adminNote" placeholder="Upiši internu napomenu ili razlog odluke"></textarea>
+                    </div>
+                </div>
+
+                <div id="actionInfo" class="actionInfoBox mt-4">Prvo izaberi akciju koju želiš da izvršiš nad oglasom.</div>
+
+                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+                    <button type="button" class="buttonAboutJoabAd" id="executeBtn" onclick="executeModeration()" disabled>Sačuvaj odluku</button>
+                    <button type="button" class="buttonAboutJoabAd secondaryBtn" onclick="resetModeration()">Otkaži</button>
+                </div>
+
+                <div id="moderationMessage" class="messageBox"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Istorija moderacije</div>
+                <div id="historyList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ads = [
+            {
+                id: 1,
+                title: 'Junior Backend Developer',
+                company: 'JetBrains Serbia',
+                city: 'Beograd',
+                status: 'Aktivan',
+                badgeText: 'Prijavljen sadržaj',
+                badgeClass: 'warning',
+                type: 'Junior pozicija',
+                deadline: '30. april 2026.',
+                reason: 'Prijavljen zbog netačnih informacija o poziciji',
+                description: 'Pridruži se našem timu i radi na backend sistemima koji koriste milioni korisnika širom sveta.',
+                note: ''
+            },
+            {
+                id: 2,
+                title: 'Frontend Intern',
+                company: 'CodeFlow Labs',
+                city: 'Remote',
+                status: 'Istekao rok',
+                badgeText: 'Zastareo',
+                badgeClass: 'old',
+                type: 'Praksa',
+                deadline: '05. april 2026.',
+                reason: 'Rok za prijavu je istekao',
+                description: 'Praksa za studente zainteresovane za rad na modernim frontend rešenjima i timskom razvoju.',
+                note: ''
+            },
+            {
+                id: 3,
+                title: 'QA Practice Program',
+                company: 'SoftVision',
+                city: 'Novi Sad',
+                status: 'Aktivan',
+                badgeText: 'Ispravan',
+                badgeClass: 'ok',
+                type: 'Praksa',
+                deadline: '18. maj 2026.',
+                reason: 'Potrebna dodatna provera nakon prijave korisnika',
+                description: 'Program prakse za QA početnike sa fokusom na manuelno testiranje, Jira alat i osnovne test scenarije.',
+                note: ''
+            }
+        ];
+
+        const history = [
+            {
+                title: 'Data Analyst Intern',
+                details: 'Uklonjen 11. april 2026. · razlog: zastareo oglas',
+                badgeText: 'Uklonjen',
+                badgeClass: 'old'
+            },
+            {
+                title: 'QA Practice Program',
+                details: 'Pregledan 12. april 2026. · oglas ostao aktivan',
+                badgeText: 'Aktivan',
+                badgeClass: 'ok'
+            }
+        ];
+
+        let selectedAdId = null;
+        let selectedAction = null;
+
+        function renderAds() {
+            const row = document.getElementById('adCardsRow');
+            row.innerHTML = '';
+
+            if (ads.length === 0) {
+                row.innerHTML = '<div class="col-12"><div class="emptyBox">Trenutno nema oglasa za proveru.</div></div>';
+                document.getElementById('actionChooserRow').style.display = 'none';
+                document.getElementById('detailsRow').style.display = 'none';
+                return;
+            }
+
+            ads.forEach(ad => {
+                const col = document.createElement('div');
+                col.className = 'col-lg-4';
+                col.innerHTML = `
+                    <div class="adPreviewCard ${selectedAdId === ad.id ? 'active-card' : ''}" onclick="selectAd(${ad.id})">
+                        <div class="previewHeaderRow">
+                            <div>
+                                <div class="previewTitle">${ad.title}</div>
+                                <div class="previewMeta">${ad.company} · ${ad.city}</div>
+                                <div class="previewMeta">Status: <strong>${ad.status}</strong></div>
+                            </div>
+                            <span class="statusBadge ${ad.badgeClass}">${ad.badgeText}</span>
+                        </div>
+                    </div>
+                `;
+                row.appendChild(col);
+            });
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('historyList');
+            container.innerHTML = '';
+
+            history.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'historyRow';
+                row.innerHTML = `
+                    <div>
+                        <strong>${item.title}</strong><br>
+                        <span class="historyMeta">${item.details}</span>
+                    </div>
+                    <span class="statusBadge ${item.badgeClass}">${item.badgeText}</span>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function selectAd(id) {
+            selectedAdId = id;
+            selectedAction = null;
+            renderAds();
+            showSelectedAdDetails();
+            document.getElementById('actionChooserRow').style.display = 'block';
+            document.getElementById('detailsRow').style.display = 'block';
+            document.getElementById('moderationMessage').style.display = 'none';
+            updateActionBox();
+        }
+
+        function showSelectedAdDetails() {
+            const ad = ads.find(item => item.id === selectedAdId);
+            if (!ad) return;
+
+            document.getElementById('adTitle').value = ad.title;
+            document.getElementById('adCompany').value = ad.company;
+            document.getElementById('adType').value = ad.type;
+            document.getElementById('adDeadline').value = ad.deadline;
+            document.getElementById('adStatus').value = ad.status;
+            document.getElementById('adReason').value = ad.reason;
+            document.getElementById('adDescription').value = ad.description;
+            document.getElementById('adminNote').value = ad.note || '';
+        }
+
+        function chooseAction(action) {
+            selectedAction = action;
+            updateActionBox();
+        }
+
+        function updateActionBox() {
+            const info = document.getElementById('actionInfo');
+            const btn = document.getElementById('executeBtn');
+
+            btn.disabled = !selectedAction || !selectedAdId;
+
+            if (!selectedAction) {
+                info.className = 'actionInfoBox mt-4';
+                info.textContent = 'Prvo izaberi akciju koju želiš da izvršiš nad oglasom.';
+                return;
+            }
+
+            if (selectedAction === 'remove') {
+                info.className = 'actionInfoBox dangerActionBox mt-4';
+                info.textContent = 'Izabrana akcija: Ukloni oglas iz javnog prikaza.';
+            } else if (selectedAction === 'outdated') {
+                info.className = 'actionInfoBox warningActionBox mt-4';
+                info.textContent = 'Izabrana akcija: Označi oglas kao zastareo.';
+            } else {
+                info.className = 'actionInfoBox successActionBox mt-4';
+                info.textContent = 'Izabrana akcija: Oglas ostaje aktivan i vidljiv korisnicima.';
+            }
+        }
+
+        function executeModeration() {
+            const ad = ads.find(item => item.id === selectedAdId);
+            if (!ad || !selectedAction) return;
+
+            const adminNote = document.getElementById('adminNote').value.trim();
+            const message = document.getElementById('moderationMessage');
+            const today = '16. april 2026.';
+
+            ad.note = adminNote;
+
+            if (selectedAction === 'remove') {
+                history.unshift({
+                    title: ad.title,
+                    details: `Uklonjen ${today}${adminNote ? ' · napomena: ' + adminNote : ''}`,
+                    badgeText: 'Uklonjen',
+                    badgeClass: 'old'
+                });
+
+                const index = ads.findIndex(item => item.id === selectedAdId);
+                if (index !== -1) ads.splice(index, 1);
+
+                message.className = 'messageBox errorBox';
+                message.textContent = 'Oglas je uklonjen iz javnog prikaza.';
+                message.style.display = 'block';
+
+                selectedAdId = null;
+                selectedAction = null;
+                renderAds();
+                renderHistory();
+                document.getElementById('actionChooserRow').style.display = ads.length ? 'none' : 'none';
+                document.getElementById('detailsRow').style.display = 'none';
+                return;
+            }
+
+            if (selectedAction === 'outdated') {
+                ad.status = 'Zastareo';
+                ad.badgeText = 'Zastareo';
+                ad.badgeClass = 'old';
+
+                history.unshift({
+                    title: ad.title,
+                    details: `Označen kao zastareo ${today}${adminNote ? ' · napomena: ' + adminNote : ''}`,
+                    badgeText: 'Zastareo',
+                    badgeClass: 'old'
+                });
+
+                message.className = 'messageBox warningBox';
+                message.textContent = 'Oglas je označen kao zastareo.';
+            }
+
+            if (selectedAction === 'keep') {
+                ad.status = 'Aktivan';
+                ad.badgeText = 'Ispravan';
+                ad.badgeClass = 'ok';
+
+                history.unshift({
+                    title: ad.title,
+                    details: `Pregledan ${today} · oglas ostao aktivan${adminNote ? ' · napomena: ' + adminNote : ''}`,
+                    badgeText: 'Aktivan',
+                    badgeClass: 'ok'
+                });
+
+                message.className = 'messageBox successBox';
+                message.textContent = 'Oglas ostaje aktivan i vidljiv korisnicima.';
+            }
+
+            message.style.display = 'block';
+            renderAds();
+            renderHistory();
+            showSelectedAdDetails();
+            selectedAction = null;
+            updateActionBox();
+        }
+
+        function resetModeration() {
+            selectedAction = null;
+            document.getElementById('adminNote').value = '';
+            document.getElementById('moderationMessage').style.display = 'none';
+            updateActionBox();
+        }
+
+        renderAds();
+        renderHistory();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

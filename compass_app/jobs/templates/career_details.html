@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include 'basing_settings.html' %}
+
+    <link rel="stylesheet" href="{% static 'css/careers.css' %}">
+
+    <div class="container mt-4 careersContainer">
+
+        <div class="careerCard p-4">
+
+            <div class="careerHeader">
+                <h3>
+                    {{ career.name }}
+                </h3>
+            </div>
+
+            <div class="careerBody">
+                <p class="desc">
+                    {{ career.description }}
+                </p>
+            </div>
+
+            <div class="careerActions">
+                <a href="{% url 'careers' %}" class="buttonDetails">
+                    Back to careers
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

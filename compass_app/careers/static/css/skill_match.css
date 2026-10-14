@@ -1,0 +1,401 @@
+/*author: Anastasija Ljubičić 0312/2023*/
+
+/* ---------- Skill selection chips ---------- */
+
+#skill-field-div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-field {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    color: var(--k-text-soft);
+    font-size: 0.9rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--k-border);
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.25s ease, transform 0.25s var(--k-ease);
+}
+
+.skill-field:hover {
+    color: #ffffff;
+    background: rgba(34, 211, 238, 0.08);
+    border-color: rgba(34, 211, 238, 0.45);
+    transform: translateY(-1px);
+}
+
+.skill-field.selected {
+    color: #03141f;
+    font-weight: 600;
+    background: var(--k-gradient);
+    border-color: transparent;
+    box-shadow: 0 8px 22px -10px rgba(34, 211, 238, 0.95);
+}
+
+.custom-card {
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* ---------- Results ---------- */
+
+.career-star {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.start-btn {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    position: static;
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+}
+
+.career-name {
+    color: #ffffff;
+    font-family: var(--k-font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.career-percentage {
+    font-family: var(--k-font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    background: var(--k-gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.progress-track {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    margin: 6px 0 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--k-border);
+    border-radius: 999px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--k-gradient);
+    box-shadow: 0 0 14px rgba(34, 211, 238, 0.75);
+}
+
+.legend {
+    color: var(--k-muted);
+    font-size: 0.85rem;
+}
+
+.legend-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+    vertical-align: -1px;
+    border-radius: 3px;
+}
+
+.legend-swatch.user-level {
+    background: var(--k-cyan);
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.8);
+}
+
+.legend-swatch.career-level {
+    background: transparent;
+    border: 1px solid rgba(255, 107, 61, 0.9);
+}
+
+.skill-bar-wrap {
+    position: relative;
+    height: 20px;
+}
+
+.skill-bar-user {
+    position: absolute;
+    top: 0;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--k-gradient);
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.6);
+}
+
+.skill-bar-career {
+    position: absolute;
+    bottom: 0;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 107, 61, 0.12);
+    border: 1px solid rgba(255, 107, 61, 0.85);
+}
+
+.skill-status {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.skill-status.ok {
+    color: var(--k-success);
+}
+
+.skill-status.gap {
+    color: var(--k-danger);
+}
+
+/* ---------- Sliders ---------- */
+
+#sliders-container > div {
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--k-border-soft);
+    border-radius: 12px;
+}
+
+.slider-skill-name {
+    min-width: 120px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.slider-value {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    color: #03141f;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 8px;
+    background: var(--k-gradient);
+}
+
+.slider-level-label {
+    min-width: 90px;
+    color: var(--k-muted);
+    font-size: 0.9rem;
+}
+
+.job-company {
+    color: var(--k-muted);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.job-meta {
+    color: var(--k-text-soft);
+    font-size: 0.88rem;
+    flex-wrap: wrap;
+}
+
+.job-meta > div {
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--k-border-soft);
+    border-radius: 999px;
+}
+
+.filter-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--k-text-soft);
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+}
+
+.filter-checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* ---------- Learn skills ---------- */
+
+.learn-skills-section {
+    margin-top: 16px;
+}
+
+.learn-skills-title {
+    margin-bottom: 12px;
+    color: #ffffff;
+    font-family: var(--k-font-display);
+    font-weight: 600;
+}
+
+.missing-skill-name {
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.missing-skill-gap {
+    color: var(--k-muted);
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+.resource-line {
+    margin-top: 6px;
+    padding: 10px 14px;
+    color: var(--k-text-soft);
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--k-border-soft);
+    border-radius: 10px;
+    overflow-wrap: anywhere;
+}
+
+.resource-empty {
+    font-style: italic;
+    color: var(--k-muted);
+}
+
+.projects-disclaimer {
+    margin-bottom: 10px;
+    color: var(--k-warning);
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.project-line {
+    margin-bottom: 10px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--k-border-soft);
+    border-radius: 10px;
+}
+
+.project-name {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.project-download {
+    margin-right: 8px;
+    padding: 2px 10px;
+    color: var(--k-cyan);
+    font-size: 0.85rem;
+    text-decoration: none;
+    border: 1px solid rgba(34, 211, 238, 0.4);
+    border-radius: 999px;
+    transition: background 0.2s ease;
+}
+
+.project-download:hover {
+    color: #ffffff;
+    background: rgba(34, 211, 238, 0.12);
+}
+
+.project-level {
+    color: var(--k-muted);
+    font-size: 0.8rem;
+}
+
+.project-description {
+    color: var(--k-muted);
+    font-size: 0.82rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ---------- Result title row (name + favourite star) ---------- */
+
+.result-title {
+    position: relative;
+    min-width: 0;
+}
+
+.result-title .career-name {
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+/* the star sits in a fixed box that matches the height of the first title line,
+   so it lines up the same way for one-line careers and two-line job ads */
+.result-title .star-btn {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 30px;
+    height: calc(1.3rem * 1.35);
+    font-size: 1.45rem;
+    line-height: 1;
+    transform-origin: center;
+}
+
+.career-percentage {
+    flex: 0 0 auto;
+}
+
+/* ---------- Favourite star ---------- */
+
+.favorite-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+}
+
+.star-btn {
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: rgba(231, 238, 251, 0.25);
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease, transform 0.2s var(--k-ease), text-shadow 0.2s ease;
+}
+
+.star-btn:hover {
+    color: var(--k-star);
+    transform: scale(1.15);
+}
+
+.favorite-checkbox:checked + .star-btn {
+    color: var(--k-star);
+    text-shadow: 0 0 14px rgba(252, 211, 77, 0.7);
+}
+
+.favorite-checkbox:focus-visible + .star-btn {
+    outline: 2px solid var(--k-cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+@media (max-width: 767.98px) {
+    #sliders-container > div {
+        flex-wrap: wrap;
+        gap: 10px !important;
+    }
+
+    .skill-status {
+        font-size: 0.8rem;
+    }
+}

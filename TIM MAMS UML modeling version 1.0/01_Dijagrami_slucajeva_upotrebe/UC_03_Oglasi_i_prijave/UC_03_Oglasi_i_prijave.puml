@@ -1,0 +1,97 @@
+@startuml
+title UC_03 – Oglasi, prijave i rad firme sa kandidatima
+left to right direction
+
+actor Gost as Guest
+actor "Registrovani korisnik" as User
+actor Firma as Company
+
+rectangle "KOMPAS – Podsistem oglasa i prijava" {
+
+  package "Javni pregled oglasa i firmi" {
+    usecase "Pregled oglasa" as UC_Ads
+    usecase "Pretraga oglasa" as UC_SearchAds
+    usecase "Sortiranje oglasa" as UC_SortAds
+    usecase "Pregled detalja oglasa" as UC_AdDetails
+    usecase "Označavanje oglasa\nkao omiljenog" as UC_FavoriteAd
+    usecase "Pregled liste firmi" as UC_Companies
+    usecase "Pregled profila firme" as UC_CompanyProfile
+
+    UC_SearchAds ..> UC_Ads : <<extend>>
+    UC_SortAds ..> UC_Ads : <<extend>>
+    UC_AdDetails ..> UC_Ads : <<extend>>
+    UC_FavoriteAd ..> UC_Ads : <<extend>>
+    UC_CompanyProfile ..> UC_Companies : <<extend>>
+  }
+
+  package "Prijavljivanje na oglas" {
+    usecase "Prijavljivanje na oglas" as UC_Apply
+    usecase "Dodavanje CV dokumenta" as UC_CV
+    usecase "Unos propratne poruke" as UC_Cover
+    usecase "Provera jedinstvenosti\nprijave korisnik–oglas" as UC_Unique
+
+    UC_Apply ..> UC_CV : <<include>>
+    UC_Apply ..> UC_Cover : <<include>>
+    UC_Apply ..> UC_Unique : <<include>>
+  }
+
+  package "Profil i kontrolna tabla firme" {
+    usecase "Pregled kontrolne table firme" as UC_Dashboard
+    usecase "Pregled profila firme" as UC_Profile
+    usecase "Pristup sopstvenim oglasima" as UC_MyAds
+
+    UC_Profile ..> UC_Dashboard : <<extend>>
+    UC_MyAds ..> UC_Dashboard : <<extend>>
+  }
+
+  package "Upravljanje oglasima firme" {
+    usecase "Upravljanje sopstvenim oglasima" as UC_ManageAds
+    usecase "Pregled svojih oglasa" as UC_ListAds
+    usecase "Kreiranje oglasa" as UC_CreateAd
+    usecase "Izmena oglasa" as UC_EditAd
+    usecase "Brisanje oglasa" as UC_DeleteAd
+    usecase "Definisanje traženih\nveština i nivoa" as UC_Skills
+    usecase "Pregled statusa oglasa" as UC_Status
+
+    UC_ManageAds ..> UC_ListAds : <<include>>
+    UC_CreateAd ..> UC_ManageAds : <<extend>>
+    UC_EditAd ..> UC_ManageAds : <<extend>>
+    UC_DeleteAd ..> UC_ManageAds : <<extend>>
+    UC_CreateAd ..> UC_Skills : <<include>>
+    UC_EditAd ..> UC_Skills : <<include>>
+    UC_ManageAds ..> UC_Status : <<include>>
+  }
+
+  package "Pregled prijava i kandidata" {
+    usecase "Pregled prijava za\nsopstvene oglase" as UC_Applications
+    usecase "Pregled podataka kandidata" as UC_Candidate
+    usecase "Pregled ili preuzimanje\nCV dokumenta" as UC_CandidateCV
+    usecase "Pregled propratne poruke" as UC_CandidateCover
+    usecase "Označavanje kandidata\nkao omiljenog" as UC_FavoriteCandidate
+    usecase "Pregled omiljenih kandidata" as UC_FavoriteCandidates
+
+    UC_Applications ..> UC_Candidate : <<include>>
+    UC_Applications ..> UC_CandidateCV : <<include>>
+    UC_Applications ..> UC_CandidateCover : <<include>>
+    UC_FavoriteCandidate ..> UC_Candidate : <<extend>>
+    UC_FavoriteCandidates ..> UC_Applications : <<extend>>
+  }
+}
+
+Guest -- UC_Ads
+Guest -- UC_Companies
+
+User -- UC_Ads
+User -- UC_Companies
+User -- UC_Apply
+
+Company -- UC_Dashboard
+Company -- UC_ManageAds
+Company -- UC_Applications
+
+note bottom
+Registracija, prijava i pretplate modeluju se u UC_01.
+Skill Match i privatna lista favorita modeluju se u UC_02.
+Odobravanje firme i moderacija oglasa modeluju se u UC_04.
+end note
+@enduml

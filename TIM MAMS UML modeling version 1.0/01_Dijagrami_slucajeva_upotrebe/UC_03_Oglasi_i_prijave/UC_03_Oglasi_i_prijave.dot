@@ -1,0 +1,18 @@
+digraph UC_03_Oglasi_i_prijave {
+  graph [
+    label="UC_03 – Oglasi, prijave i rad firme sa kandidatima",
+    labelloc=t,
+    rankdir=LR
+  ];
+  node [shape=ellipse];
+
+  Gost -> PregledOglasa [dir=none];
+  Gost -> PregledFirmi [dir=none];
+
+  RegistrovaniKorisnik -> PregledOglasa [dir=none];
+  RegistrovaniKorisnik -> PrijavljivanjeNaOglas [dir=none];
+
+  Firma -> KontrolnaTablaFirme [dir=none];
+  Firma -> UpravljanjeOglasima [dir=none];
+  Firma -> PregledPrijava [dir=none];
+}

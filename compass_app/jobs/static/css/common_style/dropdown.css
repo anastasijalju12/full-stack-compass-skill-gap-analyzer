@@ -1,0 +1,109 @@
+/* Collapsible lists used in the candidate modals. */
+
+.dropdown-container {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 16px;
+    color: var(--k-text);
+    font-size: 0.95rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--k-border);
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+    white-space: normal;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.dropdown-header:hover {
+    background: rgba(34, 211, 238, 0.07);
+    border-color: rgba(34, 211, 238, 0.4);
+}
+
+.dropdown-container.active .dropdown-header {
+    border-color: rgba(34, 211, 238, 0.45);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.arrow {
+    display: inline-block;
+    padding: 3.5px;
+    border: solid var(--k-cyan);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+.dropdown-container.active .arrow {
+    transform: rotate(-135deg);
+}
+
+.dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-left: 1px solid var(--k-border);
+    border-right: 1px solid var(--k-border);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    transition: max-height 0.3s ease-out;
+}
+
+.dropdown-container.active .dropdown-content {
+    max-height: 400px;
+    overflow-y: auto;
+    border-bottom: 1px solid var(--k-border);
+}
+
+.dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(3, 9, 22, 0.5);
+}
+
+.dropdown-list li {
+    padding: 11px 16px;
+    color: var(--k-text-soft);
+    border-bottom: 1px solid var(--k-border-soft);
+    cursor: pointer;
+}
+
+.dropdown-list li:hover {
+    background: rgba(34, 211, 238, 0.06);
+}
+
+.dropdown-list p {
+    margin: 0;
+    padding: 12px 16px;
+    color: var(--k-muted);
+}
+
+.dropdown-btn {
+    width: 100%;
+    padding: 14px;
+    color: #03141f;
+    font-size: 15px;
+    font-weight: 600;
+    background: var(--k-gradient);
+    border: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.dropdown-btn:hover {
+    filter: brightness(1.08);
+}
+
+.dropdown-list li:last-child {
+    border-bottom: none;
+}

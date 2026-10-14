@@ -1,0 +1,257 @@
+<!-- author: Anastasija Ljubičić 0312/2023 -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Kompas - Skill Analysis{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/skill_match.css' %}?v=2">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+{% if messages %}
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-9 col-12">
+            {% for message in messages %}
+                <div class="alert-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+<div class="page-header text-center">
+    <h1 class="display-4">Skill Analysis</h1>
+</div>
+
+<form method="POST" id="skill-form">
+    {% csrf_token %}
+    <!-- 1. SKILL SELECTION -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-9 col-12 custom-card d-flex align-items-center gap-4 mb-3 px-4 py-3">
+            <div id="skill-field-div">
+                {% for skill in skills %}
+                    <span 
+                        class="skill-field" 
+                        data-id="{{ skill.id }}" 
+                        data-name="{{ skill.name }}"
+                        onclick="toggleSkill(this)">
+                        {{ skill.name }}
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- SLIDERS -->
+    <div class="row justify-content-center mt-4" id="skill-levels-div" style="display:none;">
+        <div class="col-lg-9 col-12 custom-card px-4 py-3">
+
+            <div id="sliders-container" class="w-100">
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="submit" class="button-about-joab-ad pe-3 ps-3">
+                    Analyze
+                </button>
+            </div>
+
+            <div class="d-flex justify-content-center gap-4 mt-3 result-filters">
+                <label class="filter-checkbox-label">
+                    <input type="checkbox" name="show_careers" {% if show_careers %}checked{% endif %}>
+                    Show careers
+                </label>
+                <label class="filter-checkbox-label">
+                    <input type="checkbox" name="show_jobs" {% if show_jobs %}checked{% endif %}>
+                    Show job ads
+                </label>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+{% if combined_matching %}
+    {% for result in combined_matching %}
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-9 col-12 custom-card p-4">
+
+            {% if result.type == 'career' %}
+                <!-- Name and percentage of career -->
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
+                    <div class="d-flex align-items-start gap-2 result-title">
+                        <div class="career-name">{{ result.career.name }}</div>
+                        <input type="checkbox" id="career-star-{{ result.career.id }}" class="favorite-checkbox"
+                            {% if result.is_favorited %}checked{% endif %}
+                            onchange="toggleFavourite('career', {{ result.career.id }}, this.checked)">
+                        <label for="career-star-{{ result.career.id }}" class="star-btn" title="Mark as favorite">★</label>
+                    </div>
+                    <div class="career-percentage">{{ result.match_percentage }}%</div>
+                </div>
+            {% else %}
+                <!-- Name, company, percentage of ad -->
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
+                    <div class="d-flex align-items-start gap-2 result-title">
+                        <div>
+                            <div class="career-name">{{ result.job_ad.name }}</div>
+                            <div class="job-company">{{ result.job_ad.company.name }}</div>
+                        </div>
+                        <input type="checkbox" id="job-star-{{ result.job_ad.id }}" class="favorite-checkbox"
+                            {% if result.is_favorited %}checked{% endif %}
+                            onchange="toggleFavourite('job', {{ result.job_ad.id }}, this.checked)">
+                        <label for="job-star-{{ result.job_ad.id }}" class="star-btn" title="Mark as favorite">★</label>
+                    </div>
+                    <div class="career-percentage">{{ result.match_percentage }}%</div>
+                </div>
+
+                <!-- Info abot ad -->
+                <div class="d-flex gap-4 mb-3 job-meta">
+                    {% if result.job_ad.location %}
+                        <div>📍 {{ result.job_ad.location }}</div>
+                    {% endif %}
+                    {% if result.job_ad.type %}
+                        <div>💼 {{ result.job_ad.type }}</div>
+                    {% endif %}
+                    {% if result.job_ad.application_deadline %}
+                        <div>🗓 Deadline: {{ result.job_ad.application_deadline }}</div>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <!-- Progress bar -->
+            <div class="progress-track">
+                <div class="progress-fill" style="width:{{ result.match_percentage }}%;"></div>
+            </div>
+
+            <div class="d-flex gap-3 mb-4 legend">
+                <div><span class="legend-swatch user-level"></span> Your level</div>
+                <div><span class="legend-swatch career-level"></span> Required level</div>
+            </div>
+
+            <!-- Skills -->
+            {% for skill in result.skills_match %}
+            <div class="row align-items-center mb-3">
+                <div class="col-2">{{ skill.skill_name }}</div>
+                <div class="col-7">
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-user" style="width:{{ skill.user_level_percentage }}%;"></div>
+                        <div class="skill-bar-career" style="width:{{ skill.career_level_percentage }}%;"></div>
+                    </div>
+                </div>
+                <div class="col-3 skill-status {% if skill.user_level >= skill.career_level %}ok{% else %}gap{% endif %}">
+                    {% if skill.user_level >= skill.career_level %}
+                        Meets requirements
+                    {% else %}
+                        Needs {{ skill.gap }} more level
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- Buttons -->
+            <div class="text-center mt-3">
+                {% if result.type == 'career' %}
+                    <button type="button" class="button-about-joab-ad pe-3 ps-3" onclick="toggleLearnSkills('career-{{ result.career.id }}')">Learn Skills</button>
+                {% else %}
+                    <button type="button" class="button-about-joab-ad pe-3 ps-3" onclick="toggleLearnSkills('job-{{ result.job_ad.id }}')">Learn Skills</button>
+                {% endif %}
+            </div>
+
+
+             {% if result.type == 'career' %}
+            <!-- Courses for missing skills -->
+            <div id="learn-skills-career-{{ result.career.id }}" class="learn-skills-section" style="display:none;">
+                <hr>
+                {% if result.has_missing_resources %}
+                    <div class="learn-skills-title">Recommended courses for missing skills:</div>
+                    {% for skill in result.skills_match %}
+                        {% if skill.missing_skills_resources %}
+                        <div class="mb-3">
+                            <div class="missing-skill-name">
+                                {{ skill.skill_name }}
+                                <span class="missing-skill-gap">- needs {{ skill.gap }} more level</span>
+                            </div>
+                            {% for resource in skill.missing_skills_resources %}
+                                <div class="resource-line">
+                                    📘 <strong>{{ resource.name }}</strong> Level: {{ resource.level }}<br>
+                                    <a href="{{ resource.url }}" target="_blank">{{ resource.url }}</a>
+                                </div>
+                            
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                
+
+                {% if result.projects %}
+                <div class="learn-skills-title">Typical interview projects: </div>
+                <div class="projects-disclaimer">
+                    ⚠️ Indicative examples — every company can ask for something different.
+                </div>
+
+                {% for project in result.projects %}
+                    <div class="project-line">
+                        {% if project.file_path %}
+                            <a href="{% url 'download_project' project.id %}" class="project-download">📁download</a>
+                        {% endif %}
+                        <span class="project-name">{{ project.name }}</span>
+                        {% if project.level %}<span class="project-level">— {{ project.level }}</span>{% endif %}
+                        <br>
+                        {% if project.description %}<span class="project-description">• {{ project.description }}</span>{% endif %}
+                    </div>
+                {% endfor %}
+                {% endif %}
+                <button
+                    type="button"
+                    class="button-about-joab-ad pe-3 ps-3 d-block mx-auto mt-3"
+                    onclick="window.location.href='{% url 'careers' %}#career-{{ result.career.id }}';">
+                    View
+                </button>
+            </div>
+            {% endif %}
+
+            {% if result.type == 'job' %}
+            <!-- Resources for missing skills (ads) -->
+            <div id="learn-skills-job-{{ result.job_ad.id }}" class="learn-skills-section" style="display:none;">
+                <hr>
+                {% if result.has_missing_resources %}
+                    <div class="learn-skills-title">Recommended courses for missing skills:</div>
+                    {% for skill in result.skills_match %}
+                        {% if skill.missing_skills_resources %}
+                        <div class="mb-3">
+                            <div class="missing-skill-name">
+                                {{ skill.skill_name }}
+                                <span class="missing-skill-gap">- needs {{ skill.gap }} more level</span>
+                            </div>
+                            {% for resource in skill.missing_skills_resources %}
+                                <div class="resource-line">
+                                    📘 <strong>{{ resource.name }}</strong> Level: {{ resource.level }}<br>
+                                    <a href="{{ resource.url }}" target="_blank">{{ resource.url }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                
+                <button
+                    type="button"
+                    class="button-about-joab-ad pe-3 ps-3 d-block mx-auto mt-3"
+                    onclick="window.location.href='{% url 'job_ads_candidate_view' %}#job-ad-{{ result.job_ad.id }}';">
+                    View
+                </button>
+            </div>
+            {% endif %}
+
+
+            
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/skill_match.js' %}?v=2"></script>
+{% endblock %}

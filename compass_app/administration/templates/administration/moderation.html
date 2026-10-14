@@ -1,0 +1,421 @@
+<!-- Author: Milica Pavlovic, student ID: 2023/0148 -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kompas - Job moderation{% endblock %}
+
+{% block extra_head %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-moderation.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-theme.css' %}"
+    >
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-subnav-wrap">
+    <div class="container-fluid">
+        <div class="admin-subnav">
+            <div class="admin-subnav-title">Administration</div>
+
+            <div class="admin-subnav-links">
+                <a href="{% url 'administration:dashboard' %}"
+                   class="admin-subnav-link">
+                    Admin panel
+                </a>
+
+                <a href="{% url 'administration:create_account' %}"
+                   class="admin-subnav-link">
+                    Create accounts
+                </a>
+
+                <a href="{% url 'administration:company_requests' %}"
+                   class="admin-subnav-link">
+                    Company registrations
+                </a>
+
+                <a href="{% url 'administration:moderation' %}"
+                   class="admin-subnav-link active">
+                    Job moderation
+                </a>
+
+                <a href="{% url 'administration:manage_accounts' %}"
+                   class="admin-subnav-link">
+                    Accounts & roles
+                </a>
+
+                <a href="{% url 'administration:manage_careers' %}"
+                   class="admin-subnav-link">
+                    Careers & skills
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-header text-center">
+    <h1 class="display-4">Job moderation</h1>
+</div>
+
+<div class="container pb-5">
+
+    {% if messages %}
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-12">
+
+                {% for message in messages %}
+                    <div class="alert
+                        {% if message.tags == 'success' %}
+                            alert-success
+                        {% elif message.tags == 'error' %}
+                            alert-danger
+                        {% else %}
+                            alert-info
+                        {% endif %}
+                    ">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+            <div class="sectionTitle">
+                Job ads for review
+            </div>
+
+            <div class="row g-3">
+
+                {% for ad in ads_for_review %}
+
+                    <div class="col-lg-4 col-md-6">
+
+                        <div class="adPreviewCard
+                            {% if selected_ad and selected_ad.id == ad.id %}
+                                active-card
+                            {% endif %}
+                        ">
+
+                            <div class="previewHeaderRow">
+
+                                <div>
+                                    <div class="previewTitle">
+                                        {{ ad.name }}
+                                    </div>
+
+                                    <div class="previewMeta">
+                                        {{ ad.company.name }}
+                                    </div>
+
+                                    <div class="previewMeta">
+                                        {{ ad.location|default:"Location not provided" }}
+                                    </div>
+
+                                    <div class="previewMeta">
+                                        Status:
+
+                                        <strong>
+                                            {% if ad.status == 'pending' %}
+                                                Pending
+                                            {% elif ad.status == 'active' %}
+                                                Active
+                                            {% else %}
+                                                Inactive
+                                            {% endif %}
+                                        </strong>
+                                    </div>
+                                </div>
+
+                                {% if ad.status == 'pending' %}
+
+                                    <span class="statusBadge warning">
+                                        Pending
+                                    </span>
+
+                                {% elif ad.application_deadline and ad.application_deadline < today %}
+
+                                    <span class="statusBadge old">
+                                        Outdated
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="statusBadge ok">
+                                        Active
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                            <div class="mt-3">
+                                <a
+                                    href="{% url 'administration:moderation' %}?ad={{ ad.id }}"
+                                    class="buttonAboutJoabAd previewBtn"
+                                >
+                                    Review
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                {% empty %}
+
+                    <div class="col-12">
+                        <div class="emptyBox">
+                            There are currently no job ads awaiting review.
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    {% if selected_ad %}
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Selected job ad details
+                </div>
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">
+                            Job ad title
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control readonlyField"
+                            value="{{ selected_ad.name }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">
+                            Company
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control readonlyField"
+                            value="{{ selected_ad.company.name }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">
+                            Position type
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control readonlyField"
+                            value="{{ selected_ad.get_type_display }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control readonlyField"
+                            value="{{ selected_ad.location|default:'' }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">
+                            Application deadline
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control readonlyField"
+                            value="{{ selected_ad.application_deadline|date:'M d, Y'|default:'Not specified' }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="labelTitle">
+                            Current status
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control readonlyField"
+                            value="{% if selected_ad.status == 'pending' %}Pending{% elif selected_ad.status == 'active' %}Active{% else %}Inactive{% endif %}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-12">
+                        <label class="labelTitle">
+                            Review reason
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control readonlyField"
+                            value="{% if selected_ad.status == 'pending' %}A new job ad is awaiting an administrator decision{% elif selected_ad.application_deadline and selected_ad.application_deadline < today %}The application deadline has passed{% else %}Routine review of an active job ad{% endif %}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="col-12">
+                        <label class="labelTitle">
+                            Job ad description
+                        </label>
+
+                        <textarea
+                            class="form-control readonlyField"
+                            rows="4"
+                            readonly
+                        >{{ selected_ad.description|default:'' }}</textarea>
+                    </div>
+
+                </div>
+
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label
+                            for="adminNote"
+                            class="labelTitle"
+                        >
+                            Administrator note
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="3"
+                            id="adminNote"
+                            name="admin_note"
+                            placeholder="Enter a removal reason or an additional note"
+                        >{{ selected_ad.removal_reason|default:'' }}</textarea>
+                    </div>
+
+                    <div class="actionInfoBox mt-4">
+                        Choose the action to apply to this job ad.
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd dangerBtn"
+                            formaction="{% url 'administration:remove_job_ad' selected_ad.id %}"
+                        >
+                            Remove job ad
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd warningBtn"
+                            formaction="{% url 'administration:mark_job_ad_outdated' selected_ad.id %}"
+                        >
+                            Mark as outdated
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd"
+                            formaction="{% url 'administration:keep_job_ad_active' selected_ad.id %}"
+                        >
+                            Keep active
+                        </button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+            <div class="sectionTitle">
+                Moderation history
+            </div>
+
+            {% for ad in moderated_ads %}
+
+                <div class="historyRow">
+
+                    <div>
+                        <strong>{{ ad.name }}</strong><br>
+
+                        <span class="historyMeta">
+                            Company: {{ ad.company.name }}
+
+                            {% if ad.updated_at %}
+                                · Processed:
+                                {{ ad.updated_at|date:"M d, Y H:i" }}
+                            {% endif %}
+
+                            {% if ad.removal_reason %}
+                                <br>
+                                Reason: {{ ad.removal_reason }}
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    {% if ad.removal_reason and 'Outdated job ad.' in ad.removal_reason %}
+
+                        <span class="statusBadge old">
+                            Outdated
+                        </span>
+
+                    {% else %}
+
+                        <span class="statusBadge warning">
+                            Removed
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            {% empty %}
+
+                <div class="emptyBox">
+                    No moderation decisions have been recorded yet.
+                </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

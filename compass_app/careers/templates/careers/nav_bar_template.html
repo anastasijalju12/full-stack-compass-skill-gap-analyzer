@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kompas</title>
+</head>
+<body>
+
+<nav>
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'skill_match' %}">Skill match</a>
+        <a href="{% url 'favourites' %}">Favorites</a>
+        <a href="{% url 'logout_view' %}">Log out</a>
+        <span>{{ request.user.username }}</span>
+        
+    {% endif %}
+</nav>
+{% block content %}
+{% endblock %}
+</body>
+</html>

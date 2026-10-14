@@ -1,0 +1,738 @@
+<!-- Author: Milica Pavlovic, student ID: 2023/0148 -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kompas - Accounts & roles{% endblock %}
+
+{% block extra_head %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-manage-accounts.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-theme.css' %}"
+    >
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-subnav-wrap">
+    <div class="container-fluid">
+        <div class="admin-subnav">
+            <div class="admin-subnav-title">Administration</div>
+
+            <div class="admin-subnav-links">
+                <a href="{% url 'administration:dashboard' %}"
+                   class="admin-subnav-link">
+                    Admin panel
+                </a>
+
+                <a href="{% url 'administration:create_account' %}"
+                   class="admin-subnav-link">
+                    Create accounts
+                </a>
+
+                <a href="{% url 'administration:company_requests' %}"
+                   class="admin-subnav-link">
+                    Company registrations
+                </a>
+
+                <a href="{% url 'administration:moderation' %}"
+                   class="admin-subnav-link">
+                    Job moderation
+                </a>
+
+                <a href="{% url 'administration:manage_accounts' %}"
+                   class="admin-subnav-link active">
+                    Accounts & roles
+                </a>
+
+                <a href="{% url 'administration:manage_careers' %}"
+                   class="admin-subnav-link">
+                    Careers & skills
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-header text-center">
+    <h1 class="display-4">Accounts & roles</h1>
+</div>
+
+<div class="container pb-5">
+
+    {% if messages %}
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-12">
+
+                {% for message in messages %}
+                    <div class="alert
+                        {% if message.tags == 'success' %}
+                            alert-success
+                        {% elif message.tags == 'error' %}
+                            alert-danger
+                        {% else %}
+                            alert-info
+                        {% endif %}
+                    ">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+            <div class="sectionTitle">
+                Existing accounts
+            </div>
+
+            <div class="accountSectionTitle">
+                User and administrator accounts
+            </div>
+
+            <div class="row g-3">
+
+                {% for user in users %}
+
+                    <div class="col-lg-4 col-md-6">
+                        <a
+                            href="{% url 'administration:manage_accounts' %}?type=user&id={{ user.id }}"
+                            class="accountCardLink"
+                        >
+                            <div class="accountCard
+                                {% if selected_user and selected_user.id == user.id %}
+                                    selectedCard
+                                {% endif %}
+                            ">
+
+                                <span class="accountTypeLabel">
+                                    User
+                                </span>
+
+                                <div class="accountName">
+                                    {{ user.first_name }}
+                                    {{ user.last_name }}
+                                </div>
+
+                                <div>
+                                    E-mail: {{ user.email }}
+                                </div>
+
+                                <div>
+                                    Username: {{ user.username }}
+                                </div>
+
+                                <div>
+                                    Status:
+                                    {{ user.status|default:"Not specified" }}
+                                </div>
+
+                                <span class="roleBadge">
+                                    {% if user.role == 'admin' %}
+                                        Administrator
+                                    {% else %}
+                                        User
+                                    {% endif %}
+                                </span>
+
+                            </div>
+                        </a>
+                    </div>
+
+                {% empty %}
+
+                    <div class="col-12">
+                        <div class="emptyState">
+                            There are currently no user accounts.
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="accountSectionTitle">
+                Company accounts
+            </div>
+
+            <div class="row g-3">
+
+                {% for company in companies %}
+
+                    <div class="col-lg-4 col-md-6">
+                        <a
+                            href="{% url 'administration:manage_accounts' %}?type=company&id={{ company.id }}"
+                            class="accountCardLink"
+                        >
+                            <div class="accountCard
+                                {% if selected_company and selected_company.id == company.id %}
+                                    selectedCard
+                                {% endif %}
+                            ">
+
+                                <span class="accountTypeLabel">
+                                    Company
+                                </span>
+
+                                <div class="accountName">
+                                    {{ company.name }}
+                                </div>
+
+                                <div>
+                                    E-mail:
+                                    {{ company.email|default:"Not provided" }}
+                                </div>
+
+                                <div>
+                                    Username:
+                                    {{ company.username }}
+                                </div>
+
+                                <div>
+                                    Industry:
+                                    {{ company.industry|default:"Not provided" }}
+                                </div>
+
+                                <span class="roleBadge">
+                                    {% if company.status == 'active' %}
+                                        Active company
+                                    {% elif company.status == 'rejected' %}
+                                        Rejected company
+                                    {% else %}
+                                        Pending approval
+                                    {% endif %}
+                                </span>
+
+                            </div>
+                        </a>
+                    </div>
+
+                {% empty %}
+
+                    <div class="col-12">
+                        <div class="emptyState">
+                            There are currently no company accounts.
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+
+    {% if not selected_user and not selected_company %}
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Selected account and actions
+                </div>
+
+                <div class="selectedSummary">
+                    Select an account above to edit its details, change the user role,
+                    or delete the account.
+                </div>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if selected_user %}
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Selected user account
+                </div>
+
+                <div class="selectedSummary">
+                    Selected account:
+                    <strong>
+                        {{ selected_user.first_name }}
+                        {{ selected_user.last_name }}
+                    </strong>
+
+                    <br>
+
+                    Current role:
+                    <strong>
+                        {% if selected_user.role == 'admin' %}
+                            Administrator
+                        {% else %}
+                            User
+                        {% endif %}
+                    </strong>
+
+                    &nbsp;|&nbsp;
+
+                    Username:
+                    <strong>{{ selected_user.username }}</strong>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Edit account details
+                </div>
+
+                <form
+                    method="post"
+                    action="{% url 'administration:update_user_account' selected_user.id %}"
+                >
+                    {% csrf_token %}
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label
+                                for="userFirstName"
+                                class="labelTitle"
+                            >
+                                First name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="userFirstName"
+                                name="first_name"
+                                value="{{ selected_user.first_name }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label
+                                for="userLastName"
+                                class="labelTitle"
+                            >
+                                Last name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="userLastName"
+                                name="last_name"
+                                value="{{ selected_user.last_name }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label
+                                for="userEmail"
+                                class="labelTitle"
+                            >
+                                E-mail
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="userEmail"
+                                name="email"
+                                value="{{ selected_user.email }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label
+                                for="userUsername"
+                                class="labelTitle"
+                            >
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="userUsername"
+                                name="username"
+                                value="{{ selected_user.username }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-12">
+                            <label
+                                for="userContact"
+                                class="labelTitle"
+                            >
+                                Contact
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="userContact"
+                                name="contact"
+                                value="{{ selected_user.contact|default:'' }}"
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-4">
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd"
+                        >
+                            Save changes
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Change user role
+                </div>
+
+                {% if selected_user.id == logged_admin_id %}
+
+                    <div class="dangerNotice">
+                        This is the account you are currently signed in with.
+                        You can edit its details, but you cannot remove its administrator role or delete it.
+                    </div>
+
+                {% endif %}
+
+                <form
+                    method="post"
+                    action="{% url 'administration:change_user_role' selected_user.id %}"
+                    class="mt-3"
+                >
+                    {% csrf_token %}
+
+                    <div class="row g-3 align-items-end">
+
+                        <div class="col-md-6">
+                            <label class="labelTitle">
+                                Current role
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                value="{% if selected_user.role == 'admin' %}Administrator{% else %}User{% endif %}"
+                                readonly
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label
+                                for="newUserRole"
+                                class="labelTitle"
+                            >
+                                New role
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="newUserRole"
+                                name="new_role"
+                                required
+                            >
+                                <option value="">
+                                    Choose a new role
+                                </option>
+
+                                <option value="user">
+                                    User
+                                </option>
+
+                                <option value="admin">
+                                    Administrator
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-4">
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd secondaryBtn"
+                        >
+                            Change role
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Delete account
+                </div>
+
+                {% if selected_user.id == logged_admin_id %}
+
+                    <div class="dangerNotice">
+                        The account you are currently signed in with cannot be deleted.
+                    </div>
+
+                {% else %}
+
+                    <div class="dangerNotice">
+                        Deleting this account also removes the user’s related data.
+                        This action cannot be undone.
+                    </div>
+
+                    <form
+                        method="post"
+                        action="{% url 'administration:delete_user_account' selected_user.id %}"
+                        class="mt-4 text-center"
+                        onsubmit="return confirm('Are you sure you want to permanently delete this account?');"
+                    >
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd deleteBtn"
+                        >
+                            Delete user account
+                        </button>
+                    </form>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if selected_company %}
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Selected company account
+                </div>
+
+                <div class="selectedSummary">
+                    Selected company:
+                    <strong>{{ selected_company.name }}</strong>
+
+                    <br>
+
+                    Current status:
+                    <strong>
+                        {% if selected_company.status == 'active' %}
+                            Active
+                        {% elif selected_company.status == 'rejected' %}
+                            Rejected
+                        {% else %}
+                            Pending
+                        {% endif %}
+                    </strong>
+
+                    &nbsp;|&nbsp;
+
+                    Username:
+                    <strong>{{ selected_company.username }}</strong>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Edit company details
+                </div>
+
+                <form
+                    method="post"
+                    action="{% url 'administration:update_company_account' selected_company.id %}"
+                >
+                    {% csrf_token %}
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label
+                                for="companyName"
+                                class="labelTitle"
+                            >
+                                Company name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="companyName"
+                                name="name"
+                                value="{{ selected_company.name }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label
+                                for="companyUsername"
+                                class="labelTitle"
+                            >
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="companyUsername"
+                                name="username"
+                                value="{{ selected_company.username }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label
+                                for="companyEmail"
+                                class="labelTitle"
+                            >
+                                E-mail
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="companyEmail"
+                                name="email"
+                                value="{{ selected_company.email|default:'' }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label
+                                for="companyIndustry"
+                                class="labelTitle"
+                            >
+                                Industry
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="companyIndustry"
+                                name="industry"
+                                value="{{ selected_company.industry|default:'' }}"
+                            >
+                        </div>
+
+                        <div class="col-12">
+                            <label
+                                for="companyContact"
+                                class="labelTitle"
+                            >
+                                Contact
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="companyContact"
+                                name="contact"
+                                value="{{ selected_company.contact|default:'' }}"
+                            >
+                        </div>
+
+                        <div class="col-12">
+                            <label
+                                for="companyDescription"
+                                class="labelTitle"
+                            >
+                                Company description
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="companyDescription"
+                                name="description"
+                                rows="4"
+                            >{{ selected_company.description|default:'' }}</textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-4">
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd"
+                        >
+                            Save changes
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Delete company account
+                </div>
+
+                <div class="dangerNotice">
+                    Deleting this company may also remove its job ads,
+                    applications, and other related data. This action cannot
+                    be undone.
+                </div>
+
+                <form
+                    method="post"
+                    action="{% url 'administration:delete_company_account' selected_company.id %}"
+                    class="mt-4 text-center"
+                    onsubmit="return confirm('Are you sure you want to permanently delete this company?');"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="buttonAboutJoabAd deleteBtn"
+                    >
+                        Delete company account
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

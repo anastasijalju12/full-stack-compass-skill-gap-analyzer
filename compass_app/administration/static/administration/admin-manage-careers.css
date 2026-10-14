@@ -1,0 +1,100 @@
+/* Author: Milica Pavlovic */
+/* Layout for the manage careers page. Colors come from admin-theme.css. */
+
+.careerCard {
+  height: 100%;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.addNewCard {
+  border-style: dashed;
+}
+
+.careerName {
+  margin-bottom: 6px;
+  font-size: 1.2rem;
+}
+
+.careerShortDescription {
+  margin-bottom: 8px;
+}
+
+.selectionInfo,
+.confirmBox,
+.messageBoxInline {
+  padding: 14px 16px;
+}
+
+.buttonAboutJoabAd {
+  min-width: 170px;
+}
+
+.historyRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.historyRow + .historyRow {
+  margin-top: 12px;
+}
+
+.careerCardLink {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+
+.careerSkills {
+  margin-top: 12px;
+}
+
+.skillBadge {
+  margin: 4px 4px 0 0;
+}
+
+.helpText {
+  display: block;
+  margin-top: 7px;
+  font-size: 0.85rem;
+}
+
+.careerDescription {
+  white-space: pre-line;
+}
+
+.skillDetailsTable {
+  width: 100%;
+}
+
+.skillDetailsRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 12px;
+  padding: 11px 14px;
+}
+
+.skillDetailsRow:last-child {
+  border-bottom: none;
+}
+
+.skillDetailsHeader {
+  font-weight: 600;
+}
+
+@media (max-width: 991px) {
+  .historyRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  .skillDetailsRow {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

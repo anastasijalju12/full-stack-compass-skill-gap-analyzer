@@ -1,0 +1,77 @@
+digraph UC_04_Administracija {
+	bgcolor=white fontcolor="#1f2937" fontname=Arial fontsize=24 label="UC_04 – Administracija" labelloc=t nodesep=0.38 pad=0.35 rankdir=LR ranksep=1.05 splines=spline
+	node [color="#374151" fontname=Arial fontsize=12 penwidth=1.4]
+	edge [arrowsize=0.8 color="#4b5563" fontname=Arial fontsize=10]
+	ADMIN [label=Administrator fixedsize=true fontsize=13 height=2.25 image="/mnt/data/UC_04_Administracija/actor_admin.png" imagescale=true labelloc=b shape=none width=1.25]
+	subgraph cluster_system {
+		color="#6b7280" fontname="Arial Bold" fontsize=18 label="KOMPAS – Administratorski podsistem" margin=26 penwidth=1.8 style=rounded
+		subgraph cluster_dashboard {
+			color="#93c5fd" fillcolor="#eff6ff" label="Kontrolna tabla" style="rounded,filled"
+			UC_DASH [label="Pregled administratorske
+kontrolne table" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_STATS [label="Pregled statistike sistema" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_DASH -> UC_STATS [label="«include»" arrowhead=open style=dashed]
+		}
+		subgraph cluster_accounts {
+			color="#86efac" fillcolor="#f0fdf4" label="Nalozi i uloge" style="rounded,filled"
+			UC_CREATE [label="Kreiranje korisničkog ili
+firminog naloga" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_MANAGE_ACC [label="Upravljanje nalozima
+i korisničkim ulogama" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_VIEW_ACC [label="Pregled i izbor naloga" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_EDIT_ACC [label="Izmena podataka naloga" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_DELETE_ACC [label="Brisanje naloga" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_ROLE [label="Promena korisničke uloge" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_MANAGE_ACC -> UC_VIEW_ACC [label="«include»" arrowhead=open style=dashed]
+			UC_EDIT_ACC -> UC_MANAGE_ACC [label="«extend»" arrowhead=open style=dashed]
+			UC_DELETE_ACC -> UC_MANAGE_ACC [label="«extend»" arrowhead=open style=dashed]
+			UC_ROLE -> UC_MANAGE_ACC [label="«extend»" arrowhead=open style=dashed]
+		}
+		subgraph cluster_company {
+			color="#fde68a" fillcolor="#fffbeb" label="Registracije firmi" style="rounded,filled"
+			UC_COMPANY [label="Obrada zahteva za
+registraciju firme" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_COMPANY_DETAILS [label="Pregled detalja prijave" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_APPROVE [label="Odobravanje registracije" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_REJECT [label="Odbijanje registracije" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_PENDING [label="Ostavljanje zahteva
+na čekanju" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_COMPANY -> UC_COMPANY_DETAILS [label="«include»" arrowhead=open style=dashed]
+			UC_APPROVE -> UC_COMPANY [label="«extend»" arrowhead=open style=dashed]
+			UC_REJECT -> UC_COMPANY [label="«extend»" arrowhead=open style=dashed]
+			UC_PENDING -> UC_COMPANY [label="«extend»" arrowhead=open style=dashed]
+		}
+		subgraph cluster_careers {
+			color="#c4b5fd" fillcolor="#f5f3ff" label=Karijere style="rounded,filled"
+			UC_CAREERS [label="Upravljanje karijerama" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_BROWSE_CAREERS [label="Pregled i pretraga karijera" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_ADD_CAREER [label="Dodavanje karijere" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_EDIT_CAREER [label="Izmena karijere i veština" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_DELETE_CAREER [label="Brisanje karijere" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_CAREERS -> UC_BROWSE_CAREERS [label="«include»" arrowhead=open style=dashed]
+			UC_ADD_CAREER -> UC_CAREERS [label="«extend»" arrowhead=open style=dashed]
+			UC_EDIT_CAREER -> UC_CAREERS [label="«extend»" arrowhead=open style=dashed]
+			UC_DELETE_CAREER -> UC_CAREERS [label="«extend»" arrowhead=open style=dashed]
+		}
+		subgraph cluster_moderation {
+			color="#fca5a5" fillcolor="#fef2f2" label="Moderacija oglasa" style="rounded,filled"
+			UC_MODERATE [label="Moderacija oglasa" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_AD_DETAILS [label="Pregled detalja oglasa
+i podataka firme" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_REMOVE_AD [label="Uklanjanje neprikladnog oglasa" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_OUTDATED [label="Označavanje oglasa
+kao zastarelog" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_KEEP_ACTIVE [label="Ostavljanje oglasa aktivnim" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_MODERATE -> UC_AD_DETAILS [label="«include»" arrowhead=open style=dashed]
+			UC_REMOVE_AD -> UC_MODERATE [label="«extend»" arrowhead=open style=dashed]
+			UC_OUTDATED -> UC_MODERATE [label="«extend»" arrowhead=open style=dashed]
+			UC_KEEP_ACTIVE -> UC_MODERATE [label="«extend»" arrowhead=open style=dashed]
+		}
+	}
+	ADMIN -> UC_DASH [color="#111827" dir=none penwidth=1.4]
+	ADMIN -> UC_CREATE [color="#111827" dir=none penwidth=1.4]
+	ADMIN -> UC_MANAGE_ACC [color="#111827" dir=none penwidth=1.4]
+	ADMIN -> UC_COMPANY [color="#111827" dir=none penwidth=1.4]
+	ADMIN -> UC_CAREERS [color="#111827" dir=none penwidth=1.4]
+	ADMIN -> UC_MODERATE [color="#111827" dir=none penwidth=1.4]
+}

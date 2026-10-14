@@ -1,0 +1,500 @@
+<!-- Autor: Milica Pavlovic -->
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas - Karijere i veštine</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="admin-manage-careers.css">
+</head>
+<body>
+
+    <!---------------- JAVNI HEADER --------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navHeader">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo/compas.png" class="img-fluid" style="height:64px;" alt="logoKompas">
+                <span class="h4 ms-2" id="navMenuCompanyName">Kompas</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navbarNavDropdown" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Početna</a></li>
+                    <li class="nav-item"><a href="careers.html" class="nav-link">Zanimanja</a></li>
+                    <li class="nav-item"><a href="jobAds.html" class="nav-link">Oglasi</a></li>
+                    <li class="nav-item"><a href="skillMatch.html" class="nav-link">Pametno filtriranje</a></li>
+                    <li class="nav-item"><a href="companies.html" class="nav-link">Naše kompanije</a></li>
+                    <li class="nav-item"><a href="aboutUs.html" class="nav-link">O nama</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Avatar</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a href="psiIndex.html" class="dropdown-item">Moj profil</a></li>
+                            <li><a href="favourites.html" class="dropdown-item">Omiljeno</a></li>
+                            <li><a href="#" class="dropdown-item">Odjava</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!---------------- ADMIN HEADER --------------------->
+    <div class="admin-subnav-wrap">
+        <div class="container-fluid">
+            <div class="admin-subnav">
+                <div class="admin-subnav-title">Admin meni</div>
+                <div class="admin-subnav-links">
+                    <a href="admin-dashboard.html" class="admin-subnav-link">Admin panel</a>
+                    <a href="admin-create-account.html" class="admin-subnav-link">Kreiranje naloga</a>
+                    <a href="admin-company-requests.html" class="admin-subnav-link">Registracije firmi</a>
+                    <a href="admin-moderation.html" class="admin-subnav-link">Moderacija</a>
+                    <a href="admin-manage-accounts.html" class="admin-subnav-link">Nalozi i uloge</a>
+                    <a href="admin-manage-careers.html" class="admin-subnav-link active">Karijere i veštine</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header text-center">
+        <h1 class="display-4">Karijere i veštine</h1>
+    </div>
+
+    <div class="container pb-5">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Karijere u sistemu</div>
+                <div class="row g-3" id="careersContainer"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Odabir radnje</div>
+                <div id="selectedCareerInfo" class="selectionInfo emptyState">
+                    Izaberi karijeru iz liste iznad ili karticu <strong>Nova karijera</strong>.
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4 actionButtons" id="actionButtons" style="display:none;">
+                    <button type="button" class="buttonAboutJoabAd" id="addActionBtn">Dodavanje</button>
+                    <button type="button" class="buttonAboutJoabAd secondaryBtn" id="editActionBtn">Izmena</button>
+                    <button type="button" class="buttonAboutJoabAd deleteBtn" id="deleteActionBtn">Brisanje</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4 actionPanel" id="addPanel" style="display:none;">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Dodavanje nove karijere</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="labelTitle">Naziv karijere</label>
+                        <input type="text" class="form-control" id="addName" placeholder="Unesi naziv karijere">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Kratak opis</label>
+                        <input type="text" class="form-control" id="addShortDescription" placeholder="Unesi kratak opis">
+                    </div>
+                    <div class="col-12">
+                        <label class="labelTitle">Opis karijere</label>
+                        <textarea class="form-control" rows="4" id="addDescription" placeholder="Unesi detaljniji opis"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="labelTitle">Veštine (odvojene zarezima)</label>
+                        <textarea class="form-control" rows="3" id="addSkills" placeholder="Na primer: HTML, CSS, JavaScript, React"></textarea>
+                    </div>
+                    
+                    <div class="col-12">
+                        <label class="labelTitle">Projekti za intervju</label>
+                        
+                        <div id="projectsList"></div>
+
+                        <button type="button" class="buttonAboutJoabAd secondaryBtn mt-2" onclick="
+                            const div = document.createElement('div');
+                            div.className = 'd-flex gap-2 align-items-center mb-2';
+                            div.innerHTML = '<input type=\'file\' class=\'form-control\' accept=\'.zip\'><input type=\'text\' class=\'form-control\' placeholder=\'Opis projekta (npr. Portfolio stranica — Praksa, Junior)\'><button type=\'button\' class=\'buttonAboutJoabAd deleteBtn\' onclick=\'this.parentElement.remove()\'>✕</button>';
+                            document.getElementById('projectsList').appendChild(div);
+                        ">+ Dodaj projekat</button>
+                    </div>
+
+
+
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+                    <button type="button" class="buttonAboutJoabAd" id="saveAddBtn">Sačuvaj novu karijeru</button>
+                    <button type="button" class="buttonAboutJoabAd secondaryBtn" id="cancelAddBtn">Otkaži</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4 actionPanel" id="editPanel" style="display:none;">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Izmena karijere</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="labelTitle">Naziv karijere</label>
+                        <input type="text" class="form-control" id="editName">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Kratak opis</label>
+                        <input type="text" class="form-control" id="editShortDescription">
+                    </div>
+                    <div class="col-12">
+                        <label class="labelTitle">Opis karijere</label>
+                        <textarea class="form-control" rows="4" id="editDescription"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="labelTitle">Veštine (odvojene zarezima)</label>
+                        <textarea class="form-control" rows="3" id="editSkills"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="labelTitle">Projekti za intervju</label>
+                        <div id="editProjectsList"></div>
+                        <button type="button" class="buttonAboutJoabAd secondaryBtn mt-2" onclick="
+                            const div = document.createElement('div');
+                            div.className = 'd-flex gap-2 align-items-center mb-2';
+                            div.innerHTML = '<input type=\'file\' class=\'form-control\' accept=\'.zip\'><input type=\'text\' class=\'form-control\' placeholder=\'Opis projekta\'><button type=\'button\' class=\'buttonAboutJoabAd deleteBtn\' onclick=\'this.parentElement.remove()\'>✕</button>';
+                            document.getElementById('editProjectsList').appendChild(div);
+                        ">+ Dodaj projekat</button>
+                    </div>
+
+
+
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+                    <button type="button" class="buttonAboutJoabAd" id="saveEditBtn">Sačuvaj izmene</button>
+                    <button type="button" class="buttonAboutJoabAd secondaryBtn" id="cancelEditBtn">Otkaži</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4 actionPanel" id="deletePanel" style="display:none;">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Brisanje karijere</div>
+                <div class="confirmBox" id="deleteInfoBox"></div>
+                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+                    <button type="button" class="buttonAboutJoabAd deleteBtn" id="confirmDeleteBtn">Obriši karijeru</button>
+                    <button type="button" class="buttonAboutJoabAd secondaryBtn" id="cancelDeleteBtn">Otkaži</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Poruka sistema</div>
+                <div id="systemMessage" class="messageBoxInline emptyState">Još uvek nije izvršena nijedna radnja.</div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Istorija izmena</div>
+                <div id="historyContainer">
+                    <div class="historyEmpty">Istorija je trenutno prazna.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const careers = [
+            {
+                id: 1,
+                name: 'Frontend Developer',
+                shortDescription: 'Kreira interaktivne korisničke interfejse',
+                description: 'Frontend developer razvija izgled i ponašanje veb aplikacija koristeći HTML, CSS, JavaScript i druge tehnologije.',
+                skills: ['HTML', 'CSS', 'JavaScript', 'React']
+            },
+            {
+                id: 2,
+                name: 'Backend Developer',
+                shortDescription: 'Razvija serverski deo aplikacija',
+                description: 'Backend developer radi na logici sistema, bazama podataka i API servisima.',
+                skills: ['Java', 'SQL', 'Spring', 'Git']
+            },
+            {
+                id: 3,
+                name: 'QA Tester',
+                shortDescription: 'Testira kvalitet i stabilnost sistema',
+                description: 'QA tester proverava funkcionalnost, stabilnost i kvalitet softvera kroz manuelno i automatsko testiranje.',
+                skills: ['Testing', 'Selenium', 'Jira']
+            }
+        ];
+
+        let selectedCareerId = null;
+        let selectedAction = null;
+        let nextCareerId = 4;
+        const historyEntries = [];
+
+        const careersContainer = document.getElementById('careersContainer');
+        const selectedCareerInfo = document.getElementById('selectedCareerInfo');
+        const actionButtons = document.getElementById('actionButtons');
+        const addActionBtn = document.getElementById('addActionBtn');
+        const editActionBtn = document.getElementById('editActionBtn');
+        const deleteActionBtn = document.getElementById('deleteActionBtn');
+        const historyContainer = document.getElementById('historyContainer');
+        const systemMessage = document.getElementById('systemMessage');
+
+        const addPanel = document.getElementById('addPanel');
+        const editPanel = document.getElementById('editPanel');
+        const deletePanel = document.getElementById('deletePanel');
+        const deleteInfoBox = document.getElementById('deleteInfoBox');
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+        }
+
+        function renderCareers() {
+            let cards = careers.map(career => `
+                <div class="col-lg-4">
+                    <div class="careerCard ${career.id === selectedCareerId ? 'selectedCard' : ''}" onclick="selectCareer(${career.id})">
+                        <div class="careerName">${escapeHtml(career.name)}</div>
+                        <div class="careerShortDescription">${escapeHtml(career.shortDescription)}</div>
+                        <div class="careerSkills">Veštine: ${escapeHtml(career.skills.join(', '))}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            cards += `
+                <div class="col-lg-4">
+                    <div class="careerCard addNewCard ${selectedCareerId === 'new' ? 'selectedCard' : ''}" onclick="selectNewCareer()">
+                        <div class="careerName">+ Nova karijera</div>
+                        <div class="careerShortDescription">Dodavanje nove karijere u sistem</div>
+                        <div class="careerSkills">Klikni da otvoriš formu za dodavanje.</div>
+                    </div>
+                </div>
+            `;
+
+            careersContainer.innerHTML = cards;
+        }
+
+        function updateSelectionInfo() {
+            if (selectedCareerId === null) {
+                selectedCareerInfo.className = 'selectionInfo emptyState';
+                selectedCareerInfo.innerHTML = 'Izaberi karijeru iz liste iznad ili karticu <strong>Nova karijera</strong>.';
+                actionButtons.style.display = 'none';
+                return;
+            }
+
+            actionButtons.style.display = 'flex';
+
+            if (selectedCareerId === 'new') {
+                selectedCareerInfo.className = 'selectionInfo';
+                selectedCareerInfo.innerHTML = 'Izabrana je opcija <strong>Nova karijera</strong>. Možeš da otvoriš formu za dodavanje nove karijere.';
+                editActionBtn.disabled = true;
+                deleteActionBtn.disabled = true;
+                return;
+            }
+
+            const career = careers.find(item => item.id === selectedCareerId);
+            if (!career) return;
+
+            selectedCareerInfo.className = 'selectionInfo';
+            selectedCareerInfo.innerHTML = `Izabrana karijera: <strong>${escapeHtml(career.name)}</strong>`;
+            editActionBtn.disabled = false;
+            deleteActionBtn.disabled = false;
+        }
+
+        function hidePanels() {
+            addPanel.style.display = 'none';
+            editPanel.style.display = 'none';
+            deletePanel.style.display = 'none';
+            selectedAction = null;
+        }
+
+        function setSystemMessage(type, text) {
+            systemMessage.className = `messageBoxInline ${type}`;
+            systemMessage.textContent = text;
+        }
+
+        function addHistory(action, careerName, statusText) {
+            const now = new Date();
+            const formatted = now.toLocaleDateString('sr-RS') + ' ' + now.toLocaleTimeString('sr-RS', { hour: '2-digit', minute: '2-digit' });
+            historyEntries.unshift({ action, careerName, statusText, time: formatted });
+            renderHistory();
+        }
+
+        function renderHistory() {
+            if (!historyEntries.length) {
+                historyContainer.innerHTML = '<div class="historyEmpty">Istorija je trenutno prazna.</div>';
+                return;
+            }
+
+            historyContainer.innerHTML = historyEntries.map(entry => `
+                <div class="historyRow">
+                    <div>
+                        <strong>${escapeHtml(entry.action)}</strong><br>
+                        <span class="historyMeta">${escapeHtml(entry.careerName)} · ${escapeHtml(entry.time)}</span>
+                    </div>
+                    <span class="historyBadge">${escapeHtml(entry.statusText)}</span>
+                </div>
+            `).join('');
+        }
+
+        function fillEditForm(career) {
+            document.getElementById('editName').value = career.name;
+            document.getElementById('editShortDescription').value = career.shortDescription;
+            document.getElementById('editDescription').value = career.description;
+            document.getElementById('editSkills').value = career.skills.join(', ');
+
+            const lista = document.getElementById('editProjectsList');
+            lista.innerHTML = '';
+
+            if (career.name === 'Frontend Developer') {
+                const div = document.createElement('div');
+                div.className = 'd-flex gap-2 align-items-center mb-2';
+                div.innerHTML = `📁 <strong>Portfolio stranica — Praksa, Junior</strong>
+                    <button type="button" class="buttonAboutJoabAd deleteBtn" onclick="this.parentElement.remove()">✕</button>`;
+                lista.appendChild(div);
+            }
+        }
+
+        function clearAddForm() {
+            document.getElementById('addName').value = '';
+            document.getElementById('addShortDescription').value = '';
+            document.getElementById('addDescription').value = '';
+            document.getElementById('addSkills').value = '';
+        }
+
+        function parseSkills(input) {
+            return input.split(',').map(skill => skill.trim()).filter(Boolean);
+        }
+
+        function selectCareer(id) {
+            selectedCareerId = id;
+            hidePanels();
+            renderCareers();
+            updateSelectionInfo();
+        }
+
+        function selectNewCareer() {
+            selectedCareerId = 'new';
+            hidePanels();
+            renderCareers();
+            updateSelectionInfo();
+        }
+
+        addActionBtn.addEventListener('click', () => {
+            hidePanels();
+            addPanel.style.display = 'block';
+            clearAddForm();
+            selectedAction = 'add';
+        });
+
+        editActionBtn.addEventListener('click', () => {
+            if (selectedCareerId === null || selectedCareerId === 'new') return;
+            const career = careers.find(item => item.id === selectedCareerId);
+            if (!career) return;
+            hidePanels();
+            editPanel.style.display = 'block';
+            fillEditForm(career);
+            selectedAction = 'edit';
+        });
+
+        deleteActionBtn.addEventListener('click', () => {
+            if (selectedCareerId === null || selectedCareerId === 'new') return;
+            const career = careers.find(item => item.id === selectedCareerId);
+            if (!career) return;
+            hidePanels();
+            deletePanel.style.display = 'block';
+            deleteInfoBox.innerHTML = `Da li sigurno želiš da obrišeš karijeru <strong>${escapeHtml(career.name)}</strong>?`;
+            selectedAction = 'delete';
+        });
+
+        document.getElementById('saveAddBtn').addEventListener('click', () => {
+            const name = document.getElementById('addName').value.trim();
+            const shortDescription = document.getElementById('addShortDescription').value.trim();
+            const description = document.getElementById('addDescription').value.trim();
+            const skills = parseSkills(document.getElementById('addSkills').value.trim());
+
+            if (!name || !shortDescription || !description || !skills.length) {
+                setSystemMessage('errorState', 'Karijera nije dodata. Popuni naziv, opise i bar jednu veštinu.');
+                return;
+            }
+
+            careers.push({
+                id: nextCareerId++,
+                name,
+                shortDescription,
+                description,
+                skills
+            });
+
+            selectedCareerId = careers[careers.length - 1].id;
+            renderCareers();
+            updateSelectionInfo();
+            hidePanels();
+            setSystemMessage('successState', `Karijera „${name}" je uspešno dodata u sistem.`);
+            addHistory('Dodavanje karijere', name, 'Dodato');
+        });
+
+        document.getElementById('saveEditBtn').addEventListener('click', () => {
+            if (selectedCareerId === null || selectedCareerId === 'new') return;
+            const career = careers.find(item => item.id === selectedCareerId);
+            if (!career) return;
+
+            const name = document.getElementById('editName').value.trim();
+            const shortDescription = document.getElementById('editShortDescription').value.trim();
+            const description = document.getElementById('editDescription').value.trim();
+            const skills = parseSkills(document.getElementById('editSkills').value.trim());
+
+            if (!name || !shortDescription || !description || !skills.length) {
+                setSystemMessage('errorState', 'Izmene nisu sačuvane. Popuni naziv, opise i bar jednu veštinu.');
+                return;
+            }
+
+            career.name = name;
+            career.shortDescription = shortDescription;
+            career.description = description;
+            career.skills = skills;
+
+            renderCareers();
+            updateSelectionInfo();
+            hidePanels();
+            setSystemMessage('successState', `Podaci o karijeri „${name}" su uspešno izmenjeni.`);
+            addHistory('Izmena karijere', name, 'Izmenjeno');
+        });
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
+            if (selectedCareerId === null || selectedCareerId === 'new') return;
+            const careerIndex = careers.findIndex(item => item.id === selectedCareerId);
+            if (careerIndex === -1) return;
+
+            const deletedCareer = careers[careerIndex];
+            careers.splice(careerIndex, 1);
+            selectedCareerId = null;
+            renderCareers();
+            updateSelectionInfo();
+            hidePanels();
+            setSystemMessage('deleteState', `Karijera „${deletedCareer.name}" je uspešno obrisana iz sistema.`);
+            addHistory('Brisanje karijere', deletedCareer.name, 'Obrisano');
+        });
+
+
+        
+
+        document.getElementById('cancelAddBtn').addEventListener('click', hidePanels);
+        document.getElementById('cancelEditBtn').addEventListener('click', hidePanels);
+        document.getElementById('cancelDeleteBtn').addEventListener('click', hidePanels);
+
+        renderCareers();
+        updateSelectionInfo();
+        renderHistory();
+
+        window.selectCareer = selectCareer;
+        window.selectNewCareer = selectNewCareer;
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

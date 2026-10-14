@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include 'basing_settings.html' %}
+
+    <link rel="stylesheet" href="{% static 'css/companies.css' %}">
+
+    <div class="companies-page container mt-4">
+
+        <h2 class="companies-page__title">
+            Companies
+        </h2>
+
+        <div class="companies-toolbar mb-4">
+
+            <div class="companies-toolbar__search">
+                <input
+                    type="text"
+                    id="companySearchInput"
+                    class="form-control"
+                    placeholder="Search companies..."
+                >
+
+                <button
+                    type="button"
+                    id="companySearchButton"
+                    class="companies-toolbar__search-button"
+                >
+                    Search
+                </button>
+            </div>
+
+            <div class="companies-toolbar__sort">
+                <label for="companySortSelect">Sort:</label>
+
+                <select id="companySortSelect" class="form-select">
+                    <option value="default">Default</option>
+                    <option value="nameAsc">Name A-Z</option>
+                    <option value="nameDesc">Name Z-A</option>
+                    <option value="industryAsc">Industry A-Z</option>
+                    <option value="industryDesc">Industry Z-A</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="row g-4" id="companiesRow">
+
+            {% for company in companies %}
+
+                <div
+                    class="col-lg-4 col-md-6 col-12 company-item"
+                    data-name="{{ company.name }}"
+                    data-industry="{{ company.industry }}"
+                >
+
+                    <div class="company-card p-4">
+
+                        <header class="company-card__header">
+
+                            <div class="company-card__title">
+                                <h2>{{ company.name }}</h2>
+
+                                {% if company.industry %}
+                                    <p>{{ company.industry }}</p>
+                                {% endif %}
+                            </div>
+
+                            <div class="company-card__media">
+
+                                {% if company.logo_path %}
+                                    <img
+                                        src="{% static 'images/companyLogo/'|add:company.logo_path %}"
+                                        class="company-card__logo"
+                                        alt="{{ company.name }} logo"
+                                    >
+                                {% else %}
+                                    <div class="company-card__logo-placeholder">
+                                        {{ company.name|slice:":1" }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </header>
+
+                        <div class="company-card__body">
+
+                            {% if company.email %}
+                                <p>
+                                    <strong>Email:</strong>
+                                    {{ company.email }}
+                                </p>
+                            {% endif %}
+
+                            {% if company.contact %}
+                                <p>
+                                    <strong>Contact:</strong>
+                                    {{ company.contact }}
+                                </p>
+                            {% endif %}
+
+                            {% if company.status %}
+                                <p>
+                                    <strong>Status:</strong>
+                                    {{ company.status }}
+                                </p>
+                            {% endif %}
+
+                            {% if company.description %}
+                                <div class="company-card__description">
+                                    <p class="company-card__description-text">
+                                        {{ company.description }}
+                                    </p>
+
+                                    <button
+                                        type="button"
+                                        class="company-card__details-button"
+                                        onclick="toggleCompanyDescription(this)"
+                                    >
+                                        View more
+                                    </button>
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="col-12">
+                    <p class="text-muted">
+                        No companies are available.
+                    </p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/companies.js' %}"></script>
+
+{% endblock %}

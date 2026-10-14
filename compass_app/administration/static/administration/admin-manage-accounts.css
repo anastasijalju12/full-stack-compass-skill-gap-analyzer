@@ -1,0 +1,87 @@
+/* Author: Milica Pavlovic */
+/* Layout for the manage accounts page. Colors come from admin-theme.css. */
+
+.accountCard {
+  height: 100%;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.accountName {
+  margin-bottom: 6px;
+  font-size: 1.2rem;
+}
+
+.roleBadge,
+.historyBadge {
+  margin-top: 8px;
+}
+
+.confirmBox,
+.selectedSummary,
+.emptyState {
+  padding: 14px 16px;
+}
+
+.actionButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.buttonAboutJoabAd {
+  min-width: 165px;
+}
+
+.messageBox {
+  display: none;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-weight: 500;
+}
+
+.historyRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.historyRow + .historyRow {
+  margin-top: 12px;
+}
+
+.accountCardLink {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+
+.accountTypeLabel {
+  margin-bottom: 8px;
+}
+
+.formHint {
+  margin-top: 5px;
+  font-size: 0.85rem;
+}
+
+.accountSectionTitle {
+  margin-top: 24px;
+  margin-bottom: 14px;
+  color: var(--k-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 991px) {
+  .historyRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

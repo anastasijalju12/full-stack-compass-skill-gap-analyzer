@@ -1,0 +1,405 @@
+<!-- Author: Milica Pavlovic, student ID: 2023/0148 -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kompas - Create accounts{% endblock %}
+
+{% block extra_head %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-create-account.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-theme.css' %}"
+    >
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-subnav-wrap">
+    <div class="container-fluid">
+        <div class="admin-subnav">
+            <div class="admin-subnav-title">Administration</div>
+
+            <div class="admin-subnav-links">
+                <a href="{% url 'administration:dashboard' %}"
+                   class="admin-subnav-link">
+                    Admin panel
+                </a>
+
+                <a href="{% url 'administration:create_account' %}"
+                   class="admin-subnav-link active">
+                    Create accounts
+                </a>
+
+                <a href="{% url 'administration:company_requests' %}"
+                   class="admin-subnav-link">
+                    Company registrations
+                </a>
+
+                <a href="{% url 'administration:moderation' %}"
+                   class="admin-subnav-link">
+                    Job moderation
+                </a>
+
+                <a href="{% url 'administration:manage_accounts' %}"
+                   class="admin-subnav-link">
+                    Accounts & roles
+                </a>
+
+                <a href="{% url 'administration:manage_careers' %}"
+                   class="admin-subnav-link">
+                    Careers & skills
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-header text-center">
+    <h1 class="display-4">Create accounts</h1>
+</div>
+
+<div class="container pb-5">
+
+    {% if messages %}
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-12">
+
+                {% for message in messages %}
+                    <div class="alert
+                        {% if message.tags == 'success' %}
+                            alert-success
+                        {% elif message.tags == 'error' %}
+                            alert-danger
+                        {% else %}
+                            alert-info
+                        {% endif %}
+                    ">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+            <div class="sectionTitle text-center mb-3">
+                Choose an account type
+            </div>
+
+            <div class="accountTypeButtons">
+
+                <a
+                    href="{% url 'administration:create_account' %}?type=user"
+                    class="accountTypeBtn
+                        {% if selected_type == 'user' %}active{% endif %}
+                    "
+                >
+                    User account
+                </a>
+
+                <a
+                    href="{% url 'administration:create_account' %}?type=company"
+                    class="accountTypeBtn
+                        {% if selected_type == 'company' %}active{% endif %}
+                    "
+                >
+                    Company account
+                </a>
+
+            </div>
+
+            {% if selected_type == 'user' %}
+
+                <div class="reviewTypeBadge">
+                    New user account
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="account_type"
+                        value="user"
+                    >
+
+                    {% if user_form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in user_form.non_field_errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="row g-3 mt-1">
+
+                        {% for field in user_form %}
+
+                            <div class="
+                                {% if field.name == 'contact' %}
+                                    col-12
+                                {% else %}
+                                    col-md-6
+                                {% endif %}
+                            ">
+
+                                <label
+                                    for="{{ field.id_for_label }}"
+                                    class="labelTitle"
+                                >
+                                    {{ field.label }}
+                                </label>
+
+                                {{ field }}
+
+                                {% if field.help_text %}
+                                    <span class="helpText">
+                                        {{ field.help_text }}
+                                    </span>
+                                {% endif %}
+
+                                {% for error in field.errors %}
+                                    <div class="fieldError">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-4">
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd"
+                        >
+                            Create user account
+                        </button>
+                    </div>
+                </form>
+
+            {% elif selected_type == 'company' %}
+
+                <div class="reviewTypeBadge">
+                    New company account
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="account_type"
+                        value="company"
+                    >
+
+                    {% if company_form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in company_form.non_field_errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="row g-3 mt-1">
+
+                        {% for field in company_form %}
+
+                            <div class="
+                                {% if field.name == 'description' %}
+                                    col-12
+                                {% else %}
+                                    col-md-6
+                                {% endif %}
+                            ">
+
+                                <label
+                                    for="{{ field.id_for_label }}"
+                                    class="labelTitle"
+                                >
+                                    {{ field.label }}
+                                </label>
+
+                                {{ field }}
+
+                                {% if field.help_text %}
+                                    <span class="helpText">
+                                        {{ field.help_text }}
+                                    </span>
+                                {% endif %}
+
+                                {% for error in field.errors %}
+                                    <div class="fieldError">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-4">
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd"
+                        >
+                            Create company account
+                        </button>
+                    </div>
+                </form>
+
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+            <div class="sectionHeader">
+                <div class="sectionTitle mb-0">
+                    User accounts in the system
+                </div>
+
+                <span class="badgeRole">
+                    Total: {{ users|length }}
+                </span>
+            </div>
+
+            <div class="row g-3">
+
+                {% for user in users %}
+
+                    <div class="col-lg-6">
+                        <div class="accountListItem">
+
+                            <p>
+                                <strong>
+                                    {{ user.first_name }}
+                                    {{ user.last_name }}
+                                </strong>
+                            </p>
+
+                            <p>
+                                E-mail:
+                                {{ user.email }}
+                            </p>
+
+                            <p>
+                                Username:
+                                {{ user.username }}
+                            </p>
+
+                            <p>
+                                Status:
+                                {{ user.status|default:"Not specified" }}
+                            </p>
+
+                            <span class="badgeRole">
+                                {% if user.role == 'admin' %}
+                                    Administrator
+                                {% else %}
+                                    User
+                                {% endif %}
+                            </span>
+
+                        </div>
+                    </div>
+
+                {% empty %}
+
+                    <div class="col-12">
+                        <div class="emptyState">
+                            There are currently no user accounts.
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+            <div class="sectionHeader">
+                <div class="sectionTitle mb-0">
+                    Company accounts in the system
+                </div>
+
+                <span class="badgeRole">
+                    Total: {{ companies|length }}
+                </span>
+            </div>
+
+            <div class="row g-3">
+
+                {% for company in companies %}
+
+                    <div class="col-lg-6">
+                        <div class="accountListItem">
+
+                            <p>
+                                <strong>{{ company.name }}</strong>
+                            </p>
+
+                            <p>
+                                E-mail:
+                                {{ company.email|default:"Not provided" }}
+                            </p>
+
+                            <p>
+                                Username:
+                                {{ company.username }}
+                            </p>
+
+                            <p>
+                                Industry:
+                                {{ company.industry|default:"Not provided" }}
+                            </p>
+
+                            <span class="badgeRole">
+                                {% if company.status == 'active' %}
+                                    Active company
+                                {% elif company.status == 'rejected' %}
+                                    Rejected company
+                                {% else %}
+                                    Pending approval
+                                {% endif %}
+                            </span>
+
+                        </div>
+                    </div>
+
+                {% empty %}
+
+                    <div class="col-12">
+                        <div class="emptyState">
+                            There are currently no company accounts.
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

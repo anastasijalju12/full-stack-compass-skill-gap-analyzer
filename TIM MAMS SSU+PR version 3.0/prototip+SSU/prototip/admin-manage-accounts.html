@@ -1,0 +1,436 @@
+<!-- Autor: Milica Pavlovic -->
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas - Nalozi i uloge</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="admin-manage-accounts.css">
+</head>
+<body>
+
+    <!---------------- JAVNI HEADER --------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navHeader">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo/compas.png" class="img-fluid" style="height:64px;" alt="logoKompas">
+                <span class="h4 ms-2" id="navMenuCompanyName">Kompas</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navbarNavDropdown" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Početna</a></li>
+                    <li class="nav-item"><a href="careers.html" class="nav-link">Zanimanja</a></li>
+                    <li class="nav-item"><a href="jobAds.html" class="nav-link">Oglasi</a></li>
+                    <li class="nav-item"><a href="skillMatch.html" class="nav-link">Pametno filtriranje</a></li>
+                    <li class="nav-item"><a href="companies.html" class="nav-link">Naše kompanije</a></li>
+                    <li class="nav-item"><a href="aboutUs.html" class="nav-link">O nama</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Avatar</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a href="psiIndex.html" class="dropdown-item">Moj profil</a></li>
+                            <li><a href="favourites.html" class="dropdown-item">Omiljeno</a></li>
+                            <li><a href="#" class="dropdown-item">Odjava</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!---------------- ADMIN HEADER --------------------->
+    <div class="admin-subnav-wrap">
+        <div class="container-fluid">
+            <div class="admin-subnav">
+                <div class="admin-subnav-title">Admin meni</div>
+                <div class="admin-subnav-links">
+                    <a href="admin-dashboard.html" class="admin-subnav-link">Admin panel</a>
+                    <a href="admin-create-account.html" class="admin-subnav-link">Kreiranje naloga</a>
+                    <a href="admin-company-requests.html" class="admin-subnav-link">Registracije firmi</a>
+                    <a href="admin-moderation.html" class="admin-subnav-link">Moderacija</a>
+                    <a href="admin-manage-accounts.html" class="admin-subnav-link active">Nalozi i uloge</a>
+                    <a href="admin-manage-careers.html" class="admin-subnav-link">Karijere i veštine</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header text-center">
+        <h1 class="display-4">Nalozi i uloge</h1>
+    </div>
+
+    <div class="container pb-5">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Postojeći nalozi</div>
+                <div class="row g-3" id="accountsContainer"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Izabrani nalog i akcije</div>
+                <div class="selectedSummary" id="selectedSummary">
+                    Izaberi nalog iz liste iznad da bi nastavila sa izmenom podataka, promenom uloge ili brisanjem naloga.
+                </div>
+
+                <div class="actionButtons mt-4">
+                    <button type="button" class="buttonAboutJoabAd actionBtn" id="actionEditBtn" onclick="showAction('edit')" disabled>Izmena podataka</button>
+                    <button type="button" class="buttonAboutJoabAd actionBtn secondaryBtn" id="actionRoleBtn" onclick="showAction('role')" disabled>Menjanje uloge</button>
+                    <button type="button" class="buttonAboutJoabAd actionBtn deleteBtn" id="actionDeleteBtn" onclick="showAction('delete')" disabled>Brisanje naloga</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4 actionPanel" id="panelEdit" style="display:none;">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Izmena podataka naloga</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="labelTitle">Ime / naziv</label>
+                        <input type="text" class="form-control" id="editName">
+                    </div>
+                    <div class="col-md-6" id="lastNameWrap">
+                        <label class="labelTitle">Prezime</label>
+                        <input type="text" class="form-control" id="editLastName">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">E-mail</label>
+                        <input type="email" class="form-control" id="editEmail">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Korisničko ime</label>
+                        <input type="text" class="form-control" id="editUsername">
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+                    <button type="button" class="buttonAboutJoabAd" onclick="saveEdit()">Sačuvaj izmene</button>
+                    <button type="button" class="buttonAboutJoabAd secondaryBtn" onclick="closePanels()">Otkaži</button>
+                </div>
+                <div id="editSuccess" class="messageBox successBox">Podaci naloga su uspešno izmenjeni.</div>
+                <div id="editError" class="messageBox errorBox">Izmene nisu sačuvane. Proveri obavezna polja.</div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4 actionPanel" id="panelRole" style="display:none;">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Menjanje korisničke uloge</div>
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-6">
+                        <label class="labelTitle">Trenutna uloga</label>
+                        <input type="text" class="form-control" id="currentRole" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Nova uloga</label>
+                        <select class="form-select" id="newRole">
+                            <option>Korisnik</option>
+                            <option>Pretplaćeni korisnik</option>
+                            <option>Firma</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+                    <button type="button" class="buttonAboutJoabAd" onclick="saveRoleChange()">Sačuvaj ulogu</button>
+                    <button type="button" class="buttonAboutJoabAd secondaryBtn" onclick="closePanels()">Otkaži</button>
+                </div>
+                <div id="roleSuccess" class="messageBox successBox">Korisnička uloga je uspešno promenjena.</div>
+                <div id="roleError" class="messageBox errorBox">Nova uloga mora da bude različita od trenutne.</div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4 actionPanel" id="panelDelete" style="display:none;">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Brisanje naloga</div>
+                <div class="confirmBox" id="deleteText"></div>
+                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+                    <button type="button" class="buttonAboutJoabAd deleteBtn" onclick="deleteAccount()">Potvrdi brisanje</button>
+                    <button type="button" class="buttonAboutJoabAd secondaryBtn" onclick="closePanels()">Otkaži</button>
+                </div>
+                <div id="deleteSuccess" class="messageBox deleteBox">Nalog je uspešno obrisan iz sistema.</div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Istorija izmena</div>
+                <div id="historyContainer">
+                    <div class="historyRow">
+                        <div>
+                            <strong>Microsoft Serbia</strong><br>
+                            <span class="historyMeta">Uloga promenjena u Firma • 12. april 2026.</span>
+                        </div>
+                        <span class="historyBadge">Promena uloge</span>
+                    </div>
+                    <div class="historyRow">
+                        <div>
+                            <strong>Ana Anic</strong><br>
+                            <span class="historyMeta">Podaci naloga izmenjeni • 11. april 2026.</span>
+                        </div>
+                        <span class="historyBadge">Izmena</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const accounts = [
+            {
+                id: 1,
+                type: 'korisnik',
+                name: 'Ana',
+                lastName: 'Anic',
+                email: 'ana.anic@gmail.com',
+                username: 'anaanic',
+                role: 'Korisnik'
+            },
+            {
+                id: 2,
+                type: 'firma',
+                name: 'JetBrains Serbia',
+                lastName: '',
+                email: 'careers@jetbrains.rs',
+                username: 'jetbrains_srb',
+                role: 'Firma'
+            },
+            {
+                id: 3,
+                type: 'korisnik',
+                name: 'Marko',
+                lastName: 'Markovic',
+                email: 'marko@gmail.com',
+                username: 'markom',
+                role: 'Pretplaćeni korisnik'
+            }
+        ];
+
+        let selectedAccountId = null;
+        let currentAction = null;
+
+        function renderAccounts() {
+            const container = document.getElementById('accountsContainer');
+            container.innerHTML = '';
+
+            if (accounts.length === 0) {
+                container.innerHTML = '<div class="col-12"><div class="emptyState">Trenutno nema naloga u sistemu.</div></div>';
+                resetSelectionAfterDelete();
+                return;
+            }
+
+            accounts.forEach(account => {
+                const selectedClass = account.id === selectedAccountId ? 'selectedCard' : '';
+                const title = account.type === 'firma' ? account.name : `${account.name} ${account.lastName}`;
+
+                container.innerHTML += `
+                    <div class="col-lg-4">
+                        <div class="accountCard ${selectedClass}" onclick="selectAccount(${account.id})">
+                            <div class="accountName">${title}</div>
+                            <div>E-mail: ${account.email}</div>
+                            <div>Korisničko ime: ${account.username}</div>
+                            <span class="roleBadge">${account.role}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function selectAccount(id) {
+            selectedAccountId = id;
+            currentAction = null;
+            renderAccounts();
+            hidePanelsAndMessages();
+            toggleActionButtons(false);
+
+            const account = getSelectedAccount();
+            const fullName = account.type === 'firma' ? account.name : `${account.name} ${account.lastName}`;
+            document.getElementById('selectedSummary').innerHTML = `
+                Izabran nalog: <strong>${fullName}</strong><br>
+                Trenutna uloga: <strong>${account.role}</strong> &nbsp;|&nbsp; Korisničko ime: <strong>${account.username}</strong>
+            `;
+        }
+
+        function toggleActionButtons(disabled) {
+            document.getElementById('actionEditBtn').disabled = disabled;
+            document.getElementById('actionRoleBtn').disabled = disabled;
+            document.getElementById('actionDeleteBtn').disabled = disabled;
+        }
+
+        function getSelectedAccount() {
+            return accounts.find(account => account.id === selectedAccountId);
+        }
+
+        function showAction(action) {
+            if (selectedAccountId === null) return;
+            currentAction = action;
+            hidePanelsAndMessages();
+
+            document.querySelectorAll('.actionBtn').forEach(btn => btn.classList.remove('activeActionBtn'));
+            if (action === 'edit') document.getElementById('actionEditBtn').classList.add('activeActionBtn');
+            if (action === 'role') document.getElementById('actionRoleBtn').classList.add('activeActionBtn');
+            if (action === 'delete') document.getElementById('actionDeleteBtn').classList.add('activeActionBtn');
+
+            const account = getSelectedAccount();
+            if (!account) return;
+
+            if (action === 'edit') {
+                document.getElementById('panelEdit').style.display = 'block';
+                document.getElementById('editName').value = account.name;
+                document.getElementById('editLastName').value = account.lastName;
+                document.getElementById('editEmail').value = account.email;
+                document.getElementById('editUsername').value = account.username;
+
+                if (account.type === 'firma') {
+                    document.getElementById('lastNameWrap').style.display = 'none';
+                } else {
+                    document.getElementById('lastNameWrap').style.display = 'block';
+                }
+            }
+
+            if (action === 'role') {
+                document.getElementById('panelRole').style.display = 'block';
+                document.getElementById('currentRole').value = account.role;
+                document.getElementById('newRole').value = account.role;
+            }
+
+            if (action === 'delete') {
+                document.getElementById('panelDelete').style.display = 'block';
+                const fullName = account.type === 'firma' ? account.name : `${account.name} ${account.lastName}`;
+                document.getElementById('deleteText').innerHTML = `Da li si sigurna da želiš da obrišeš nalog <strong>${fullName}</strong>?`;
+            }
+        }
+
+        function closePanels() {
+            currentAction = null;
+            hidePanelsAndMessages();
+            document.querySelectorAll('.actionBtn').forEach(btn => btn.classList.remove('activeActionBtn'));
+        }
+
+        function hidePanelsAndMessages() {
+            document.getElementById('panelEdit').style.display = 'none';
+            document.getElementById('panelRole').style.display = 'none';
+            document.getElementById('panelDelete').style.display = 'none';
+            document.querySelectorAll('.messageBox').forEach(box => box.style.display = 'none');
+        }
+
+        function saveEdit() {
+            const account = getSelectedAccount();
+            if (!account) return;
+
+            const name = document.getElementById('editName').value.trim();
+            const lastName = document.getElementById('editLastName').value.trim();
+            const email = document.getElementById('editEmail').value.trim();
+            const username = document.getElementById('editUsername').value.trim();
+
+            const lastNameRequired = account.type !== 'firma';
+            const emailValid = /^\S+@\S+\.\S+$/.test(email);
+
+            document.getElementById('editSuccess').style.display = 'none';
+            document.getElementById('editError').style.display = 'none';
+
+            if (!name || !email || !username || (lastNameRequired && !lastName) || !emailValid) {
+                document.getElementById('editError').style.display = 'block';
+                return;
+            }
+
+            account.name = name;
+            account.lastName = account.type === 'firma' ? '' : lastName;
+            account.email = email;
+            account.username = username;
+
+            renderAccounts();
+            selectAccount(account.id);
+            showAction('edit');
+            document.getElementById('editSuccess').style.display = 'block';
+
+            const fullName = account.type === 'firma' ? account.name : `${account.name} ${account.lastName}`;
+            addHistory(`${fullName}`, 'Podaci naloga su izmenjeni.', 'Izmena');
+        }
+
+        function saveRoleChange() {
+            const account = getSelectedAccount();
+            if (!account) return;
+
+            const newRole = document.getElementById('newRole').value;
+            document.getElementById('roleSuccess').style.display = 'none';
+            document.getElementById('roleError').style.display = 'none';
+
+            if (newRole === account.role) {
+                document.getElementById('roleError').style.display = 'block';
+                return;
+            }
+
+            const oldRole = account.role;
+            account.role = newRole;
+            renderAccounts();
+            selectAccount(account.id);
+            showAction('role');
+            document.getElementById('roleSuccess').style.display = 'block';
+
+            const fullName = account.type === 'firma' ? account.name : `${account.name} ${account.lastName}`;
+            addHistory(`${fullName}`, `Uloga promenjena iz ${oldRole} u ${newRole}.`, 'Promena uloge');
+        }
+
+        function deleteAccount() {
+            const account = getSelectedAccount();
+            if (!account) return;
+
+            const fullName = account.type === 'firma' ? account.name : `${account.name} ${account.lastName}`;
+            const index = accounts.findIndex(item => item.id === account.id);
+            if (index !== -1) {
+                accounts.splice(index, 1);
+            }
+
+            addHistory(`${fullName}`, 'Nalog je obrisan iz sistema.', 'Brisanje');
+            document.getElementById('deleteSuccess').style.display = 'block';
+
+            setTimeout(() => {
+                selectedAccountId = null;
+                currentAction = null;
+                renderAccounts();
+                hidePanelsAndMessages();
+                document.querySelectorAll('.actionBtn').forEach(btn => btn.classList.remove('activeActionBtn'));
+                document.getElementById('selectedSummary').innerHTML = 'Izaberi nalog iz liste iznad da bi nastavila sa izmenom podataka, promenom uloge ili brisanjem naloga.';
+                toggleActionButtons(true);
+            }, 500);
+        }
+
+        function addHistory(title, text, badge) {
+            const now = new Date();
+            const dateText = now.toLocaleDateString('sr-RS', { day: '2-digit', month: 'long', year: 'numeric' });
+            const container = document.getElementById('historyContainer');
+            const row = document.createElement('div');
+            row.className = 'historyRow';
+            row.innerHTML = `
+                <div>
+                    <strong>${title}</strong><br>
+                    <span class="historyMeta">${text} • ${dateText}</span>
+                </div>
+                <span class="historyBadge">${badge}</span>
+            `;
+            container.prepend(row);
+        }
+
+        function resetSelectionAfterDelete() {
+            selectedAccountId = null;
+            currentAction = null;
+            hidePanelsAndMessages();
+            document.querySelectorAll('.actionBtn').forEach(btn => btn.classList.remove('activeActionBtn'));
+            document.getElementById('selectedSummary').innerHTML = 'Trenutno nema naloga u sistemu.';
+            toggleActionButtons(true);
+        }
+
+        renderAccounts();
+        toggleActionButtons(true);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+@startuml
+title SD Moderacija oglasa
+
+actor Administrator
+boundary "moderation.html\n: ModerationPage" as Page
+control "administration.views\n: AdministrationController" as Controller
+entity "JobAd" as JobAd
+database "Baza podataka" as DB
+
+Administrator -> Page: otvoriModeraciju()
+Page -> Controller: GET /administration/moderation/
+Controller -> Controller: proveriUlogu(session.role)
+
+alt uloga nije admin
+    Controller --> Page: redirect(login/home)\nporuka o zabrani pristupa
+    Page --> Administrator: prikažiPorukuOGrešci()
+else uloga = admin
+    Controller -> JobAd: filter(status in pending, active)
+    JobAd -> DB: SELECT oglasi + firma
+    DB --> JobAd: lista oglasa
+    JobAd --> Controller: ads_for_review
+
+    Controller -> JobAd: filter(status = inactive)
+    JobAd -> DB: SELECT istorija moderacije
+    DB --> JobAd: moderirani oglasi
+    JobAd --> Controller: moderated_ads
+
+    Controller --> Page: render(liste oglasa)
+    Page --> Administrator: prikažiOglaseIIstoriju()
+end
+
+Administrator -> Page: izaberiOglas(adId)
+Page -> Controller: GET /administration/moderation/?ad=adId
+Controller -> JobAd: get_object_or_404(adId)
+JobAd -> DB: SELECT oglas + firma
+DB --> JobAd: podaci oglasa
+JobAd --> Controller: selected_ad
+Controller --> Page: render(detalji oglasa)
+Page --> Administrator: prikažiDetalje()
+
+alt Ukloni oglas
+    Administrator -> Page: unesiRazlog(admin_note)\nklikni „Ukloni oglas“
+    Page -> Controller: POST /moderation/{id}/remove/
+    Controller -> Controller: proveri admin_note
+
+    alt razlog nije unet
+        Controller --> Page: redirect(?ad=id)\nmessages.error(...)
+        Page --> Administrator: „Morate uneti razlog\nuklanjanja oglasa.“
+    else razlog je unet
+        Controller -> JobAd: status = inactive\nremoval_reason = admin_note\nupdated_at = now()
+        JobAd -> DB: UPDATE oglas
+        DB --> JobAd: uspešno sačuvano
+        JobAd --> Controller: potvrda
+        Controller --> Page: redirect(moderation)\nmessages.success(...)
+        Page --> Administrator: prikaži „Uklonjen“ u istoriji
+    end
+
+else Označi kao zastareo
+    Administrator -> Page: opcionalna napomena\nklikni „Označi kao zastareo“
+    Page -> Controller: POST /moderation/{id}/mark-outdated/
+    Controller -> Controller: formiraj removal_reason\n„Zastareo oglas.“ + napomena
+    Controller -> JobAd: status = inactive\nremoval_reason = formirani razlog\nupdated_at = now()
+    JobAd -> DB: UPDATE oglas
+    DB --> JobAd: uspešno sačuvano
+    Controller --> Page: redirect(moderation)\nmessages.success(...)
+    Page --> Administrator: prikaži „Zastareo“ u istoriji
+
+else Ostavi aktivnim
+    Administrator -> Page: klikni „Ostavi aktivnim“
+    Page -> Controller: POST /moderation/{id}/keep-active/
+    Controller -> JobAd: status = active\nremoval_reason = null\nupdated_at = now()
+    JobAd -> DB: UPDATE oglas
+    DB --> JobAd: uspešno sačuvano
+    Controller --> Page: redirect(?ad=id)\nmessages.success(...)
+    Page --> Administrator: prikaži status „Aktivan“
+end
+
+@enduml

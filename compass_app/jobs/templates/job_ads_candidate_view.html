@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include 'basing_settings.html' %}
+
+    <link rel="stylesheet" href="{% static 'css/job_ads_candidate_view.css' %}?v=2">
+
+    <!-- CARDS -->
+    <div class="jobs-page container mt-4">
+
+        <div class="jobs-toolbar mb-4">
+
+        <div class="jobs-toolbar__search">
+            <input
+                type="text"
+                id="jobSearchInput"
+                class="form-control"
+                placeholder="Search job ads..."
+            >
+
+            <button
+                type="button"
+                id="jobSearchButton"
+                class="jobs-toolbar__search-button"
+            >
+                Search
+            </button>
+        </div>
+
+        <div class="jobs-toolbar__sort">
+            <label for="jobSortSelect">Sort by:</label>
+
+            <select id="jobSortSelect" class="form-select">
+                <option value="default">Default</option>
+                <option value="titleAsc">Title A-Z</option>
+                <option value="titleDesc">Title Z-A</option>
+                <option value="deadlineAsc">Application deadline - earliest first</option>
+                <option value="deadlineDesc">Application deadline - latest first</option>
+            </select>
+        </div>
+
+    </div>
+
+        <div class="row g-4" id="jobsRow">
+
+            {% for ad in ads %}
+
+                <div
+                    id="job-ad-{{ ad.id }}"
+                    class="col-lg-4 col-md-6 col-12 job-ad-column job-item"
+                    data-title="{{ ad.name }}"
+                    data-deadline="{{ ad.application_deadline|date:'Y-m-d' }}">
+
+                    <div class="ad-card__box p-4">
+
+                        <header class="ad-card__header">
+
+                            <div class="ad-card__title">
+                                <h2>{{ ad.name }}</h2>
+                            </div>
+
+                            <div class="ad-card__media">
+
+                                {% if ad.company.logo_path %}
+                                    <img
+                                        src="{% static 'images/companyLogo/'|add:ad.company.logo_path %}"
+                                        class="ad-card__logo"
+                                        alt="{{ ad.company.name }} logo"
+                                    >
+                                {% else %}
+                                    <div class="ad-card__logo-placeholder" title="{{ ad.company.name }}">
+                                        {{ ad.company.name|slice:":1" }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </header>
+
+                        <div class="ad-card__body">
+
+                            <ul class="list-unstyled mb-0">
+
+                                <li>
+                                    Type:
+                                    <strong>{{ ad.type }}</strong>
+                                </li>
+
+                                <li>
+                                    Location:
+                                    <strong>{{ ad.location }}</strong>
+                                </li>
+
+                                <li>
+                                    Application deadline:<br>
+
+                                    <span class="ad-card__deadline">
+                                        {{ ad.application_deadline|date:"d.m.Y." }}
+                                    </span>
+                                </li>
+
+                                <li class="mt-2">
+                                    {{ ad.description }}
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        <footer class="ad-card__footer">
+
+                            <button type="button"
+                                    class="ad-card__apply-button"
+                                    data-ad-id="{{ ad.id }}"
+                                    data-ad-name="{{ ad.name }}"
+                                    data-company-name="{{ ad.company.name }}"
+                                    onclick="openApplyForJobForm(this)"
+                                    > Apply </button>
+
+                        </footer>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="col-12">
+                    <p class="text-muted">
+                        There are currently no available job ads.
+                    </p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% include 'apply_for_job.html' %}
+
+    <script src="{% static 'js/job_ads_candidate_view.js' %}"></script>
+
+{% endblock %}

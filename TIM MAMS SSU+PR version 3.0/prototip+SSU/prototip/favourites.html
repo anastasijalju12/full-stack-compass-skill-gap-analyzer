@@ -1,0 +1,137 @@
+<!-- autor: Anastasija Ljubičić 0312/2023 -->
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="favourites.css">
+    
+</head>
+
+<body>
+
+  
+
+    <div class="page-header text-center">
+        <h1 class="display-4">Omiljeno</h1>
+    </div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('oglasi')">Oglasi</button>
+        <button class="tab-btn" onclick="switchTab('karijere')">Karijere</button>
+    </div>
+    <div id="panelJoabAds" class="tab-panel active">
+        <div class="row justify-content-center" id="arrangementsContainer">
+            <div class="col-lg-9 col-12 customCard d-flex align-items-center gap-4 mb-3 px-4 py-3" id="card">
+
+                <img src="images/companyLogo/JetBrains.png" class="img-fluid" style="width:90px; height:90px; object-fit:contain; border-radius:10px;">
+
+                <div class="flex-grow-1">
+                    <ul class="list-unstyled mb-0">
+                        <li><h2 class="mt-0 ">Junior Backend Developer</h2></li>
+                        <li>Kompanija: <strong>JetBrains</strong></li>
+                        <li>Tip: <strong>Junior pozicija</strong> &nbsp;|&nbsp; Lokacija: <strong>Beograd</strong></li>
+                        <li>
+                            Rok prijave: 
+                            <span class="fw-bold finalPrice" style="color:#d00000">30. april 2026.</span>
+                        </li>
+                        <li class="mt-2">
+                            Pridruži se našem timu i radi na backend sistemima koji koriste milioni korisnika širom sveta. Tražimo motivisane juniore sa znanjem C++ i želju za razvojem.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="d-flex flex-column align-items-center gap-2" style="min-width:130px;">
+                    <div class="card-actions pt-4">
+
+                    <button
+                        type="button"
+                        class="buttonAboutJoabAd pe-3 ps-3 d-block mx-auto"
+                        onclick="
+                            this.closest('.customCard').remove();
+                        ">
+                        Ukloni
+                    </button>
+
+                    <button
+                        type="button"
+                        class="buttonAboutJoabAd pe-3 ps-3 d-block mx-auto"
+                        onclick="
+                            localStorage.setItem('selectedArrangement', JSON.stringify({
+                                name: 'Junior Backend Developer',
+                                company: 'JetBrains',
+                                type: 'Junior pozicija',
+                                deadline: '30. april 2026.',
+                                rating: 4.6,
+                                description: 'Pridruži se našem timu i radi na backend sistemima koji koriste milioni korisnika širom sveta.'
+                            }));
+                            window.location.href = 'jobAds.html#jetBrainsJuniorBackendDeveloper';
+                        ">
+                        Pogledaj
+                    </button>
+
+                </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="panelCareers" class="tab-panel">
+        <div class="row justify-content-center" id="arrangementsContainer">
+            <div class="col-lg-9 col-12 customCard
+             d-flex align-items-center gap-4 mb-3 px-4 py-3" id="card">
+                <div class="flex-grow-1">
+                    <ul class="list-unstyled mb-0">
+                        <li><h2 class="mt-0">Web designer</h2></li>
+                        <li><strong>Digitalna iskustva koja ostavljaju utisak</strong></li>
+                        <li class="mt-2">
+                            Web designer osmišljava izgled i doživljaj veb sajtova — od rasporeda elemenata i izbora boja do tipografije i korisničkog iskustva. Spaja kreativnost i tehničko znanje kako bi napravio interfejs koji je lep, intuitivan i funkcionalan.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="d-flex flex-column align-items-center gap-2" style="min-width:130px;">
+
+                    <button
+                        type="button"
+                        class="buttonAboutJoabAd pe-3 ps-3 d-block mx-auto"
+                        onclick="this.closest('.customCard').remove();">
+                        Ukloni
+                    </button>
+                    
+                    <button
+                        type="button"
+                        class="buttonAboutJoabAd pe-3 ps-3 d-block mx-auto"
+                        onclick="window.location.href = 'careers.html#webDesigner';">
+                        Pogledaj
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+<script>
+function switchTab(tab) {
+    document.getElementById('panelJoabAds').classList.toggle('active', tab === 'oglasi');
+    document.getElementById('panelCareers').classList.toggle('active', tab === 'karijere');
+
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="navbar.js"></script>
+
+</body>
+</html>

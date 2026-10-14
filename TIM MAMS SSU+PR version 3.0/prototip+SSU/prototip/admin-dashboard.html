@@ -1,0 +1,163 @@
+<!-- Autor: Milica Pavlovic -->
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas - Admin panel</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+
+<body>
+
+    <!---------------- JAVNI HEADER --------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navHeader">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo/compas.png" class="img-fluid" style="height:64px;" alt="logoKompas">
+                <span class="h4 ms-2" id="navMenuCompanyName">Kompas</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navbarNavDropdown" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Početna</a></li>
+                    <li class="nav-item"><a href="careers.html" class="nav-link">Zanimanja</a></li>
+                    <li class="nav-item"><a href="jobAds.html" class="nav-link">Oglasi</a></li>
+                    <li class="nav-item"><a href="skillMatch.html" class="nav-link">Pametno filtriranje</a></li>
+                    <li class="nav-item"><a href="companies.html" class="nav-link">Naše kompanije</a></li>
+                    <li class="nav-item"><a href="aboutUs.html" class="nav-link">O nama</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Avatar</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a href="psiIndex.html" class="dropdown-item">Moj profil</a></li>
+                            <li><a href="favourites.html" class="dropdown-item">Omiljeno</a></li>
+                            <li><a href="#" class="dropdown-item">Odjava</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!---------------- ADMIN HEADER --------------------->
+    <div class="admin-subnav-wrap">
+        <div class="container-fluid">
+            <div class="admin-subnav">
+                <div class="admin-subnav-title">Admin meni</div>
+                <div class="admin-subnav-links">
+                    <a href="admin-dashboard.html" class="admin-subnav-link active">Admin panel</a>
+                    <a href="admin-create-account.html" class="admin-subnav-link">Kreiranje naloga</a>
+                    <a href="admin-company-requests.html" class="admin-subnav-link">Registracije firmi</a>
+                    <a href="admin-moderation.html" class="admin-subnav-link">Moderacija</a>
+                    <a href="admin-manage-accounts.html" class="admin-subnav-link">Nalozi i uloge</a>
+                    <a href="admin-manage-careers.html" class="admin-subnav-link">Karijere i veštine</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header text-center">
+        <h1 class="display-4">Administratorski panel</h1>
+    </div>
+
+    <div class="container pb-5">
+       
+
+        <div class="row g-4 justify-content-center mb-5">
+            <div class="col-lg-5 col-md-6">
+                <div class="dashboardActionCard h-100">
+                    <div>
+                        <div class="actionTitle">Kreiranje naloga</div>
+                        <p class="actionText">Dodavanje novog korisničkog ili firmnog naloga kroz administrativnu formu.</p>
+                    </div>
+                    <a href="admin-create-account.html" class="actionBtn">Otvori stranicu</a>
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-md-6">
+                <div class="dashboardActionCard h-100">
+                    <div>
+                        <div class="actionTitle">Registracije firmi</div>
+                        <p class="actionText">Pregled prijava firmi i donošenje odluke o odobravanju ili odbijanju registracije.</p>
+                    </div>
+                    <a href="admin-company-requests.html" class="actionBtn">Otvori stranicu</a>
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-md-6">
+                <div class="dashboardActionCard h-100">
+                    <div>
+                        <div class="actionTitle">Moderacija oglasa</div>
+                        <p class="actionText">Uklanjanje neprimerenih ili zastarelih oglasa i pregled statusa sadržaja.</p>
+                    </div>
+                    <a href="admin-moderation.html" class="actionBtn">Otvori stranicu</a>
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-md-6">
+                <div class="dashboardActionCard h-100">
+                    <div>
+                        <div class="actionTitle">Nalozi i uloge</div>
+                        <p class="actionText">Izmena podataka naloga, brisanje naloga i promena korisničkih uloga.</p>
+                    </div>
+                    <a href="admin-manage-accounts.html" class="actionBtn">Otvori stranicu</a>
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-md-6">
+                <div class="dashboardActionCard h-100">
+                    <div>
+                        <div class="actionTitle">Karijere i veštine</div>
+                        <p class="actionText">Dodavanje, izmena i brisanje karijera i potrebnih veština u sistemu.</p>
+                    </div>
+                    <a href="admin-manage-careers.html" class="actionBtn">Otvori stranicu</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Brzi pregled statusa</div>
+                <div class="row g-3">
+                    <div class="col-md-3 col-6">
+                        <div class="statusBox">
+                            <div class="statusNumber">4</div>
+                            <div class="statusLabel">Zahteva firmi</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="statusBox">
+                            <div class="statusNumber">9</div>
+                            <div class="statusLabel">Oglasa za proveru</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="statusBox">
+                            <div class="statusNumber">31</div>
+                            <div class="statusLabel">Aktivnih naloga</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="statusBox">
+                            <div class="statusNumber">18</div>
+                            <div class="statusLabel">Karijera u sistemu</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

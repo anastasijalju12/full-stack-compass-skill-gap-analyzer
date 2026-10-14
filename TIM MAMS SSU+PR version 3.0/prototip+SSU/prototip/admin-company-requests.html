@@ -1,0 +1,293 @@
+<!-- Autor: Milica Pavlovic -->
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas - Registracije firmi</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="admin-company-requests.css">
+</head>
+<body>
+
+    <!---------------- JAVNI HEADER --------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navHeader">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo/compas.png" class="img-fluid" style="height:64px;" alt="logoKompas">
+                <span class="h4 ms-2" id="navMenuCompanyName">Kompas</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navbarNavDropdown" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Početna</a></li>
+                    <li class="nav-item"><a href="careers.html" class="nav-link">Zanimanja</a></li>
+                    <li class="nav-item"><a href="jobAds.html" class="nav-link">Oglasi</a></li>
+                    <li class="nav-item"><a href="skillMatch.html" class="nav-link">Pametno filtriranje</a></li>
+                    <li class="nav-item"><a href="companies.html" class="nav-link">Naše kompanije</a></li>
+                    <li class="nav-item"><a href="aboutUs.html" class="nav-link">O nama</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Avatar</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a href="psiIndex.html" class="dropdown-item">Moj profil</a></li>
+                            <li><a href="favourites.html" class="dropdown-item">Omiljeno</a></li>
+                            <li><a href="#" class="dropdown-item">Odjava</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!---------------- ADMIN HEADER --------------------->
+    <div class="admin-subnav-wrap">
+        <div class="container-fluid">
+            <div class="admin-subnav">
+                <div class="admin-subnav-title">Admin meni</div>
+                <div class="admin-subnav-links">
+                    <a href="admin-dashboard.html" class="admin-subnav-link">Admin panel</a>
+                    <a href="admin-create-account.html" class="admin-subnav-link">Kreiranje naloga</a>
+                    <a href="admin-company-requests.html" class="admin-subnav-link active">Registracije firmi</a>
+                    <a href="admin-moderation.html" class="admin-subnav-link">Moderacija</a>
+                    <a href="admin-manage-accounts.html" class="admin-subnav-link">Nalozi i uloge</a>
+                    <a href="admin-manage-careers.html" class="admin-subnav-link">Karijere i veštine</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header text-center">
+        <h1 class="display-4">Registracije firmi</h1>
+    </div>
+
+    <div class="container pb-5">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Zahtevi koji čekaju obradu</div>
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="requestPreviewCard h-100" id="requestCard-jetbrains">
+                            <div class="requestPreviewHeader">
+                                <div>
+                                    <div class="requestName">JetBrains Serbia</div>
+                                    <div class="requestMeta">Status: <strong id="statusText-jetbrains">Na čekanju</strong></div>
+                                </div>
+                                <span class="statusBadge pending" id="statusBadge-jetbrains">Na čekanju</span>
+                            </div>
+                            <p class="mb-2">Kontakt: careers@jetbrains.rs</p>
+                            <p class="mb-2">Grad: Beograd</p>
+                            <p class="mb-3">Firma želi pristup objavljivanju oglasa i uređivanju svog profila.</p>
+                            <button type="button" class="buttonAboutJoabAd previewBtn" onclick="showCompanyDetails('jetbrains')">Pregled</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="requestPreviewCard h-100" id="requestCard-codeflow">
+                            <div class="requestPreviewHeader">
+                                <div>
+                                    <div class="requestName">CodeFlow Labs</div>
+                                    <div class="requestMeta">Status: <strong id="statusText-codeflow">Na čekanju</strong></div>
+                                </div>
+                                <span class="statusBadge pending" id="statusBadge-codeflow">Na čekanju</span>
+                            </div>
+                            <p class="mb-2">Kontakt: jobs@codeflow.rs</p>
+                            <p class="mb-2">Grad: Novi Sad</p>
+                            <p class="mb-3">Zahtev je poslat i čeka pregled podataka od strane administratora.</p>
+                            <button type="button" class="buttonAboutJoabAd previewBtn" onclick="showCompanyDetails('codeflow')">Pregled</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4 detailSectionHidden" id="detailsSection">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Detalji prijave firme</div>
+                <div class="selectedCompanyInfo" id="selectedCompanyInfo"></div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="labelTitle">Naziv firme</label>
+                        <input type="text" class="form-control" id="companyNameInput">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">PIB</label>
+                        <input type="text" class="form-control" id="companyPibInput">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Kontakt e-mail</label>
+                        <input type="email" class="form-control" id="companyEmailInput">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Grad</label>
+                        <input type="text" class="form-control" id="companyCityInput">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Web sajt</label>
+                        <input type="text" class="form-control" id="companyWebsiteInput">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Trenutni status</label>
+                        <select class="form-select" id="companyStatusSelect">
+                            <option>Na čekanju</option>
+                            <option>Odobren</option>
+                            <option>Odbijen</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="labelTitle">Opis firme</label>
+                        <textarea class="form-control" rows="4" id="companyDescriptionInput"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="labelTitle">Napomena administratora</label>
+                        <textarea class="form-control" rows="3" id="adminNoteInput" placeholder="Unesi razlog odbijanja ili internu napomenu"></textarea>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+                    <button type="button" class="buttonAboutJoabAd" onclick="updateRequestStatus('Odobren')">Odobri registraciju</button>
+                    <button type="button" class="buttonAboutJoabAd rejectBtn" onclick="updateRequestStatus('Odbijen')">Odbij registraciju</button>
+                    <button type="button" class="buttonAboutJoabAd secondaryBtn" onclick="updateRequestStatus('Na čekanju')">Ostavi na čekanju</button>
+                </div>
+
+                <div id="approveMessage" class="successBox">Registracija firme je uspešno odobrena. Firma sada može da pristupi funkcionalnostima svog naloga.</div>
+                <div id="rejectMessage" class="errorBox">Registracija firme je odbijena. Firma ne može da pristupi funkcionalnostima namenjenim poslodavcu.</div>
+                <div id="pendingMessage" class="pendingBox">Prijava firme ostaje u statusu na čekanju dok se podaci ne razjasne.</div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Istorija odluka</div>
+                <div class="historyRow approved">
+                    <div>
+                        <strong>Microsoft Serbia</strong><br>
+                        <span class="historyMeta">Odobreno 12. april 2026.</span>
+                    </div>
+                    <span class="statusBadge approved">Odobren</span>
+                </div>
+                <div class="historyRow rejected">
+                    <div>
+                        <strong>Unknown Tech Group</strong><br>
+                        <span class="historyMeta">Odbijeno 10. april 2026.</span>
+                    </div>
+                    <span class="statusBadge rejected">Odbijen</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const companies = {
+            jetbrains: {
+                name: 'JetBrains Serbia',
+                pib: '109876543',
+                email: 'careers@jetbrains.rs',
+                city: 'Beograd',
+                website: 'www.jetbrains.com',
+                status: 'Na čekanju',
+                description: 'JetBrains Serbia razvija softverske alate i želi da objavljuje juniorske pozicije i prakse na platformi Kompas.',
+                note: ''
+            },
+            codeflow: {
+                name: 'CodeFlow Labs',
+                pib: '108765432',
+                email: 'jobs@codeflow.rs',
+                city: 'Novi Sad',
+                website: 'www.codeflowlabs.rs',
+                status: 'Na čekanju',
+                description: 'CodeFlow Labs razvija web i cloud rešenja i želi pristup objavljivanju oglasa i predstavljanju firme na platformi Kompas.',
+                note: ''
+            }
+        };
+
+        let selectedCompanyKey = null;
+
+        function clearMessages() {
+            document.querySelectorAll('.successBox, .errorBox, .pendingBox').forEach(box => {
+                box.style.display = 'none';
+            });
+        }
+
+        function getStatusClass(status) {
+            if (status === 'Odobren') return 'approved';
+            if (status === 'Odbijen') return 'rejected';
+            return 'pending';
+        }
+
+        function updatePreviewCardStatus(companyKey) {
+            const company = companies[companyKey];
+            const badge = document.getElementById(`statusBadge-${companyKey}`);
+            const text = document.getElementById(`statusText-${companyKey}`);
+
+            badge.textContent = company.status;
+            text.textContent = company.status;
+            badge.className = `statusBadge ${getStatusClass(company.status)}`;
+        }
+
+        function highlightSelectedCard(companyKey) {
+            document.querySelectorAll('.requestPreviewCard').forEach(card => card.classList.remove('selectedRequestCard'));
+            document.getElementById(`requestCard-${companyKey}`).classList.add('selectedRequestCard');
+        }
+
+        function showCompanyDetails(companyKey) {
+            selectedCompanyKey = companyKey;
+            const company = companies[companyKey];
+
+            document.getElementById('detailsSection').classList.remove('detailSectionHidden');
+            document.getElementById('selectedCompanyInfo').textContent = `Trenutno pregledate prijavu firme: ${company.name}`;
+
+            document.getElementById('companyNameInput').value = company.name;
+            document.getElementById('companyPibInput').value = company.pib;
+            document.getElementById('companyEmailInput').value = company.email;
+            document.getElementById('companyCityInput').value = company.city;
+            document.getElementById('companyWebsiteInput').value = company.website;
+            document.getElementById('companyStatusSelect').value = company.status;
+            document.getElementById('companyDescriptionInput').value = company.description;
+            document.getElementById('adminNoteInput').value = company.note;
+
+            clearMessages();
+            highlightSelectedCard(companyKey);
+            document.getElementById('detailsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function updateRequestStatus(newStatus) {
+            if (!selectedCompanyKey) return;
+
+            const company = companies[selectedCompanyKey];
+            company.name = document.getElementById('companyNameInput').value;
+            company.pib = document.getElementById('companyPibInput').value;
+            company.email = document.getElementById('companyEmailInput').value;
+            company.city = document.getElementById('companyCityInput').value;
+            company.website = document.getElementById('companyWebsiteInput').value;
+            company.description = document.getElementById('companyDescriptionInput').value;
+            company.note = document.getElementById('adminNoteInput').value;
+            company.status = newStatus;
+
+            document.getElementById('companyStatusSelect').value = newStatus;
+            document.getElementById('selectedCompanyInfo').textContent = `Trenutno pregledate prijavu firme: ${company.name}`;
+            document.querySelector(`#requestCard-${selectedCompanyKey} .requestName`).textContent = company.name;
+            document.querySelector(`#requestCard-${selectedCompanyKey} .requestMeta`).innerHTML = `Status: <strong id="statusText-${selectedCompanyKey}">${company.status}</strong>`;
+
+            updatePreviewCardStatus(selectedCompanyKey);
+            clearMessages();
+
+            if (newStatus === 'Odobren') {
+                document.getElementById('approveMessage').style.display = 'block';
+            } else if (newStatus === 'Odbijen') {
+                document.getElementById('rejectMessage').style.display = 'block';
+            } else {
+                document.getElementById('pendingMessage').style.display = 'block';
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

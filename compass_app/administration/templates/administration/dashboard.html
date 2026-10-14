@@ -1,0 +1,206 @@
+<!-- Author: Milica Pavlovic, student ID: 2024/0148 -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kompas - Administration dashboard{% endblock %}
+
+{% block extra_head %}
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-dashboard.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-theme.css' %}"
+    >
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-subnav-wrap">
+    <div class="container-fluid">
+        <div class="admin-subnav">
+            <div class="admin-subnav-title">Administration</div>
+
+            <div class="admin-subnav-links">
+                <a href="{% url 'administration:dashboard' %}"
+                   class="admin-subnav-link active">
+                    Admin panel
+                </a>
+
+                <a href="{% url 'administration:create_account' %}"
+                   class="admin-subnav-link">
+                    Create accounts
+                </a>
+
+                <a href="{% url 'administration:company_requests' %}"
+                   class="admin-subnav-link">
+                    Company registrations
+                </a>
+
+                <a href="{% url 'administration:moderation' %}"
+                   class="admin-subnav-link">
+                    Job moderation
+                </a>
+
+                <a href="{% url 'administration:manage_accounts' %}"
+                   class="admin-subnav-link">
+                    Accounts & roles
+                </a>
+
+                <a href="{% url 'administration:manage_careers' %}"
+                   class="admin-subnav-link">
+                    Careers & skills
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-header text-center">
+    <h1 class="display-4">Administration dashboard</h1>
+</div>
+
+<div class="container pb-5">
+
+    <div class="row g-4 justify-content-center mb-5">
+
+        <div class="col-lg-5 col-md-6">
+            <div class="dashboardActionCard h-100">
+                <div>
+                    <div class="actionTitle">Create accounts</div>
+                    <p class="actionText">
+                        Create a new user or company account
+                        through the administration form.
+                    </p>
+                </div>
+
+                <a href="{% url 'administration:create_account' %}"
+                   class="actionBtn">
+                    Open page
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-5 col-md-6">
+            <div class="dashboardActionCard h-100">
+                <div>
+                    <div class="actionTitle">Company registrations</div>
+                    <p class="actionText">
+                        Review company applications and approve or reject
+                        registration requests.
+                    </p>
+                </div>
+
+                <a href="{% url 'administration:company_requests' %}"
+                   class="actionBtn">
+                    Open page
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-5 col-md-6">
+            <div class="dashboardActionCard h-100">
+                <div>
+                    <div class="actionTitle">Job moderation</div>
+                    <p class="actionText">
+                        Remove inappropriate or outdated job ads
+                        and review content status.
+                    </p>
+                </div>
+
+                <a href="{% url 'administration:moderation' %}"
+                   class="actionBtn">
+                    Open page
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-5 col-md-6">
+            <div class="dashboardActionCard h-100">
+                <div>
+                    <div class="actionTitle">Accounts & roles</div>
+                    <p class="actionText">
+                        Edit account details, delete accounts,
+                        and change user roles.
+                    </p>
+                </div>
+
+                <a href="{% url 'administration:manage_accounts' %}"
+                   class="actionBtn">
+                    Open page
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-5 col-md-6">
+            <div class="dashboardActionCard h-100">
+                <div>
+                    <div class="actionTitle">Careers & skills</div>
+                    <p class="actionText">
+                        Add, edit, and delete careers
+                        and their required skills.
+                    </p>
+                </div>
+
+                <a href="{% url 'administration:manage_careers' %}"
+                   class="actionBtn">
+                    Open page
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10 col-12 customCard px-4 py-4">
+            <div class="sectionTitle">System overview</div>
+
+            <div class="row g-3">
+
+                <div class="col-md-3 col-6">
+                    <div class="statusBox">
+                        <div class="statusNumber">
+                            {{ pending_companies_count }}
+                        </div>
+                        <div class="statusLabel">Company requests</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-6">
+                    <div class="statusBox">
+                        <div class="statusNumber">
+                            {{ pending_job_ads_count }}
+                        </div>
+                        <div class="statusLabel">Ads for review</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-6">
+                    <div class="statusBox">
+                        <div class="statusNumber">
+                            {{ active_accounts_count }}
+                        </div>
+                        <div class="statusLabel">Active accounts</div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-6">
+                    <div class="statusBox">
+                        <div class="statusNumber">
+                            {{ careers_count }}
+                        </div>
+                        <div class="statusLabel">Careers in system</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

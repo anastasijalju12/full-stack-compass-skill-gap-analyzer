@@ -1,0 +1,77 @@
+@startuml
+title CD_01 – Accounts modeli
+hide methods
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+package accounts {
+
+class User {
+  - id: AutoField
+  - first_name: CharField(100)
+  - last_name: CharField(100)
+  - username: CharField(100) {unique}
+  - email: CharField(150) {unique}
+  - password: CharField(255)
+  - contact: CharField(50) [0..1]
+  - status: active | pending [0..1]
+  - role: user | admin [0..1]
+  - registered_at: DateTimeField [0..1]
+  - rejection_reason: TextField [0..1]
+}
+
+class Company {
+  - id: AutoField
+  - name: CharField(150)
+  - username: CharField(100) {unique}
+  - email: CharField(150) {unique} [0..1]
+  - password: CharField(255) [0..1]
+  - industry: CharField(150) [0..1]
+  - contact: CharField(150) [0..1]
+  - description: TextField [0..1]
+  - logo_path: CharField(500) [0..1]
+  - status: active | pending [0..1]
+  - rejection_reason: TextField [0..1]
+}
+
+class Administrator {
+  - id: AutoField
+  - access_level: CharField(50) [0..1]
+  - assigned_date: DateField [0..1]
+}
+
+class Subscription {
+  - id: AutoField
+  - amount: DecimalField(8,2) = 10.00
+  - status: success | failed | cancelled
+  - date: DateTimeField
+}
+
+class PasswordReset {
+  - id: AutoField
+  - token: CharField(255) {unique}
+  - expires_at: DateTimeField
+  - is_used: BooleanField = false [0..1]
+}
+
+User "1" -- "0..*" Administrator : user
+User "1" -- "0..*" Subscription : user
+Company "1" -- "0..*" Subscription : company
+User "1" -- "0..*" PasswordReset : user
+Company "1" -- "0..*" PasswordReset : company
+
+note right of PasswordReset
+Subscription i PasswordReset mogu biti
+povezani ili sa User ili sa Company.
+U konkretnom zapisu koristi se samo
+odgovarajući vlasnik naloga.
+end note
+
+note left of Administrator
+Administrator.user je ForeignKey,
+pa jedan User tehnički može imati
+više administratorskih zapisa.
+end note
+}
+@enduml

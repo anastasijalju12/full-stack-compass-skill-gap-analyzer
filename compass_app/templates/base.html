@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kompas - a career guidance platform for exploring careers, analyzing skills and finding internships and jobs.">
+    <meta name="theme-color" content="#040a17">
+    <title>{% block title %}Kompas{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'images/logo/compas.png' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+
+    {% block extra_head %}{% endblock %}
+
+    <!-- Global theme is loaded last so it consistently overrides page styles -->
+    <link rel="stylesheet" href="{% static 'css/kompas-theme.css' %}?v=2">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-xl fixed-top k-navbar" id="navHeader" aria-label="Main navigation">
+    <div class="container-xl">
+
+        <a class="navbar-brand k-brand" href="{% url 'home' %}">
+            <span class="k-brand__logo">
+                <img src="{% static 'images/logo/compas.png' %}" alt="Kompas logo">
+            </span>
+            <span class="k-brand__name" id="navMenuCompanyName">Kom<span>pas</span></span>
+        </a>
+
+        <button class="navbar-toggler k-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="navbarNavDropdown" class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto align-items-xl-center k-nav">
+
+                {% if not user_role %}
+                    <!-- Guest -->
+                    <li class="nav-item"><a href="{% url 'public_index' %}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'careers' %}" class="nav-link">Careers</a></li>
+                    <li class="nav-item"><a href="{% url 'job_ads_candidate_view' %}" class="nav-link">Job Ads</a></li>
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Analysis</a></li>
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Favorites</a></li>
+                    <li class="nav-item"><a href="{% url 'companies' %}" class="nav-link">Companies</a></li>
+                    <li class="nav-item"><a href="{% url 'about_us' %}" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link k-nav-ghost">Login</a></li>
+                    <li class="nav-item"><a href="{% url 'registration_choice' %}" class="nav-link k-nav-cta">Register</a></li>
+
+                {% elif user_role == 'user' %}
+                    <!-- Logged-in user -->
+                    <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'careers' %}" class="nav-link">Careers</a></li>
+                    <li class="nav-item"><a href="{% url 'job_ads_candidate_view' %}" class="nav-link">Job Ads</a></li>
+                    <li class="nav-item"><a href="{% url 'skill_match' %}" class="nav-link">Analysis</a></li>
+                    <li class="nav-item"><a href="{% url 'favourites' %}" class="nav-link">Favorites</a></li>
+                    <li class="nav-item"><a href="{% url 'companies' %}" class="nav-link">Companies</a></li>
+                    <li class="nav-item"><a href="{% url 'subscription_view' %}" class="nav-link">Subscription</a></li>
+                    <li class="nav-item"><a href="{% url 'about_us' %}" class="nav-link">About Us</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="k-avatar" aria-hidden="true">{{ current_display_name|slice:":1" }}</span>
+                            {{ current_display_name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a href="{% url 'my_profile' %}" class="dropdown-item">My Profile</a></li>
+                            <li><a href="{% url 'logout_view' %}" class="dropdown-item">Log Out</a></li>
+                        </ul>
+                    </li>
+
+                {% elif user_role == 'company' %}
+                    <!-- Logged-in company -->
+                    <li class="nav-item"><a href="{% url 'company_main' %}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'company_ads' %}" class="nav-link">My Job Ads</a></li>
+                    <li class="nav-item"><a href="{% url 'subscription_view' %}" class="nav-link">Subscription</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="k-avatar" aria-hidden="true">{{ current_display_name|slice:":1" }}</span>
+                            {{ current_display_name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a href="{% url 'my_profile' %}" class="dropdown-item">My Profile</a></li>
+                            <li><a href="{% url 'logout_view' %}" class="dropdown-item">Log Out</a></li>
+                        </ul>
+                    </li>
+
+                {% elif user_role == 'admin' %}
+                    <!-- Logged-in admin -->
+                    <li class="nav-item"><a href="{% url 'administration:dashboard' %}" class="nav-link">Admin Panel</a></li>
+                    <li class="nav-item"><a href="{% url 'logout_view' %}" class="nav-link k-nav-ghost">Log Out</a></li>
+
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="k-main" id="main">
+    {% if messages %}
+        <div class="container k-messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% else %}alert-info{% endif %}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="k-footer">
+    <div class="container-xl k-footer__inner">
+        <div class="k-footer__brand">
+            <img src="{% static 'images/logo/compas.png' %}" alt="" aria-hidden="true">
+            Kompas
+            <span class="text-muted fw-normal ms-2">&copy; {% now "Y" %} &middot; Career guidance platform</span>
+        </div>
+        <nav class="k-footer__links" aria-label="Footer">
+            <a href="{% url 'careers' %}">Careers</a>
+            <a href="{% url 'job_ads_candidate_view' %}">Job Ads</a>
+            <a href="{% url 'companies' %}">Companies</a>
+            <a href="{% url 'about_us' %}">About Us</a>
+        </nav>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* Presentation-only helpers: active nav link and navbar shadow on scroll. */
+(function () {
+    var path = window.location.pathname;
+    var match = null;
+    document.querySelectorAll('.k-nav a.nav-link[href]').forEach(function (link) {
+        if (link.getAttribute('href') === path) { match = link; }
+    });
+    if (match) {
+        match.classList.add('active');
+        match.setAttribute('aria-current', 'page');
+    }
+
+    var nav = document.getElementById('navHeader');
+    function onScroll() {
+        if (nav) { nav.classList.toggle('is-scrolled', window.scrollY > 8); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* "View" links from Favorites / Analysis point to #job-ad-<id> or #career-<id>:
+       scroll that card into the middle of the screen and highlight it. */
+    function highlightTarget() {
+        var hash = window.location.hash;
+        if (!/^#(job-ad|career)-\d+$/.test(hash)) { return; }
+        var target = document.getElementById(hash.slice(1));
+        if (!target) { return; }
+        target.classList.remove('k-highlight');
+        void target.offsetWidth;
+        target.classList.add('k-highlight');
+        target.scrollIntoView({ behavior: 'instant', block: 'center' });
+    }
+    window.addEventListener('load', function () { setTimeout(highlightTarget, 150); });
+    window.addEventListener('hashchange', highlightTarget);
+})();
+</script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

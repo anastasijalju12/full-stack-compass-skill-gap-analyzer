@@ -1,0 +1,172 @@
+<!----------------MINA OSTOJIC--------------------->
+
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="company-ads.css">
+
+</head>
+
+<body>
+
+
+    <!-- CARDS -->
+    <div class="container mt-4">
+        <div class="row g-4">
+
+            <!-- CARD 1 -->
+            <div class="col-lg-4 col-md-6 col-12">
+                
+                <div class="customCard p-4">
+                                
+                    <div class="flex-grow-1">
+                        <ul class="list-unstyled mb-0">
+                            <li><h2 class="mt-0 ">Junior Backend Developer</h2></li>
+                            <li>Tip: <strong>Junior pozicija</strong></li>
+                            <li>Lokacija: <strong>Beograd</strong></li>
+                            <li>
+                                Rok prijave:<br>
+                                <span class="fw-bold finalPrice" style="color:#d00000">30. april 2026.</span>
+                            </li>
+                            <li>
+                                Status: 
+                                <span class="fw-bold finalPrice" style="color:#d00000">AKTIVAN</span>
+                            </li>
+                            <li class="mt-2">
+                                Pridruži se našem timu i radi na backend sistemima koji koriste milioni korisnika širom sveta. Tražimo motivisane juniore sa znanjem C++ i želju za razvojem.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card-actions pt-4">
+                        <button class="buttonModifyAd">Obriši</button>
+                        <button class="buttonModifyAd">Izmeni</button>
+                        <button type="button" class="buttonModifyAd" onclick="toggleCandidates()">
+                            Kandidati
+                        </button>
+                        <img src="images/companyLogo/JetBrains.png" class="img-fluid" style="width:90px; height:90px; object-fit:contain; border-radius:10px;">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="col-lg-4 col-md-6 col-12">
+                
+                <div class="customCard p-4">
+                                
+                    <div class="flex-grow-1">
+                        <ul class="list-unstyled mb-0">
+                            <li><h2 class="mt-0 ">JetBrains – Internship Program (Software Engineering)</h2></li>
+                            <li>Tip: <strong>Praksa (Internship – Junior Software Engineer)</strong></li>
+                            <li>Lokacija: <strong>Beograd</strong></li>
+                            <li>
+                                Rok prijave:<br>                
+                                <span class="fw-bold finalPrice" style="color:#d00000">30. mart 2026.</span>
+                            </li>
+                            <li>
+                                Status: 
+                                <span class="fw-bold finalPrice" style="color:#d00000">ISTEKAO</span>
+                            </li>
+                            <li class="mt-2">
+                                Pridruži se JetBrains timu i radi na razvoju alata koje koriste milioni developera širom sveta (IDE, code analysis i developer tooling). Praksa je namenjena studentima i juniorima koji žele da rade na realnim softverskim problemima i da unaprede znanje iz Java, Kotlin ili C++ tehnologija. Tokom programa dobijaš mentorstvo i radiš na produkcionom kodu zajedno sa iskusnim inženjerima.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card-actions pt-4">
+                        <button class="buttonModifyAd">Obriši</button>
+                        <button class="buttonModifyAd">Izmeni</button>
+                        <button type="button" class="buttonModifyAd" onclick="toggleCandidates()">
+                            Kandidati
+                        </button>
+                        <img src="images/companyLogo/JetBrains.png" class="img-fluid" style="width:90px; height:90px; object-fit:contain; border-radius:10px;">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- PANEL -->
+    <div class="candidatesPanel">
+
+        <h4 class="mb-3">Kandidati</h4>
+
+        <!-- KANDIDAT 1 -->
+        <div class="candidateCard">
+
+            <input type="checkbox" id="cand1" hidden>
+
+            <div class="candidateHeader">
+                <label for="cand1" class="candidateName">Marko Marković</label>
+
+                <div class="icons">
+                    <input type="checkbox" id="starCand1" hidden>
+                    <label for="starCand1" class="starBtn">★</label>   
+                                     
+                    <button>🗑️</button>
+                </div>
+            </div>
+
+            <div class="candidateBody">
+                <p><strong>Veštine:</strong> Java, Spring Boot, SQL</p>
+                <p><strong>Iskustvo:</strong> / </p>
+            </div>
+
+        </div>
+
+        <!-- KANDIDAT 2 -->
+        <div class="candidateCard">
+
+            <input type="checkbox" id="cand2" hidden>
+
+            <div class="candidateHeader">
+                <label for="cand2" class="candidateName">Jelena Jovanović</label>
+
+                <div class="icons">
+                    <input type="checkbox" id="starCand2" hidden>
+                    <label for="starCand2" class="starBtn">★</label>   
+                    
+                    <button>🗑️</button>
+                </div>
+            </div>
+
+            <div class="candidateBody">
+                <p><strong>Veštine:</strong> Python, Django</p>
+                <p><strong>Iskustvo:</strong> praksa u Nordeusu </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function toggleCandidates() {
+            document.getElementById("candidatesPanel").classList.toggle("show");
+        }
+        function toggleCandidates() {
+            document.querySelector(".candidatesPanel").classList.toggle("show");
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="navbar.js"></script>
+
+</body>
+</html>

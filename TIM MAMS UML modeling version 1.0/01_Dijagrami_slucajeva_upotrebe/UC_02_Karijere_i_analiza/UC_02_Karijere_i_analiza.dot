@@ -1,0 +1,10 @@
+digraph UC_02_Karijere_i_analiza {
+  graph [label="UC_02 – Karijere, veštine i pametna analiza", labelloc=t, rankdir=LR];
+  node [shape=ellipse];
+  Gost -> PregledKarijera [dir=none];
+  RegistrovaniKorisnik -> PregledKarijera [dir=none];
+  RegistrovaniKorisnik -> Profil [dir=none];
+  RegistrovaniKorisnik -> Analiza [dir=none];
+  RegistrovaniKorisnik -> SacuvanaAnaliza [dir=none];
+  RegistrovaniKorisnik -> Favoriti [dir=none];
+}

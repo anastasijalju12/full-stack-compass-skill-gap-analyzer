@@ -1,0 +1,236 @@
+/* Autor: Milica Pavlovic */
+
+body {
+  background: #f3f3f3;
+}
+
+.admin-subnav-wrap {
+  margin-top: 8px;
+  margin-bottom: 18px;
+}
+
+.admin-subnav {
+  background: #f7e5cf;
+  border: 3px solid #f2a65a;
+  border-radius: 20px;
+  padding: 14px 18px;
+}
+
+.admin-subnav-title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.admin-subnav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-subnav-link {
+  text-decoration: none;
+  color: #000;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.admin-subnav-link:hover,
+.admin-subnav-link.active {
+  background: #f2a65a;
+  color: #fff;
+}
+
+.customCard {
+  background-color: #f2a65a;
+  color: #000000;
+  border-radius: 20px;
+  border: solid #000000 3px;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.sectionTitle {
+  font-weight: 700;
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.requestPreviewCard {
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid #000;
+  border-radius: 14px;
+  padding: 16px;
+  transition: 0.2s;
+}
+
+.requestPreviewCard.selectedRequestCard {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+.requestPreviewHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.requestName {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.requestMeta,
+.historyMeta {
+  color: #333;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 2px solid #000;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.statusBadge.pending {
+  background: #fff4d6;
+}
+
+.statusBadge.approved {
+  background: #dff3e3;
+}
+
+.statusBadge.rejected {
+  background: #ffe0e0;
+}
+
+.labelTitle {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-control,
+.form-select,
+textarea {
+  border: 2px solid #000;
+  border-radius: 12px;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+  border-color: #000;
+  box-shadow: none;
+}
+
+.buttonAboutJoabAd {
+  min-width: 170px;
+  padding: 10px 18px;
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.buttonAboutJoabAd:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.previewBtn {
+  min-width: 120px;
+}
+
+.rejectBtn {
+  background: #ffe0e0;
+}
+
+.secondaryBtn {
+  background: transparent;
+}
+
+.successBox,
+.errorBox,
+.pendingBox {
+  display: none;
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-weight: 600;
+  margin-top: 18px;
+}
+
+.successBox {
+  background: #dff3e3;
+  border: 2px solid #2d6a4f;
+}
+
+.errorBox {
+  background: #ffe0e0;
+  border: 2px solid #b00020;
+}
+
+.pendingBox {
+  background: #fff4d6;
+  border: 2px solid #b8860b;
+}
+
+.historyRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 2px solid #000;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.historyRow + .historyRow {
+  margin-top: 14px;
+}
+
+.detailSectionHidden {
+  display: none;
+}
+
+.selectedCompanyInfo {
+  font-weight: 700;
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid #000;
+}
+
+@media (max-width: 991px) {
+  .sectionTitle {
+    font-size: 22px;
+  }
+
+  .requestName {
+    font-size: 20px;
+  }
+
+  .customCard {
+    font-size: 16px;
+  }
+
+  .historyRow,
+  .requestPreviewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

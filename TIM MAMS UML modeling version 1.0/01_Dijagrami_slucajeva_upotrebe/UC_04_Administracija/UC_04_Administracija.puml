@@ -1,0 +1,93 @@
+@startuml
+title UC_04 – Administracija
+left to right direction
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor white
+  BorderColor #374151
+  ArrowColor #4B5563
+}
+skinparam actor {
+  BorderColor #111827
+  FontColor #111827
+}
+
+actor Administrator as Admin
+
+rectangle "KOMPAS – Administratorski podsistem" {
+
+  package "Kontrolna tabla" #EFF6FF {
+    usecase "Pregled administratorske\nkontrolne table" as UC_Dashboard
+    usecase "Pregled statistike sistema" as UC_Stats
+    UC_Dashboard ..> UC_Stats : <<include>>
+  }
+
+  package "Nalozi i uloge" #F0FDF4 {
+    usecase "Kreiranje korisničkog ili\nfirminog naloga" as UC_Create
+    usecase "Upravljanje nalozima\ni korisničkim ulogama" as UC_ManageAccounts
+    usecase "Pregled i izbor naloga" as UC_ViewAccounts
+    usecase "Izmena podataka naloga" as UC_EditAccount
+    usecase "Brisanje naloga" as UC_DeleteAccount
+    usecase "Promena korisničke uloge" as UC_ChangeRole
+
+    UC_ManageAccounts ..> UC_ViewAccounts : <<include>>
+    UC_EditAccount ..> UC_ManageAccounts : <<extend>>
+    UC_DeleteAccount ..> UC_ManageAccounts : <<extend>>
+    UC_ChangeRole ..> UC_ManageAccounts : <<extend>>
+  }
+
+  package "Registracije firmi" #FFFBEB {
+    usecase "Obrada zahteva za\nregistraciju firme" as UC_CompanyRequests
+    usecase "Pregled detalja prijave" as UC_CompanyDetails
+    usecase "Odobravanje registracije" as UC_ApproveCompany
+    usecase "Odbijanje registracije" as UC_RejectCompany
+    usecase "Ostavljanje zahteva\nna čekanju" as UC_KeepPending
+
+    UC_CompanyRequests ..> UC_CompanyDetails : <<include>>
+    UC_ApproveCompany ..> UC_CompanyRequests : <<extend>>
+    UC_RejectCompany ..> UC_CompanyRequests : <<extend>>
+    UC_KeepPending ..> UC_CompanyRequests : <<extend>>
+  }
+
+  package "Karijere" #F5F3FF {
+    usecase "Upravljanje karijerama" as UC_ManageCareers
+    usecase "Pregled i pretraga karijera" as UC_BrowseCareers
+    usecase "Dodavanje karijere" as UC_AddCareer
+    usecase "Izmena karijere i veština" as UC_EditCareer
+    usecase "Brisanje karijere" as UC_DeleteCareer
+
+    UC_ManageCareers ..> UC_BrowseCareers : <<include>>
+    UC_AddCareer ..> UC_ManageCareers : <<extend>>
+    UC_EditCareer ..> UC_ManageCareers : <<extend>>
+    UC_DeleteCareer ..> UC_ManageCareers : <<extend>>
+  }
+
+  package "Moderacija oglasa" #FEF2F2 {
+    usecase "Moderacija oglasa" as UC_ModerateAds
+    usecase "Pregled detalja oglasa\ni podataka firme" as UC_AdDetails
+    usecase "Uklanjanje neprikladnog oglasa" as UC_RemoveAd
+    usecase "Označavanje oglasa\nkao zastarelog" as UC_MarkOutdated
+    usecase "Ostavljanje oglasa aktivnim" as UC_KeepActive
+
+    UC_ModerateAds ..> UC_AdDetails : <<include>>
+    UC_RemoveAd ..> UC_ModerateAds : <<extend>>
+    UC_MarkOutdated ..> UC_ModerateAds : <<extend>>
+    UC_KeepActive ..> UC_ModerateAds : <<extend>>
+  }
+}
+
+Admin -- UC_Dashboard
+Admin -- UC_Create
+Admin -- UC_ManageAccounts
+Admin -- UC_CompanyRequests
+Admin -- UC_ManageCareers
+Admin -- UC_ModerateAds
+
+note bottom
+Prijava administratora i opšta autentifikacija
+modeluju se u dijagramu UC_01_Nalozi_i_pristup.
+end note
+@enduml

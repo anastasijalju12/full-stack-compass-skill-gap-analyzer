@@ -1,0 +1,350 @@
+<!----------------MINA OSTOJIC--------------------->
+
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="jobAds.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- CARDS -->
+    <div class="container mt-4">
+
+         <div class="search-sort-bar mb-4">
+        
+            <div class="search-group">
+                <input type="text" id="searchInput" class="form-control" placeholder="Pretraži oglase...">
+                <button id="searchButton" class="buttonSearch">Pretraži</button>
+            </div>
+
+            <div class="sort-group">
+                <label for="sortSelect">Sortiraj:</label>
+                <select id="sortSelect" class="form-select">
+                    <option value="default">Podrazumevano</option>
+                    <option value="titleAsc">Naziv A-Z</option>
+                    <option value="titleDesc">Naziv Z-A</option>
+                    <option value="deadlineAsc">Rok prijave - najbliži</option>
+                    <option value="deadlineDesc">Rok prijave - najdalji</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="row g-4" id="cardsRow">
+
+            <!-- CARD 1 -->
+            <div class="col-lg-4 col-md-6 col-12 job-card" data-title="Junior Backend Developer" data-deadline="2026-04-30" id="jetBrainsJuniorBackendDeveloper">
+                
+                <div class="customCard p-4">
+                            
+                    <div class="cardHeader pt-0">
+
+                        <div class="title pt-0">
+                            <h2 class="mt-0 ">Junior Backend Developer</h2>
+                        </div>
+                        
+                        <div class="cardLogoStar">
+                            
+                            <input type="checkbox" id="starAdd1" hidden>
+                            <label for="starAdd1" class="starBtn" title="Označi kao omiljeno">★</label> 
+                            <img src="images/companyLogo/JetBrains.png" class="companyLogo">  
+       
+                        </div>
+
+                    </div>
+                    
+                    <div class="cardBody">
+                        <ul class="list-unstyled mb-0">
+                            <li>Tip: <strong>Junior pozicija</strong></li>
+                            <li>Lokacija: <strong>Beograd</strong></li>
+                            <li>
+                                Rok prijave:<br>
+                                <span class="fw-bold finalPrice" style="color:#d00000">30. april 2026.</span>
+                            </li>
+                            <li class="mt-2">
+                                Pridruži se našem timu i radi na backend sistemima koji koriste milioni korisnika širom sveta. Tražimo motivisane juniore sa znanjem C++ i želju za razvojem.
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="card-register pt-0">
+                        <button
+                            type="button" 
+                            class="buttonRegister openApplicationForm"
+                            data-job="Junior Backend Developer"
+                            data-company="JetBrains">
+                            Prijavi se
+                        </button>                    
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="col-lg-4 col-md-6 col-12 job-card" data-title="Nordeus Internship Program Software Engineering" data-deadline="2026-05-30">
+                
+                <div class="customCard p-4">
+                            
+                    <div class="cardHeader pt-0">
+
+                        <div class="title pt-0">
+                            <h2 class="mt-0 ">Nordeus – Internship Program (Software Engineering)</h2>
+                        </div>
+                        
+                        <div class="cardLogoStar">
+                            
+                            <input type="checkbox" id="starAdd2" hidden>
+                            <label for="starAdd2" class="starBtn" title="Označi kao omiljeno">★</label> 
+                            <img src="images/companyLogo/Nordeus.webp" class="companyLogo">  
+       
+                        </div>
+
+                    </div>
+                    
+                    <div class="cardBody">
+                        <ul class="list-unstyled mb-0">
+                            <li>Tip: <strong>Praksa (Internship – Junior Software Engineer)</strong></li>
+                            <li>Lokacija: <strong>Beograd</strong></li>
+                            <li>
+                                Rok prijave:<br>
+                                <span class="fw-bold finalPrice" style="color:#d00000">30. maj 2026.</span>
+                            </li>
+                            <li class="mt-2">
+                                Pridruži se Nordeus timu i radi na razvoju igara koje igraju milioni ljudi širom sveta, uključujući hit naslove poput Top Eleven. Praksa je namenjena studentima i juniorima koji žele da steknu iskustvo u game developmentu i radu na realnim, velikim i kompleksnim softverskim sistemima.
+                                Tokom programa radiš zajedno sa iskusnim inženjerima, dizajnerima i product timovima, i imaš priliku da doprineseš produkcionom kodu i funkcionalnostima koje direktno koriste igrači. Program je fokusiran na učenje kroz praksu, mentorstvo i rad u dinamičnom okruženju koje kombinuje tehnologiju, kreativnost i gaming industriju.
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="card-register pt-0">
+                        <button 
+                            type="button" 
+                            class="buttonRegister openApplicationForm"
+                            data-job="Nordeus – Internship Program (Software Engineering)"
+                            data-company="Nordeus">
+                            Prijavi se
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- APPLICATION MODAL -->
+    <div id="applicationModal" class="applicationModal hidden">
+
+        <div class="applicationBox">
+
+            <button type="button" id="closeApplicationModal" class="closeModalBtn">×</button>
+
+            <h2>Prijava na oglas</h2>
+
+            <p class="applicationInfo">
+                Prijavljujete se za poziciju:
+                <strong id="selectedJobTitle"></strong>
+                u firmi
+                <strong id="selectedCompany"></strong>.
+            </p>
+
+            <form id="applicationForm">
+
+                <h3>Podaci iz rezimea</h3>
+
+                <div class="formGroup">
+                    <label for="fullName">Ime i prezime</label>
+                    <input type="text" id="fullName" value="Milica Perišić" readonly>
+                </div>
+
+                <div class="formGroup">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="mica.perisic@email.com" readonly>
+                </div>
+
+                <div class="formGroup">
+                    <label for="phone">Telefon</label>
+                    <input type="text" id="phone" value="+381 60 123 4567" readonly>
+                </div>
+
+                <div class="formGroup">
+                    <label for="education">Obrazovanje</label>
+                    <input type="text" id="education" value="Elektrotehnički fakultet, Univerzitet u Beogradu" readonly>
+                </div>
+
+                <div class="formGroup">
+                    <label for="skills">Veštine</label>
+                    <input type="text" id="skills" value="C++, Java, HTML, CSS, JavaScript" readonly>
+                </div>
+
+                <div class="formGroup">
+                    <label for="cvDocument">CV dokument</label>
+                    <input type="text" id="cvDocument" value="CV_Milica_Perisic.pdf" readonly>
+                </div>
+
+                <div class="formGroup">
+                    <label for="messageToEmployer">Dodatna poruka za poslodavca</label>
+                    <textarea 
+                        id="messageToEmployer" 
+                        rows="5" 
+                        placeholder="Unesite dodatnu poruku za poslodavca..."></textarea>
+                </div>
+
+                <div class="formButtons">
+                    <button type="button" id="cancelApplication" class="cancelBtn">Odustani</button>
+                    <button type="submit" class="confirmApplicationBtn">Pošalji prijavu</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+    <script>
+    const searchInput = document.getElementById("searchInput");
+    const searchButton = document.getElementById("searchButton");
+    const sortSelect = document.getElementById("sortSelect");
+    const cardsRow = document.getElementById("cardsRow");
+
+    const originalCards = Array.from(document.querySelectorAll(".job-card"));
+
+    function filterCards() {
+        const searchValue = searchInput.value.toLowerCase().trim();
+
+        originalCards.forEach(card => {
+            const cardText = card.textContent.toLowerCase();
+
+            if (cardText.includes(searchValue)) {
+                card.style.display = "";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+
+    function sortCards() {
+        const sortValue = sortSelect.value;
+
+        let cards = Array.from(document.querySelectorAll(".job-card"));
+
+        cards.sort((a, b) => {
+            const titleA = a.dataset.title.toLowerCase();
+            const titleB = b.dataset.title.toLowerCase();
+
+            const deadlineA = new Date(a.dataset.deadline);
+            const deadlineB = new Date(b.dataset.deadline);
+
+            if (sortValue === "titleAsc") {
+                return titleA.localeCompare(titleB);
+            }
+
+            if (sortValue === "titleDesc") {
+                return titleB.localeCompare(titleA);
+            }
+
+            if (sortValue === "deadlineAsc") {
+                return deadlineA - deadlineB;
+            }
+
+            if (sortValue === "deadlineDesc") {
+                return deadlineB - deadlineA;
+            }
+
+            return 0;
+        });
+
+        if (sortValue === "default") {
+            cards = originalCards;
+        }
+
+        cards.forEach(card => {
+            cardsRow.appendChild(card);
+        });
+    }
+
+    searchButton.addEventListener("click", filterCards);
+
+    searchInput.addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            filterCards();
+        }
+    });
+
+    sortSelect.addEventListener("change", function() {
+        sortCards();
+        filterCards();
+    });
+    </script>
+
+    <script>
+    const applicationModal = document.getElementById("applicationModal");
+    const closeApplicationModal = document.getElementById("closeApplicationModal");
+    const cancelApplication = document.getElementById("cancelApplication");
+    const applicationForm = document.getElementById("applicationForm");
+
+    const selectedJobTitle = document.getElementById("selectedJobTitle");
+    const selectedCompany = document.getElementById("selectedCompany");
+    const messageToEmployer = document.getElementById("messageToEmployer");
+
+    const applicationButtons = document.querySelectorAll(".openApplicationForm");
+
+    applicationButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const jobTitle = this.dataset.job;
+            const company = this.dataset.company;
+
+            selectedJobTitle.textContent = jobTitle;
+            selectedCompany.textContent = company;
+
+            messageToEmployer.value = "";
+
+            applicationModal.classList.remove("hidden");
+        });
+    });
+
+    function closeModal() {
+        applicationModal.classList.add("hidden");
+    }
+
+    closeApplicationModal.addEventListener("click", closeModal);
+    cancelApplication.addEventListener("click", closeModal);
+
+    applicationModal.addEventListener("click", function (event) {
+        if (event.target === applicationModal) {
+            closeModal();
+        }
+    });
+
+    applicationForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const message = messageToEmployer.value.trim();
+
+        alert("Prijava je uspešno poslata!");
+
+        closeModal();
+    });
+    </script>
+</body>
+</html>

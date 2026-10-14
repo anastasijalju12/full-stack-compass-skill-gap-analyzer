@@ -1,0 +1,86 @@
+digraph UC_01_Nalozi_i_pristup {
+	bgcolor=white fontcolor="#1f2937" fontname=Arial fontsize=24 label="UC_01 – Nalozi i pristup" labelloc=t nodesep=0.35 pad=0.35 rankdir=LR ranksep=1.1 splines=spline
+	node [color="#374151" fontname=Arial fontsize=11 penwidth=1.35]
+	edge [arrowsize=0.8 color="#4b5563" fontname=Arial fontsize=9]
+	GUEST [label=Gost fixedsize=true fontsize=12 height=2.05 image="/mnt/data/UC_01_Nalozi_i_pristup/actor.png" imagescale=true labelloc=b shape=none width=1.25]
+	USER [label="Registrovani
+korisnik" fixedsize=true fontsize=12 height=2.05 image="/mnt/data/UC_01_Nalozi_i_pristup/actor.png" imagescale=true labelloc=b shape=none width=1.25]
+	COMPANY [label=Firma fixedsize=true fontsize=12 height=2.05 image="/mnt/data/UC_01_Nalozi_i_pristup/actor.png" imagescale=true labelloc=b shape=none width=1.25]
+	ADMIN [label=Administrator fixedsize=true fontsize=12 height=2.05 image="/mnt/data/UC_01_Nalozi_i_pristup/actor.png" imagescale=true labelloc=b shape=none width=1.25]
+	subgraph cluster_system {
+		color="#6b7280" fontname="Arial Bold" fontsize=18 label="KOMPAS – Nalozi i kontrola pristupa" margin=26 penwidth=1.8 style=rounded
+		subgraph cluster_public {
+			color="#93c5fd" fillcolor="#eff6ff" label="Javni pristup" style="rounded,filled"
+			UC_PUBLIC [label="Pregled javnog sadržaja" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_HOME [label="Pregled početne stranice" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_ABOUT [label="Pregled stranice „O nama“" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_PUBLIC -> UC_HOME [label="«include»" arrowhead=open style=dashed]
+			UC_PUBLIC -> UC_ABOUT [label="«include»" arrowhead=open style=dashed]
+		}
+		subgraph cluster_auth {
+			color="#86efac" fillcolor="#f0fdf4" label="Registracija i autentifikacija" style="rounded,filled"
+			UC_REG_CHOICE [label="Izbor vrste registracije" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_REG_USER [label="Registracija korisnika" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_REG_COMPANY [label="Registracija firme" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_VALIDATE [label="Validacija registracionih podataka" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_USERNAME [label="Provera dostupnosti
+korisničkog imena" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_LOGIN [label="Prijava na sistem" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_CREDENTIALS [label="Provera kredencijala
+i vrste naloga" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_LOGOUT [label="Odjava sa sistema" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_REG_USER -> UC_REG_CHOICE [label="«extend»" arrowhead=open style=dashed]
+			UC_REG_COMPANY -> UC_REG_CHOICE [label="«extend»" arrowhead=open style=dashed]
+			UC_REG_USER -> UC_VALIDATE [label="«include»" arrowhead=open style=dashed]
+			UC_REG_COMPANY -> UC_VALIDATE [label="«include»" arrowhead=open style=dashed]
+			UC_REG_USER -> UC_USERNAME [label="«include»" arrowhead=open style=dashed]
+			UC_REG_COMPANY -> UC_USERNAME [label="«include»" arrowhead=open style=dashed]
+			UC_LOGIN -> UC_CREDENTIALS [label="«include»" arrowhead=open style=dashed]
+		}
+		subgraph cluster_password {
+			color="#fde68a" fillcolor="#fffbeb" label="Reset lozinke" style="rounded,filled"
+			UC_RESET [label="Resetovanje lozinke" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_RESET_REQUEST [label="Podnošenje zahteva
+za reset" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_SEND_TOKEN [label="Generisanje i slanje
+jednokratnog tokena" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_TOKEN [label="Provera važenja tokena" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_NEW_PASSWORD [label="Postavljanje nove lozinke" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_RESET -> UC_RESET_REQUEST [label="«include»" arrowhead=open style=dashed]
+			UC_RESET_REQUEST -> UC_SEND_TOKEN [label="«include»" arrowhead=open style=dashed]
+			UC_RESET -> UC_TOKEN [label="«include»" arrowhead=open style=dashed]
+			UC_RESET -> UC_NEW_PASSWORD [label="«include»" arrowhead=open style=dashed]
+		}
+		subgraph cluster_subscription {
+			color="#c4b5fd" fillcolor="#f5f3ff" label=Pretplate style="rounded,filled"
+			UC_SUBS [label="Upravljanje pretplatom" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_SUBS_HISTORY [label="Pregled statusa i
+istorije pretplata" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_SUBSCRIBE [label="Aktiviranje pretplate" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_PAYMENT_SUCCESS [label="Evidentiranje uspešnog
+plaćanja" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_PAYMENT_FAIL [label="Evidentiranje neuspešnog
+plaćanja" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_CANCEL [label="Otkazivanje pretplate" fillcolor="#ffffff" shape=ellipse style=filled]
+			UC_SUBS -> UC_SUBS_HISTORY [label="«include»" arrowhead=open style=dashed]
+			UC_SUBSCRIBE -> UC_SUBS [label="«extend»" arrowhead=open style=dashed]
+			UC_CANCEL -> UC_SUBS [label="«extend»" arrowhead=open style=dashed]
+			UC_PAYMENT_SUCCESS -> UC_SUBSCRIBE [label="«extend»" arrowhead=open style=dashed]
+			UC_PAYMENT_FAIL -> UC_SUBSCRIBE [label="«extend»" arrowhead=open style=dashed]
+		}
+	}
+	GUEST -> UC_PUBLIC [color="#111827" dir=none penwidth=1.35]
+	GUEST -> UC_REG_CHOICE [color="#111827" dir=none penwidth=1.35]
+	GUEST -> UC_LOGIN [color="#111827" dir=none penwidth=1.35]
+	USER -> UC_LOGIN [color="#111827" dir=none penwidth=1.35]
+	USER -> UC_LOGOUT [color="#111827" dir=none penwidth=1.35]
+	USER -> UC_RESET [color="#111827" dir=none penwidth=1.35]
+	COMPANY -> UC_LOGIN [color="#111827" dir=none penwidth=1.35]
+	COMPANY -> UC_LOGOUT [color="#111827" dir=none penwidth=1.35]
+	COMPANY -> UC_RESET [color="#111827" dir=none penwidth=1.35]
+	ADMIN -> UC_LOGIN [color="#111827" dir=none penwidth=1.35]
+	ADMIN -> UC_LOGOUT [color="#111827" dir=none penwidth=1.35]
+	ADMIN -> UC_RESET [color="#111827" dir=none penwidth=1.35]
+	USER -> UC_SUBS [color="#111827" dir=none penwidth=1.35]
+	COMPANY -> UC_SUBS [color="#111827" dir=none penwidth=1.35]
+}

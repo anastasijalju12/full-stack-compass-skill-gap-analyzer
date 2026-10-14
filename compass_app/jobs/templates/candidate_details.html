@@ -1,0 +1,121 @@
+
+<div id="candidateDetails-{{ ad.id }}-{{ application.id }}" class="candidate-details-content">
+
+    <form method="post"
+      action="{% url 'change_application_status' application.id %}"
+      class="candidate-action-buttons status-change-form"
+      data-ad-id="{{ ad.id }}"
+      data-application-id="{{ application.id }}">
+    {% csrf_token %}
+
+    <div class="status-button-group {% if application.status == 'active' %}active{% endif %}"
+         data-status-group="active">
+
+        <button type="submit"
+                name="status"
+                value="accepted"
+                class="candidate-action-btn candidate-action-success">
+            Accept
+        </button>
+
+        <button type="submit"
+                name="status"
+                value="denied"
+                class="candidate-action-btn candidate-action-danger">
+            Reject
+        </button>
+
+    </div>
+
+    <div class="status-button-group {% if application.status == 'accepted' %}active{% endif %}"
+         data-status-group="accepted">
+
+        <button type="submit"
+                name="status"
+                value="active"
+                class="candidate-action-btn candidate-action-primary">
+            Move back to review
+        </button>
+
+        <button type="submit"
+                name="status"
+                value="denied"
+                class="candidate-action-btn candidate-action-danger">
+            Reject
+        </button>
+
+    </div>
+
+    <div class="status-button-group {% if application.status == 'denied' %}active{% endif %}"
+         data-status-group="denied">
+
+        <button type="submit"
+                name="status"
+                value="active"
+                class="candidate-action-btn candidate-action-primary">
+            Move back to review
+        </button>
+
+        <button type="submit"
+                name="status"
+                value="accepted"
+                class="candidate-action-btn candidate-action-success">
+            Accept
+        </button>
+
+    </div>
+</form>
+
+    <div class="candidate-details-header">
+
+    <h3 class="modal-title">
+        {{ application.user.first_name }} {{ application.user.last_name }}
+    </h3>
+
+    <button
+        type="button"
+        class="favorite-candidate-btn {% if application.is_favorite_candidate %}favorite-candidate-btn--active{% endif %}"
+        data-user-id="{{ application.user.id }}"
+        data-job-ad-id="{{ ad.id }}"
+        data-toggle-url="{% url 'toggle_favorite_candidate' %}"
+        onclick="toggleFavoriteCandidate(this)"
+        title="Mark candidate as featured"
+    >
+        ★
+    </button>
+
+</div>
+
+    <div class="candidate-info">
+        <p><strong>Email:</strong> {{ application.user.email }}</p>
+        <p><strong>Contact phone:</strong> {{ application.user.contact }}</p>
+        <p>
+            <strong>Application status:</strong>
+            <span id="applicationStatus-{{ ad.id }}-{{ application.id }}">
+                {{ application.get_status_display }}
+            </span>
+        </p>
+        <p id="statusMessage-{{ ad.id }}-{{ application.id }}" class="status-message"></p>
+        <p><strong>Application date:</strong> {{ application.applied_at|date:"d.m.Y." }}</p>
+
+        {% if application.cv_path %}
+            <p>
+                <strong>CV:</strong>
+                <a href="{{ application.cv_path.url }}" target="_blank">Open CV</a>
+            </p>
+        {% endif %}
+
+        {% if application.cover_message %}
+            <p>
+                <strong>Message to the employer: </strong>
+                {{ application.cover_message }}
+            </p>
+        {% endif %}
+
+        {% if application.message %}
+            <p><strong>Candidate message:</strong></p>
+            <p>{{ application.message }}</p>
+        {% endif %}
+    </div>
+
+</div>

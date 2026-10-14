@@ -1,0 +1,70 @@
+@startuml
+title CD_03 – Jobs modeli
+hide methods
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+package "jobs / modeli oglasa i prijava" {
+
+class "«external: accounts»\nCompany" as Company {
+  - id: AutoField
+}
+
+class "«external: accounts»\nUser" as User {
+  - id: AutoField
+}
+
+class "«external: careers»\nSkill" as Skill {
+  - id: AutoField
+}
+
+class JobAd {
+  - id: AutoField
+  - name: CharField(150)
+  - description: TextField [0..1]
+  - type: internship | junior
+  - location: CharField(150) [0..1]
+  - application_deadline: DateField [0..1]
+  - created_at: DateTimeField [0..1]
+  - updated_at: DateTimeField [0..1]
+  - status: active | inactive | pending [0..1]
+  - removal_reason: TextField [0..1]
+}
+
+class JobAdSkill {
+  - pk: CompositePrimaryKey(job_ad_id, skill_id)
+  - required_level: IntegerField {1..5}
+}
+
+class Application {
+  - id: AutoField
+  - applied_at: DateTimeField
+  - cv_path: FileField [0..1]
+  - skills: CharField(500) [0..1]
+  - education: CharField(200) [0..1]
+  - cover_message: TextField [0..1]
+  - status: active | withdrawn | accepted | denied
+  - unique(user, job_ad)
+}
+
+class FavoriteJobAd {
+  - pk: CompositePrimaryKey(user_id, job_ad_id)
+}
+
+class FavoriteCandidate {
+  - pk: CompositePrimaryKey(company_id, user_id, job_ad_id)
+}
+
+Company "1" -- "0..*" JobAd : company
+JobAd "1" -- "0..*" JobAdSkill : job_ad
+Skill "1" -- "0..*" JobAdSkill : skill
+User "1" -- "0..*" Application : user
+JobAd "1" -- "0..*" Application : job_ad
+User "1" -- "0..*" FavoriteJobAd : user
+JobAd "1" -- "0..*" FavoriteJobAd : job_ad
+Company "1" -- "0..*" FavoriteCandidate : company
+User "1" -- "0..*" FavoriteCandidate : user
+JobAd "1" -- "0..*" FavoriteCandidate : job_ad
+}
+@enduml

@@ -1,0 +1,127 @@
+<!----------------MINA OSTOJIC--------------------->
+
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="psiIndexFirma.css">
+
+</head>
+
+<body>
+
+    <!----------------HEADER--------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navHeader">
+        <div class="container-fluid">
+
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo/compas.png" class="img-fluid" style="height:64px;" alt="logoEagle">
+                <span class="h4 ms-2" id="navMenuCompanyName">Kompas</span> 
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navbarNavDropdown" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a href="company-main.html" class="nav-link">Početna</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="company-ads.html" class="nav-link">Moji oglasi</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            Avatar
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a href="psiIndexFirma.html" class="dropdown-item">Moj profil</a></li> 
+                            <li><a href="#" class="dropdown-item">Odjava</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+
+    <div class="profileCard">
+
+        <div class="profileHeader">
+            <div class="logoBox">
+                <img src="images/companyLogo/JetBrains.png" alt="logo">
+            </div>
+
+            <div class="profileTitle">
+                <h2>Moj profil</h2>
+                <p>Pregled i upravljanje podacima firme</p>
+            </div>
+        </div>
+
+        <div class="profileGrid">
+
+            <div class="field">
+                <label>Naziv</label>
+                <input type="text" value="JetBrains" disabled>
+            </div>
+
+            <div class="field">
+                <label>Korisničko ime</label>
+                <input type="text" value="jetbrains_admin" disabled>
+            </div>
+
+            <div class="field">
+                <label>Lozinka</label>
+                <input type="password" value="********" disabled>
+            </div>
+
+            <div class="field">
+                <label>Email</label>
+                <input type="email" value="careers@jetbrains.com" disabled>
+            </div>
+
+            <div class="field">
+                <label>Delatnost</label>
+                <input type="text" value="Razvoj softverskih alata i IDE rešenja (software development tools)" disabled>
+            </div>
+
+            <div class="field">
+                <label>Kontakt</label>
+                <input type="text" value="+420 725 384 123" disabled>
+            </div>
+
+            <div class="field">
+                <label>Opis</label>
+                <input type="text" value="JetBrains je globalna softverska kompanija poznata po razvoju IntelliJ IDEA, PyCharm, WebStorm i drugih IDE alata koje koriste milioni developera širom sveta. Fokus kompanije je na poboljšanju produktivnosti programera kroz pametne alate, code analysis i developer experience tehnologije." disabled>
+            </div>
+
+        </div>
+
+        <div class="actions">
+            <button class="editBtn">Izmeni profil</button>
+        </div>
+
+    </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+digraph CD_04_Celokupni_model {
+  graph [label="CD_04 – Celokupni model aplikacije Kompas", labelloc=t, rankdir=LR];
+  node [shape=record];
+
+  User [label="{User|...}"];
+  Company [label="{Company|...}"];
+  Administrator [label="{Administrator|...}"];
+  Subscription [label="{Subscription|...}"];
+  PasswordReset [label="{PasswordReset|...}"];
+
+  Career [label="{Career|...}"];
+  Skill [label="{Skill|...}"];
+  CareerSkill [label="{CareerSkill|...}"];
+  UserSkill [label="{UserSkill|...}"];
+  Resource [label="{Resource|...}"];
+  CareerProject [label="{CareerProject|...}"];
+  FavoriteCareer [label="{FavoriteCareer|...}"];
+
+  JobAd [label="{JobAd|...}"];
+  JobAdSkill [label="{JobAdSkill|...}"];
+  Application [label="{Application|...}"];
+  FavoriteJobAd [label="{FavoriteJobAd|...}"];
+  FavoriteCandidate [label="{FavoriteCandidate|...}"];
+}

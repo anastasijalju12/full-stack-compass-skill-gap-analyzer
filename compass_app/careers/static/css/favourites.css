@@ -1,0 +1,92 @@
+/*author: Anastasija Ljubičić 0312/2023*/
+
+/* ---------- Tabs ---------- */
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    max-width: 420px;
+    margin: 24px auto 12px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--k-border);
+    border-radius: 14px;
+    box-shadow: var(--k-shadow-sm);
+}
+
+.tab-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    color: var(--k-text-soft);
+    font-weight: 600;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tab-btn:not(.active):hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-btn.active {
+    color: #03141f;
+    background: var(--k-gradient);
+    box-shadow: 0 8px 22px -10px rgba(34, 211, 238, 0.9);
+}
+
+/* ---------- Favourite cards ---------- */
+
+.custom-card {
+    margin-top: 20px;
+    font-size: 1rem;
+    transition: transform 0.35s var(--k-ease), border-color 0.25s ease, box-shadow 0.35s ease;
+}
+
+.custom-card:hover {
+    border-color: rgba(34, 211, 238, 0.35);
+    box-shadow: 0 24px 50px -28px rgba(34, 211, 238, 0.5);
+}
+
+.custom-card .career-name {
+    margin-bottom: 8px;
+    font-family: var(--k-font-display);
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.custom-card li {
+    color: var(--k-text-soft);
+    line-height: 1.7;
+}
+
+.fav-deadline {
+    color: var(--k-coral);
+}
+
+.button-about-joab-ad {
+    width: 120px;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+@media (max-width: 575.98px) {
+    .custom-card.d-flex {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+
+    .custom-card .d-flex.flex-column {
+        flex-direction: row !important;
+        justify-content: flex-start;
+    }
+}

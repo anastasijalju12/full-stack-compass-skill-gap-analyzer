@@ -1,0 +1,553 @@
+/* Author: Milica Pavlovic
+   Shared visual theme for the administration module.
+   Built on top of the global Kompas tokens (accounts/static/css/kompas-theme.css). */
+
+/* ---------- Sub navigation ---------- */
+
+.admin-subnav-wrap {
+  margin: 0 auto 8px;
+  padding: 0 1rem;
+}
+
+.admin-subnav {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  background: rgba(9, 20, 42, 0.7);
+  border: 1px solid var(--k-border);
+  border-radius: 18px;
+  box-shadow: var(--k-shadow-sm);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.admin-subnav-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: var(--k-muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.admin-subnav-title::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--k-cyan);
+  box-shadow: 0 0 10px var(--k-cyan);
+}
+
+.admin-subnav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-subnav-link {
+  padding: 8px 16px;
+  color: var(--k-text-soft);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--k-border);
+  border-radius: 999px;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.admin-subnav-link:hover {
+  color: #ffffff;
+  background: rgba(34, 211, 238, 0.08);
+  border-color: rgba(34, 211, 238, 0.45);
+  transform: translateY(-1px);
+}
+
+.admin-subnav-link.active {
+  color: #03141f;
+  font-weight: 600;
+  background: var(--k-gradient);
+  border-color: transparent;
+  box-shadow: 0 8px 22px -10px rgba(34, 211, 238, 0.9);
+}
+
+/* ---------- Page header ---------- */
+
+.page-header {
+  padding-top: 1.4rem;
+}
+
+/* ---------- Cards ---------- */
+
+.customCard {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.dashboardActionCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 220px;
+  padding: 28px 26px 24px;
+  overflow: hidden;
+  color: var(--k-text);
+  background: var(--k-card-bg);
+  border: 1px solid var(--k-border);
+  border-radius: var(--k-radius-lg);
+  box-shadow: var(--k-shadow);
+  transition: transform 0.35s var(--k-ease), border-color 0.25s ease, box-shadow 0.35s ease;
+}
+
+.dashboardActionCard::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: var(--k-gradient-line);
+  opacity: 0.6;
+}
+
+.dashboardActionCard::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.18), transparent 70%);
+  pointer-events: none;
+  transition: transform 0.5s var(--k-ease);
+}
+
+.dashboardActionCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: var(--k-glow);
+}
+
+.dashboardActionCard:hover::after {
+  transform: scale(1.4);
+}
+
+.actionTitle {
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-family: var(--k-font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.actionText,
+.helpText,
+.previewMeta,
+.historyMeta,
+.requestMeta,
+.careerShortDescription,
+.formHint {
+  color: var(--k-muted);
+  line-height: 1.6;
+}
+
+.actionText {
+  margin-bottom: 0;
+  font-size: 0.98rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.actionBtn,
+.buttonAboutJoabAd,
+.buttonAbout,
+.previewBtn,
+.accountTypeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 0.93rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, color 150ms ease, filter 150ms ease, border-color 150ms ease;
+}
+
+.actionBtn,
+.buttonAboutJoabAd,
+.buttonAbout,
+.previewBtn {
+  color: #03141f;
+  background: var(--k-gradient);
+  box-shadow: 0 10px 26px -12px rgba(34, 211, 238, 0.9);
+}
+
+.actionBtn {
+  align-self: flex-start;
+  min-width: 160px;
+}
+
+.actionBtn:hover,
+.buttonAboutJoabAd:hover,
+.buttonAbout:hover,
+.previewBtn:hover {
+  color: #03141f;
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px -12px rgba(34, 211, 238, 1);
+}
+
+.secondaryBtn,
+.warningBtn {
+  color: var(--k-text);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--k-border);
+  box-shadow: none;
+}
+
+.secondaryBtn:hover,
+.warningBtn:hover {
+  color: #ffffff;
+  background: rgba(34, 211, 238, 0.1);
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: none;
+  filter: none;
+}
+
+.warningBtn {
+  color: #fde68a;
+  border-color: rgba(251, 191, 36, 0.45);
+  background: rgba(251, 191, 36, 0.08);
+}
+
+.warningBtn:hover {
+  color: #fde68a;
+  background: rgba(251, 191, 36, 0.16);
+  border-color: rgba(251, 191, 36, 0.7);
+}
+
+.rejectBtn,
+.dangerBtn,
+.deleteBtn {
+  color: #fecaca;
+  background: rgba(248, 113, 113, 0.12);
+  border-color: rgba(248, 113, 113, 0.5);
+  box-shadow: none;
+}
+
+.rejectBtn:hover,
+.dangerBtn:hover,
+.deleteBtn:hover {
+  color: #ffffff;
+  background: rgba(248, 113, 113, 0.28);
+  border-color: rgba(248, 113, 113, 0.8);
+  box-shadow: 0 10px 24px -12px rgba(248, 113, 113, 0.9);
+  filter: none;
+}
+
+.activeActionBtn {
+  color: #ffffff;
+  background: rgba(34, 211, 238, 0.18);
+  border-color: var(--k-cyan);
+}
+
+.buttonAboutJoabAd:disabled,
+.buttonAboutJoabAd:disabled:hover {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+  box-shadow: none;
+}
+
+.accountTypeBtn {
+  color: var(--k-text-soft);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--k-border);
+}
+
+.accountTypeBtn.active,
+.accountTypeBtn:hover {
+  color: #03141f;
+  background: var(--k-gradient);
+  border-color: transparent;
+  box-shadow: 0 10px 24px -12px rgba(34, 211, 238, 0.9);
+}
+
+/* ---------- Inner panels ---------- */
+
+.accountListItem,
+.accountCard,
+.careerCard,
+.adPreviewCard,
+.requestPreviewCard,
+.historyRow,
+.statusBox,
+.selectedCompanyInfo,
+.selectedSummary,
+.confirmBox,
+.selectionInfo,
+.messageBoxInline,
+.emptyBox,
+.noteBox,
+.emptyState,
+.actionInfoBox,
+.skillDetailsTable {
+  color: var(--k-text);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--k-border);
+  border-radius: var(--k-radius);
+  box-shadow: none;
+}
+
+.emptyBox,
+.emptyState,
+.noteBox,
+.confirmBox,
+.selectedSummary,
+.actionInfoBox {
+  border-style: dashed;
+}
+
+.emptyState,
+.emptyBox {
+  color: var(--k-muted);
+}
+
+.accountListItem,
+.accountCard,
+.careerCard,
+.adPreviewCard,
+.requestPreviewCard,
+.historyRow {
+  transition: transform 0.3s var(--k-ease), box-shadow 0.3s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.accountCard:hover,
+.careerCard:hover,
+.adPreviewCard:hover,
+.requestPreviewCard:hover {
+  background: rgba(34, 211, 238, 0.05);
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: 0 18px 36px -22px rgba(34, 211, 238, 0.55);
+  transform: translateY(-3px);
+}
+
+.selectedCard,
+.active-card,
+.selectedRequestCard,
+.requestPreviewCard.selectedRequestCard {
+  background: rgba(34, 211, 238, 0.08);
+  border-color: var(--k-cyan);
+  box-shadow: 0 0 0 1px var(--k-cyan), 0 0 30px -8px rgba(34, 211, 238, 0.6);
+}
+
+.accountCardLink,
+.careerCardLink,
+.accountCardLink:hover,
+.careerCardLink:hover {
+  color: var(--k-text);
+}
+
+.accountName,
+.careerName,
+.previewTitle,
+.requestName {
+  color: #ffffff;
+  font-family: var(--k-font-display);
+  font-weight: 600;
+}
+
+/* ---------- Status ---------- */
+
+.statusBox {
+  position: relative;
+  overflow: hidden;
+}
+
+.statusBox::after {
+  content: "";
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 0;
+  height: 2px;
+  background: var(--k-gradient);
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.9);
+}
+
+.statusNumber {
+  font-family: var(--k-font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  background: var(--k-gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.statusLabel {
+  margin-top: 8px;
+  color: var(--k-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.statusBadge,
+.badgeRole,
+.roleBadge,
+.historyBadge,
+.reviewTypeBadge,
+.accountTypeLabel,
+.skillBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  color: var(--k-text-soft);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--k-border);
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+.badgeRole,
+.roleBadge,
+.accountTypeLabel {
+  color: #a5f3fc;
+  background: rgba(34, 211, 238, 0.08);
+  border-color: rgba(34, 211, 238, 0.35);
+}
+
+.statusBadge.pending,
+.statusBadge.warning,
+.statusBadge.old {
+  color: #fde68a;
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.45);
+}
+
+.statusBadge.approved,
+.statusBadge.ok,
+.statusBadge.saved {
+  color: #a7f3d0;
+  background: rgba(52, 211, 153, 0.1);
+  border-color: rgba(52, 211, 153, 0.45);
+}
+
+.statusBadge.rejected {
+  color: #fecaca;
+  background: rgba(248, 113, 113, 0.1);
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+/* ---------- Feedback boxes ---------- */
+
+.successBox,
+.successState,
+.successActionBox {
+  color: #a7f3d0;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.45);
+}
+
+.errorBox,
+.errorState,
+.dangerActionBox,
+.deleteBox,
+.deleteState,
+.dangerNotice {
+  color: #fecaca;
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.45);
+}
+
+.pendingBox,
+.warningBox,
+.warningActionBox {
+  color: #fde68a;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.45);
+}
+
+.dangerNotice {
+  padding: 14px 16px;
+  border-left-width: 3px;
+  border-radius: var(--k-radius);
+  font-weight: 500;
+}
+
+.fieldError {
+  margin-top: 0.35rem;
+  color: var(--k-danger);
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+/* ---------- Forms ---------- */
+
+.readonlyField,
+.form-control[readonly],
+textarea[readonly] {
+  color: var(--k-text-soft);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+textarea.form-control {
+  min-height: 120px;
+}
+
+/* ---------- Skill details table ---------- */
+
+.skillDetailsTable {
+  overflow: hidden;
+}
+
+.skillDetailsRow {
+  border-bottom: 1px solid var(--k-border-soft);
+}
+
+.skillDetailsHeader {
+  color: var(--k-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 767px) {
+  .admin-subnav {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .admin-subnav-links {
+    flex-wrap: nowrap;
+    padding-bottom: 0.25rem;
+    overflow-x: auto;
+  }
+
+  .admin-subnav-link {
+    flex: 0 0 auto;
+  }
+
+  .dashboardActionCard {
+    border-radius: 18px;
+  }
+}

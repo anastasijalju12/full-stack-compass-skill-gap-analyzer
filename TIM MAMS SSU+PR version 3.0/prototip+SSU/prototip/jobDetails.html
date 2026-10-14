@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<!-- 
+Autor: Sofija Nikolić
+Predmet: Principi softverskog inženjerstva
+Projekat: Kompas
+Opis: Prototip stranice sa detaljima oglasa
+Tim: MAMS
+-->
+
+<html lang="sr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas - Detalji oglasa</title>
+    <link rel="icon" type="image/png" href="images/logo/compas.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="header.css">
+
+    <style>
+        .customCard {
+            background-color: #f2a65a;
+            color: #000000;
+            border-radius: 20px;
+            border: solid #000000 3px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .custom-btn {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .custom-btn:hover {
+            background-color: #333333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navHeader">
+        <div class="container-fluid">
+
+            <a class="navbar-brand d-flex align-items-center" href="HomeUser.html">
+                <img src="images/logo/compas.png" class="img-fluid" style="height:64px;" alt="Kompas logo">
+                <span class="h4 ms-2" id="navMenuCompanyName">Kompas</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navbarNavDropdown" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a href="HomeUser.html" class="nav-link">Početna</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="HomeUser.html#zanimanja" class="nav-link">Karijere</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="skillMatch.html" class="nav-link">Analiza</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="HomeUser.html#oglasi" class="nav-link">Oglasi</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="favourites.html" class="nav-link">Favoriti</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="HomeUser.html#kompanije" class="nav-link">Naše kompanije</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="aboutUs.html" class="nav-link">O nama</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Odjava</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- SADRŽAJ -->
+    <div class="container">
+        <div class="page-header text-center">
+            <h1 class="display-4">Junior Frontend Developer</h1>
+            <p><strong>Kompanija:</strong> Nordeus</p>
+            <p><strong>Tip angažmana:</strong> Praksa</p>
+        </div>
+
+        <!-- OPIS POSLA -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-9 col-12 customCard px-4 py-4">
+                <div class="section-title">Opis pozicije</div>
+                <p>
+                    Tražimo motivisanog kandidata za poziciju Junior Frontend Developer.
+                    Kandidat će raditi na razvoju modernih web aplikacija uz mentorstvo iskusnog tima.
+                </p>
+            </div>
+        </div>
+
+        <!-- ZAHTJEVI -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-9 col-12 customCard px-4 py-4">
+                <div class="section-title">Zahtevi</div>
+                <ul>
+                    <li>Osnovno znanje HTML, CSS i JavaScript</li>
+                    <li>Poznavanje React-a je prednost</li>
+                    <li>Spremnost za učenje i timski rad</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BENEFITI -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-9 col-12 customCard px-4 py-4">
+                <div class="section-title">Šta nudimo</div>
+                <ul>
+                    <li>Rad u dinamičnom timu</li>
+                    <li>Mogućnost stalnog zaposlenja</li>
+                    <li>Mentorstvo i razvoj karijere</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- AKCIJE -->
+        <div class="row justify-content-center mt-4 mb-5">
+            <div class="col-lg-9 col-12 text-center">
+                <a href="HomeUser.html" class="custom-btn">Nazad</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+</body>
+</html>

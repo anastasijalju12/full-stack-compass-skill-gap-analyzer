@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include 'basing_settings.html' %}
+
+    <link rel="stylesheet" href="{% static 'css/careers.css' %}">
+
+    <div class="container mt-4 careersContainer">
+
+        <h2 class="mb-4">IT Careers</h2>
+
+        <div class="search-sort-bar mb-4">
+
+            <div class="search-group">
+                <input
+                    type="text"
+                    id="careerSearchInput"
+                    class="form-control"
+                    placeholder="Search careers..."
+                >
+
+                <button
+                    type="button"
+                    id="careerSearchButton"
+                    class="buttonSearch"
+                >
+                    Search
+                </button>
+            </div>
+
+            <div class="sort-group">
+                <label for="careerSortSelect">Sort by:</label>
+
+                <select id="careerSortSelect" class="form-select">
+                    <option value="default">Default</option>
+                    <option value="titleAsc">Title A-Z</option>
+                    <option value="titleDesc">Title Z-A</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="row g-4" id="careersRow">
+
+            {% for career in careers %}
+
+                <div
+                    id="career-{{ career.id }}"
+                    class="col-lg-4 col-md-6 col-12 career-item"
+                    data-title="{{ career.name }}"
+                >
+
+                    <div class="careerCard p-4">
+
+                        <div class="careerHeader">
+
+                            <h3 class="mt-0">
+                                {{ career.name }}
+                            </h3>
+
+                            <div class="careerStar">
+                                <input
+                                    type="checkbox"
+                                    id="careerStar{{ career.id }}"
+                                    class="favoriteCheckbox"
+                                    data-career-id="{{ career.id }}"
+                                    hidden
+                                >
+
+                                <label
+                                    for="careerStar{{ career.id }}"
+                                    class="starBtn"
+                                    title="Mark as favorite"
+                                >
+                                    ★
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="careerBody">
+
+                            <p class="desc">
+                                {{ career.description }}
+                            </p>
+
+                        </div>
+
+                        <div class="careerActions">
+                            <a
+                                href="{% url 'career_details' career.id %}"
+                                class="buttonDetails"
+                            >
+                                Details
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="col-12">
+                    <p class="text-muted">
+                        There are currently no careers added.
+                    </p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/careers.js' %}"></script>
+
+{% endblock %}

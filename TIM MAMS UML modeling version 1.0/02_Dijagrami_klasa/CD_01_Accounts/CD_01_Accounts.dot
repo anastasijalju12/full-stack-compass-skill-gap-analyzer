@@ -1,0 +1,16 @@
+digraph CD_01_Accounts {
+  graph [label="CD_01 – Accounts modeli", labelloc=t, rankdir=LR];
+  node [shape=record];
+
+  User [label="{User|first_name; last_name; username; email; password; contact; status; role; registered_at; rejection_reason}"];
+  Company [label="{Company|name; username; email; password; industry; contact; description; logo_path; status; rejection_reason}"];
+  Administrator [label="{Administrator|access_level; assigned_date}"];
+  Subscription [label="{Subscription|amount; status; date}"];
+  PasswordReset [label="{PasswordReset|token; expires_at; is_used}"];
+
+  User -> Administrator [label="1 : 0..*"];
+  User -> Subscription [label="1 : 0..*"];
+  Company -> Subscription [label="1 : 0..*"];
+  User -> PasswordReset [label="1 : 0..*"];
+  Company -> PasswordReset [label="1 : 0..*"];
+}

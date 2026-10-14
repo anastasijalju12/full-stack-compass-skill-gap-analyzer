@@ -1,0 +1,7 @@
+/*author: Anastasija Ljubičić 0312/2023*/
+/* Navigation and page header styles now live in css/kompas-theme.css.
+   This file is kept for backwards compatibility with existing templates. */
+
+#navHeader {
+    z-index: 1040;
+}

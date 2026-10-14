@@ -1,0 +1,49 @@
+/*autor: Anastasija Ljubičić 0312/2023*/
+.tabs {
+  display: flex;
+  justify-content: center;  
+  gap: 0;               
+  margin: 20px auto;
+  max-width: 450px;
+  border-radius: 15px;
+  overflow: hidden;       
+  border: 3px solid #f2a65a;
+}
+.tab-btn {
+  flex: 1;
+  padding: 12px 16px;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  background: #f9efd8;
+  color: #040404;
+  font-weight: 600;
+  display: flex;
+  transition: 0.3s;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.tab-btn:not(.active):hover {
+  background: #ece8df;
+}
+
+.tab-btn.active {
+  background: #f2a65a;   /* tamno zelena kao na slici */
+  color: white;
+}
+.customCard{
+    background-color:#f2a65a;
+    color:#000000;
+    border-radius: 20px;
+    border: solid #000000 3px;
+    font-weight: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+.buttonAboutJoabAd{
+    width:120px;  
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }

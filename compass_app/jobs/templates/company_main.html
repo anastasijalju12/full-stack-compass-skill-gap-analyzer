@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% include 'basing_settings.html' %}
+        <link rel="stylesheet" href="{% static 'css/company_main.css' %}">
+        <link rel="stylesheet" href="{% static 'css/one_add_candidates.css' %}">
+
+
+    <!-- WELCOME -->
+    <div class="dashboard container mt-4">
+
+        <div class="dashboard__welcome">
+            <h2>Welcome back, {{ company_name }} 👋</h2>
+            <p>Manage your job ads and candidates in one place.</p>
+        </div>
+
+        <!-- STATS -->
+        <div class="row g-3">
+
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card p-3">
+                    <h4>{{ active_ads_num }}</h4>
+                    <p>Active job ads</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card p-3">
+                    <h4>{{ candidates_num }}</h4>
+                    <p>Candidates</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card p-3">
+                    <h4>{{ new_candidates_num }}</h4>
+                    <p>New today</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card p-3">
+                    <h4>{{ ads_expires_soon_num }}</h4>
+                    <p>Deadline expiring</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <h4 class="dashboard__section-title">Quick actions</h4>
+
+        <div class="row g-3">
+
+            <div class="col-md-3 col-6">
+                <button class="dashboard-card dashboard-card--button p-3 text-center w-100"
+                        onclick="openAddJobAdForm()">
+                    ➕ New job ad
+                </button>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <button class="dashboard-card dashboard-card--button p-3 text-center w-100"
+                        onclick="showCandidatesModal()">
+                    👥 Candidates
+                </button>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card p-3 text-center w-100">
+                    <a href="{%url 'company_ads' %}" class="dashboard-card__link">
+                        📄 My job ads
+                    </a>
+                </div>
+            </div>
+<!--
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card dashboard-card--button p-3 text-center">
+                    📊 Statistics
+                </div>
+            </div>
+-->
+        </div>
+
+        <!-- ACTIVE ADS PREVIEW -->
+        <h4 class="dashboard__section-title">Active job ads</h4>
+
+        <div class="row g-3">
+        {% for ad in active_ads_with_num %}
+            <div class="col-lg-6">
+                <div class="dashboard-card p-3">
+                    <h5>{{ad.name}}</h5>
+                    <p>{{ad.num_candidates}}</p>
+                    <!--<button class="ad-card__button">Preview</button>-->
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="text-muted">You currently have no active job ads.</p>
+            </div>
+        {% endfor %}
+        </div>
+
+        <!-- RECENT CANDIDATES -->
+        <h4 class="dashboard__section-title">New candidates</h4>
+
+        <div class="dashboard-card p-3">
+            {% for cand in recent_candidates %}
+             <p>
+                <strong>{{ cand.first_name }} {{ cand.last_name }}</strong> -
+                {{ cand.adds|default:"-" }}
+             </p>
+            {% empty %}
+                <p class="text-muted">There are no new candidate applications today.</p>
+            {%  endfor %}
+        </div>
+
+    </div>
+    {% include 'add_job_ad.html' %}
+    {% include 'current_candidates.html' %}
+    <script src="{% static 'js/add_job_ad_form.js' %}"></script>
+    <script src="{% static 'js/current_candidates.js' %}"></script>
+
+{% endblock %}

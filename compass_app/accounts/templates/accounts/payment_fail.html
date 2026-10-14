@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Kompas - Payment Failed{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="page-header text-center">
+        <h1 class="display-4">Payment failed</h1>
+    </div>
+
+    <div class="row justify-content-center mt-4 mb-5">
+        <div class="col-lg-7 col-md-9 col-12 customCard px-4 px-md-5 py-4 py-md-5 text-center">
+            <div class="k-status-icon k-status-icon--danger" aria-hidden="true">&times;</div>
+            <p class="k-status-title k-text-danger">The transaction was not completed successfully.</p>
+            <p class="mt-3">Please check the entered payment details and try again.</p>
+            <p>The account will not be created until the payment is completed successfully.</p>
+
+            <div class="mt-4">
+                <a href="{% url 'payment' %}" class="custom-btn">Try again</a>
+            </div>
+
+            <div class="mt-4 d-flex flex-column gap-2">
+                <a href="{% url 'registration_choice' %}" class="secondary-link d-block">Back to registration</a>
+                <a href="{% url 'public_index' %}" class="secondary-link d-block">Back to home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

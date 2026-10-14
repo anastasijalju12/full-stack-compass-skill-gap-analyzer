@@ -1,0 +1,86 @@
+@startuml
+title UC_02 – Karijere, veštine i pametna analiza
+left to right direction
+actor Gost
+actor "Registrovani
+korisnik" as Korisnik
+rectangle "KOMPAS – Podsistem karijera i preporuka" {
+  rectangle "Pregled karijera" {
+    usecase "Pregled karijera" as UC1
+    usecase "Pretraga karijera" as UC2
+    usecase "Sortiranje karijera" as UC3
+    usecase "Pregled detalja
+karijere" as UC4
+    usecase "Označavanje karijere
+kao omiljene" as UC5
+  }
+  rectangle "Profil i veštine korisnika" {
+    usecase "Pregled korisničkog
+profila" as UC6
+    usecase "Upravljanje sopstvenim
+veštinama" as UC7
+    usecase "Podešavanje nivoa
+znanja (1–5)" as UC8
+  }
+  rectangle "Omiljene stavke" {
+    usecase "Pregled privatnih
+favorita" as UC9
+    usecase "Pregled omiljenih
+karijera" as UC10
+    usecase "Pregled omiljenih
+oglasa" as UC11
+    usecase "Uklanjanje karijere
+iz favorita" as UC12
+    usecase "Uklanjanje oglasa
+iz favorita" as UC13
+  }
+  rectangle "Pametna analiza" {
+    usecase "Pokretanje analize
+veština" as UC14
+    usecase "Izbor veština
+i nivoa" as UC15
+    usecase "Izračunavanje i rangiranje
+podudaranja sa karijerama" as UC16
+    usecase "Izračunavanje podudaranja
+sa oglasima" as UC17
+    usecase "Pregled skill gap-a" as UC18
+    usecase "Čuvanje rezultata
+analize" as UC19
+    usecase "Pregled sačuvane
+analize" as UC20
+  }
+  rectangle "Učenje i projekti" {
+    usecase "Učenje nedostajućih
+veština" as UC21
+    usecase "Pregled preporučenih
+kurseva i resursa" as UC22
+    usecase "Pregled i preuzimanje
+projekata za vežbu" as UC23
+  }
+}
+Gost -- UC1
+Korisnik -- UC1
+Korisnik -- UC6
+Korisnik -- UC9
+Korisnik -- UC14
+Korisnik -- UC20
+UC2 ..> UC1 : <<extend>>
+UC3 ..> UC1 : <<extend>>
+UC4 ..> UC1 : <<extend>>
+UC5 ..> UC1 : <<extend>>
+UC7 ..> UC6 : <<extend>>
+UC8 ..> UC7 : <<include>>
+UC10 ..> UC9 : <<include>>
+UC11 ..> UC9 : <<include>>
+UC12 ..> UC10 : <<extend>>
+UC13 ..> UC11 : <<extend>>
+UC15 ..> UC14 : <<include>>
+UC16 ..> UC14 : <<include>>
+UC17 ..> UC14 : <<include>>
+UC19 ..> UC14 : <<include>>
+UC18 ..> UC16 : <<extend>>
+UC20 ..> UC16 : <<extend>>
+UC21 ..> UC18 : <<extend>>
+UC22 ..> UC21 : <<include>>
+UC23 ..> UC21 : <<include>>
+@enduml

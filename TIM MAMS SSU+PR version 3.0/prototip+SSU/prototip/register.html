@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<!-- 
+Autor: Sofija Nikolić
+Predmet: Principi softverskog inženjerstva
+Projekat: Kompas
+Opis: Prototip stranice za registraciju korisnika i firme
+Tim: MAMS
+-->
+
+<html lang="sr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas - Registracija</title>
+    <link rel="icon" type="image/png" href="images/logo/compas.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="header.css">
+
+    <style>
+        .customCard {
+            background-color: #f2a65a;
+            color: #000000;
+            border-radius: 20px;
+            border: solid #000000 3px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        .custom-btn {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .custom-btn:hover {
+            background-color: #333333;
+            color: white;
+        }
+
+        .secondary-link {
+            color: #000000;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .secondary-link:hover {
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        .info-box {
+            background-color: #f9efd8;
+            border: 2px solid #000000;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navHeader">
+        <div class="container-fluid">
+
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo/compas.png" class="img-fluid" style="height:64px;" alt="Kompas logo">
+                <span class="h4 ms-2" id="navMenuCompanyName">Kompas</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navbarNavDropdown" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Početna</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="index.html#zanimanja" class="nav-link">Zanimanja</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="index.html#oglasi" class="nav-link">Oglasi</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="Login.html" class="nav-link">Analiza</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="index.html#kompanije" class="nav-link">Naše kompanije</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="aboutUs.html" class="nav-link">O nama</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="Login.html" class="nav-link">Prijava</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="register.html" class="nav-link">Registracija</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SADRŽAJ -->
+    <div class="container">
+        <div class="page-header text-center">
+            <h1 class="display-4">Registracija</h1>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-8 col-12 customCard px-4 py-4">
+                <div class="section-title text-center">Kreirajte novi nalog</div>
+
+                <div class="info-box">
+                    Nakon popunjavanja registracione forme, korisnik se preusmerava na stranicu za plaćanje. 
+                    Nalog se kreira tek nakon uspešno izvršenog plaćanja i ostaje na čekanju do odobrenja administratora.
+                </div>
+            </div>
+        </div>
+
+        <!-- REGISTRACIJA KORISNIKA -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-8 col-12 customCard px-4 py-4">
+                <div class="section-title">Registracija korisnika</div>
+
+                <form action="payment.html">
+                    <div class="mb-3">
+                        <label for="ime" class="form-label">Ime</label>
+                        <input type="text" class="form-control" id="ime" placeholder="Unesite ime">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="prezime" class="form-label">Prezime</label>
+                        <input type="text" class="form-control" id="prezime" placeholder="Unesite prezime">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="emailKorisnik" class="form-label">E-mail adresa</label>
+                        <input type="email" class="form-control" id="emailKorisnik" placeholder="Unesite e-mail adresu">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="lozinkaKorisnik" class="form-label">Lozinka</label>
+                        <input type="password" class="form-control" id="lozinkaKorisnik" placeholder="Unesite lozinku">
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <input type="submit" value="Nastavi na plaćanje" class="custom-btn">
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="registerErrorExistingEmail.html" class="secondary-link">
+                            Simulacija: već postojeći e-mail
+                        </a>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a href="registerErrorEmpty.html" class="secondary-link">
+                            Simulacija: nepotpuni podaci
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- REGISTRACIJA FIRME -->
+        <div class="row justify-content-center mt-4 mb-5">
+            <div class="col-lg-8 col-12 customCard px-4 py-4">
+                <div class="section-title">Registracija firme</div>
+
+                <form action="payment.html">
+                    <div class="mb-3">
+                        <label for="nazivFirme" class="form-label">Naziv kompanije</label>
+                        <input type="text" class="form-control" id="nazivFirme" placeholder="Unesite naziv kompanije">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="djelatnost" class="form-label">Delatnost</label>
+                        <input type="text" class="form-control" id="djelatnost" placeholder="Unesite djelatnost kompanije">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kontakt" class="form-label">Kontakt e-mail</label>
+                        <input type="email" class="form-control" id="kontakt" placeholder="Unesite kontakt e-mail">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="lozinkaFirma" class="form-label">Lozinka</label>
+                        <input type="password" class="form-control" id="lozinkaFirma" placeholder="Unesite lozinku">
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <input type="submit" value="Nastavi na plaćanje" class="custom-btn">
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="registerErrorExistingEmail.html" class="secondary-link">
+                            Simulacija: već postojeći e-mail
+                        </a>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a href="registerErrorEmpty.html" class="secondary-link">
+                            Simulacija: nepotpuni podaci
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

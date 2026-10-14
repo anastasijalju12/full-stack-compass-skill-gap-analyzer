@@ -1,0 +1,440 @@
+<!-- Autor: Milica Pavlovic -->
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas - Kreiranje naloga</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="admin-create-account.css">
+</head>
+<body>
+
+    <!---------------- JAVNI HEADER --------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navHeader">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo/compas.png" class="img-fluid" style="height:64px;" alt="logoKompas">
+                <span class="h4 ms-2" id="navMenuCompanyName">Kompas</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navbarNavDropdown" class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Početna</a></li>
+                    <li class="nav-item"><a href="careers.html" class="nav-link">Zanimanja</a></li>
+                    <li class="nav-item"><a href="jobAds.html" class="nav-link">Oglasi</a></li>
+                    <li class="nav-item"><a href="skillMatch.html" class="nav-link">Pametno filtriranje</a></li>
+                    <li class="nav-item"><a href="companies.html" class="nav-link">Naše kompanije</a></li>
+                    <li class="nav-item"><a href="aboutUs.html" class="nav-link">O nama</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Avatar</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a href="psiIndex.html" class="dropdown-item">Moj profil</a></li>
+                            <li><a href="favourites.html" class="dropdown-item">Omiljeno</a></li>
+                            <li><a href="#" class="dropdown-item">Odjava</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!---------------- ADMIN HEADER --------------------->
+    <div class="admin-subnav-wrap">
+        <div class="container-fluid">
+            <div class="admin-subnav">
+                <div class="admin-subnav-title">Admin meni</div>
+                <div class="admin-subnav-links">
+                    <a href="admin-dashboard.html" class="admin-subnav-link">Admin panel</a>
+                    <a href="admin-create-account.html" class="admin-subnav-link active">Kreiranje naloga</a>
+                    <a href="admin-company-requests.html" class="admin-subnav-link">Registracije firmi</a>
+                    <a href="admin-moderation.html" class="admin-subnav-link">Moderacija</a>
+                    <a href="admin-manage-accounts.html" class="admin-subnav-link">Nalozi i uloge</a>
+                    <a href="admin-manage-careers.html" class="admin-subnav-link">Karijere i veštine</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header text-center">
+        <h1 class="display-4">Kreiranje naloga</h1>
+    </div>
+
+    <div class="container pb-5">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionHeader">
+                    <div class="sectionTitle mb-0">Upravljanje nalozima korisnika</div>
+                    <button type="button" class="buttonAboutJoabAd" id="openUserRequestBtn" onclick="openRequest('user')">Dodaj nalog</button>
+                </div>
+                <div class="row g-3" id="userAccountsList"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionHeader">
+                    <div class="sectionTitle mb-0">Upravljanje nalozima firmi</div>
+                    <button type="button" class="buttonAboutJoabAd" id="openCompanyRequestBtn" onclick="openRequest('company')">Dodaj nalog</button>
+                </div>
+                <div class="row g-3" id="companyAccountsList"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4" id="reviewSection" style="display:none;">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Dodavanje novog naloga</div>
+                <div class="reviewTypeBadge" id="reviewTypeBadge">Korisnički nalog</div>
+
+                <div class="row g-3 mt-1" id="reviewFields"></div>
+
+                <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+                    <button type="button" class="buttonAboutJoabAd" onclick="approveRequest()">Sačuvaj nalog</button>
+                    <button type="button" class="buttonAboutJoabAd rejectBtn" onclick="rejectRequest()">Odbij nalog</button>
+                    <button type="button" class="buttonAboutJoabAd secondaryBtn" onclick="closeReview()">Zatvori</button>
+                </div>
+
+                <div id="successMessage" class="successBox"></div>
+                <div id="errorMessage" class="errorBox"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+                <div class="sectionTitle">Istorija obrade naloga</div>
+                <div id="historyList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const accounts = {
+            user: [
+                {
+                    name: 'Ana Anic',
+                    email: 'ana.anic@gmail.com',
+                    username: 'anaanic',
+                    role: 'Korisnik'
+                },
+                {
+                    name: 'Marko Petrovic',
+                    email: 'marko.petrovic@gmail.com',
+                    username: 'markop',
+                    role: 'Korisnik'
+                }
+            ],
+            company: [
+                {
+                    name: 'JetBrains Serbia',
+                    email: 'careers@jetbrains.rs',
+                    username: 'jetbrains_srb',
+                    role: 'Firma',
+                    city: 'Beograd'
+                },
+                {
+                    name: 'CodeFlow Labs',
+                    email: 'jobs@codeflow.rs',
+                    username: 'codeflow_labs',
+                    role: 'Firma',
+                    city: 'Novi Sad'
+                }
+            ]
+        };
+
+        const pendingRequests = {
+            user: {
+                type: 'user',
+                name: 'Milos Jovanovic',
+                firstName: 'Milos',
+                lastName: 'Jovanovic',
+                email: 'milos.jovanovic@gmail.com',
+                username: 'milosj',
+                password: 'Privremena lozinka je uneta',
+                role: 'Korisnik',
+                submitted: '16. april 2026.'
+            },
+            company: {
+                type: 'company',
+                name: 'NovaByte Studio',
+                companyName: 'NovaByte Studio',
+                email: 'hello@novabyte.rs',
+                username: 'novabyte_studio',
+                password: 'Privremena lozinka je uneta',
+                pib: '112233445',
+                city: 'Beograd',
+                website: 'www.novabyte.rs',
+                description: 'Firma želi da objavljuje juniorske pozicije i studentske prakse na platformi Kompas.',
+                role: 'Firma',
+                submitted: '16. april 2026.'
+            }
+        };
+
+        const history = [
+            {
+                title: 'Lana Ilic',
+                subtitle: 'Sačuvan korisnički nalog · 14. april 2026.',
+                status: 'Sačuvan',
+                cssClass: 'saved'
+            },
+            {
+                title: 'BrightCode Studio',
+                subtitle: 'Odbijen firmni nalog · 13. april 2026.',
+                status: 'Odbijen',
+                cssClass: 'rejected'
+            }
+        ];
+
+        let currentRequest = null;
+
+        function renderAccountLists() {
+            const userContainer = document.getElementById('userAccountsList');
+            const companyContainer = document.getElementById('companyAccountsList');
+
+            userContainer.innerHTML = accounts.user.map(account => `
+                <div class="col-lg-6">
+                    <div class="accountListItem">
+                        <p><strong>${account.name}</strong></p>
+                        <p>E-mail: ${account.email}</p>
+                        <p>Korisničko ime: ${account.username}</p>
+                        <span class="badgeRole">${account.role}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            companyContainer.innerHTML = accounts.company.map(account => `
+                <div class="col-lg-6">
+                    <div class="accountListItem">
+                        <p><strong>${account.name}</strong></p>
+                        <p>E-mail: ${account.email}</p>
+                        <p>Korisničko ime: ${account.username}</p>
+                        <p>Grad: ${account.city}</p>
+                        <span class="badgeRole">${account.role}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderHistory() {
+            const historyContainer = document.getElementById('historyList');
+            historyContainer.innerHTML = history.map(item => `
+                <div class="historyRow ${item.cssClass}">
+                    <div>
+                        <strong>${item.title}</strong><br>
+                        <span class="historyMeta">${item.subtitle}</span>
+                    </div>
+                    <span class="statusBadge ${item.cssClass}">${item.status}</span>
+                </div>
+            `).join('');
+        }
+
+        function openRequest(type) {
+            currentRequest = JSON.parse(JSON.stringify(pendingRequests[type]));
+            const reviewSection = document.getElementById('reviewSection');
+            const reviewFields = document.getElementById('reviewFields');
+            const reviewTypeBadge = document.getElementById('reviewTypeBadge');
+
+            hideMessages();
+            reviewSection.style.display = 'block';
+
+            if (type === 'user') {
+                reviewTypeBadge.textContent = 'Korisnički nalog';
+                reviewFields.innerHTML = `
+                    <div class="col-md-6">
+                        <label class="labelTitle">Ime</label>
+                        <input type="text" class="form-control" value="${currentRequest.firstName}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Prezime</label>
+                        <input type="text" class="form-control" value="${currentRequest.lastName}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">E-mail adresa</label>
+                        <input type="email" class="form-control" value="${currentRequest.email}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Korisničko ime</label>
+                        <input type="text" class="form-control" value="${currentRequest.username}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Lozinka</label>
+                        <input type="text" class="form-control" value="${currentRequest.password}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Vrsta naloga</label>
+                        <input type="text" class="form-control" value="${currentRequest.role}" readonly>
+                    </div>
+                    <div class="col-12">
+                        <label class="labelTitle">Datum podnošenja</label>
+                        <input type="text" class="form-control" value="${currentRequest.submitted}" readonly>
+                    </div>
+                `;
+            } else {
+                reviewTypeBadge.textContent = 'Firmni nalog';
+                reviewFields.innerHTML = `
+                    <div class="col-md-6">
+                        <label class="labelTitle">Naziv firme</label>
+                        <input type="text" class="form-control" value="${currentRequest.companyName}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">PIB</label>
+                        <input type="text" class="form-control" value="${currentRequest.pib}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Kontakt e-mail</label>
+                        <input type="email" class="form-control" value="${currentRequest.email}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Korisničko ime</label>
+                        <input type="text" class="form-control" value="${currentRequest.username}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Lozinka</label>
+                        <input type="text" class="form-control" value="${currentRequest.password}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Grad</label>
+                        <input type="text" class="form-control" value="${currentRequest.city}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Web sajt</label>
+                        <input type="text" class="form-control" value="${currentRequest.website}" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labelTitle">Vrsta naloga</label>
+                        <input type="text" class="form-control" value="${currentRequest.role}" readonly>
+                    </div>
+                    <div class="col-12">
+                        <label class="labelTitle">Opis firme</label>
+                        <textarea class="form-control" rows="4" readonly>${currentRequest.description}</textarea>
+                    </div>
+                `;
+            }
+
+            reviewSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function approveRequest() {
+            if (!currentRequest) return;
+
+            const targetList = currentRequest.type === 'user' ? accounts.user : accounts.company;
+            const emailExists = targetList.some(item => item.email.toLowerCase() === currentRequest.email.toLowerCase());
+            const hasMissingRequiredField = currentRequest.type === 'user'
+                ? !currentRequest.firstName || !currentRequest.lastName || !currentRequest.email || !currentRequest.username
+                : !currentRequest.companyName || !currentRequest.email || !currentRequest.username || !currentRequest.pib;
+
+            if (hasMissingRequiredField) {
+                showError('Nalog nije sačuvan. Neko od obaveznih polja nije popunjeno.');
+                return;
+            }
+
+            if (emailExists) {
+                showError('Nalog nije sačuvan. E-mail adresa već postoji u sistemu.');
+                return;
+            }
+
+            if (currentRequest.type === 'user') {
+                accounts.user.unshift({
+                    name: currentRequest.name,
+                    email: currentRequest.email,
+                    username: currentRequest.username,
+                    role: currentRequest.role
+                });
+                document.getElementById('openUserRequestBtn').disabled = true;
+                document.getElementById('openUserRequestBtn').textContent = 'Nalog obrađen';
+                history.unshift({
+                    title: currentRequest.name,
+                    subtitle: 'Sačuvan korisnički nalog · 16. april 2026.',
+                    status: 'Sačuvan',
+                    cssClass: 'saved'
+                });
+                showSuccess('Korisnički nalog je uspešno sačuvan i dodat u listu korisnika.');
+            } else {
+                accounts.company.unshift({
+                    name: currentRequest.companyName,
+                    email: currentRequest.email,
+                    username: currentRequest.username,
+                    role: currentRequest.role,
+                    city: currentRequest.city
+                });
+                document.getElementById('openCompanyRequestBtn').disabled = true;
+                document.getElementById('openCompanyRequestBtn').textContent = 'Nalog obrađen';
+                history.unshift({
+                    title: currentRequest.companyName,
+                    subtitle: 'Sačuvan firmni nalog · 16. april 2026.',
+                    status: 'Sačuvan',
+                    cssClass: 'saved'
+                });
+                showSuccess('Firmni nalog je uspešno sačuvan i dodat u listu firmi.');
+            }
+
+            renderAccountLists();
+            renderHistory();
+        }
+
+        function rejectRequest() {
+            if (!currentRequest) return;
+
+            if (currentRequest.type === 'user') {
+                document.getElementById('openUserRequestBtn').disabled = true;
+                document.getElementById('openUserRequestBtn').textContent = 'Nalog odbijen';
+                history.unshift({
+                    title: currentRequest.name,
+                    subtitle: 'Odbijen korisnički nalog · 16. april 2026.',
+                    status: 'Odbijen',
+                    cssClass: 'rejected'
+                });
+                showError('Korisnički nalog je odbijen i nije dodat u listu korisnika.');
+            } else {
+                document.getElementById('openCompanyRequestBtn').disabled = true;
+                document.getElementById('openCompanyRequestBtn').textContent = 'Nalog odbijen';
+                history.unshift({
+                    title: currentRequest.companyName,
+                    subtitle: 'Odbijen firmni nalog · 16. april 2026.',
+                    status: 'Odbijen',
+                    cssClass: 'rejected'
+                });
+                showError('Firmni nalog je odbijen i nije dodat u listu firmi.');
+            }
+
+            renderHistory();
+        }
+
+        function closeReview() {
+            document.getElementById('reviewSection').style.display = 'none';
+            hideMessages();
+            currentRequest = null;
+        }
+
+        function hideMessages() {
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            hideMessages();
+            const successBox = document.getElementById('successMessage');
+            successBox.textContent = message;
+            successBox.style.display = 'block';
+        }
+
+        function showError(message) {
+            hideMessages();
+            const errorBox = document.getElementById('errorMessage');
+            errorBox.textContent = message;
+            errorBox.style.display = 'block';
+        }
+
+        renderAccountLists();
+        renderHistory();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

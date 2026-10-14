@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1650" height="1150" viewBox="0 0 1650 1150">
+<rect width="100%" height="100%" fill="#f3f4f6"/>
+<text x="825.0" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#111827">UC_02 – Karijere, veštine i pametna analiza</text>
+<rect x="175" y="65" width="1415" height="1040" rx="20" fill="#fbfbfb" stroke="#6b7280" stroke-width="2.8"/>
+<text x="880.0" y="103" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="bold" fill="#111827">KOMPAS – Podsistem karijera i preporuka</text>
+<circle cx="80" cy="175" r="22" fill="white" stroke="#111827" stroke-width="3"/>
+<line x1="80" y1="197" x2="80" y2="271" stroke="#111827" stroke-width="3"/>
+<line x1="46" y1="229" x2="80" y2="197" stroke="#111827" stroke-width="3"/>
+<line x1="114" y1="229" x2="80" y2="197" stroke="#111827" stroke-width="3"/>
+<line x1="42" y1="293" x2="80" y2="253" stroke="#111827" stroke-width="3"/>
+<line x1="118" y1="293" x2="80" y2="253" stroke="#111827" stroke-width="3"/>
+<text x="80" y="323.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">Gost</text>
+<circle cx="80" cy="600" r="22" fill="white" stroke="#111827" stroke-width="3"/>
+<line x1="80" y1="622" x2="80" y2="696" stroke="#111827" stroke-width="3"/>
+<line x1="46" y1="654" x2="80" y2="622" stroke="#111827" stroke-width="3"/>
+<line x1="114" y1="654" x2="80" y2="622" stroke="#111827" stroke-width="3"/>
+<line x1="42" y1="718" x2="80" y2="678" stroke="#111827" stroke-width="3"/>
+<line x1="118" y1="718" x2="80" y2="678" stroke="#111827" stroke-width="3"/>
+<text x="80" y="748.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">Registrovani</text>
+<text x="80" y="772.3" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">korisnik</text>
+<rect x="205" y="120" width="410" height="310" rx="18" fill="#dbeafe" stroke="#60a5fa" stroke-width="2.2"/>
+<text x="410.0" y="148" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">Pregled karijera</text>
+<rect x="205" y="460" width="410" height="230" rx="18" fill="#dcfce7" stroke="#4ade80" stroke-width="2.2"/>
+<text x="410.0" y="488" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">Profil i veštine korisnika</text>
+<rect x="205" y="725" width="410" height="330" rx="18" fill="#fee2e2" stroke="#f87171" stroke-width="2.2"/>
+<text x="410.0" y="753" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">Omiljene stavke</text>
+<rect x="650" y="120" width="900" height="560" rx="18" fill="#fef3c7" stroke="#fbbf24" stroke-width="2.2"/>
+<text x="1100.0" y="148" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">Pametna analiza</text>
+<rect x="650" y="705" width="900" height="350" rx="18" fill="#ede9fe" stroke="#a78bfa" stroke-width="2.2"/>
+<text x="1100.0" y="733" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#111827">Učenje i projekti</text>
+<ellipse cx="410.0" cy="192.0" rx="100.0" ry="32.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="410.0" y="198.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pregled karijera</text>
+<ellipse cx="325.0" cy="299.0" rx="95.0" ry="29.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="325.0" y="305.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pretraga karijera</text>
+<ellipse cx="515.0" cy="299.0" rx="85.0" ry="29.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="515.0" y="305.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Sortiranje karijera</text>
+<ellipse cx="317.5" cy="379.0" rx="97.5" ry="29.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="317.5" y="380.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pregled detalja</text>
+<text x="317.5" y="398.20000000000005" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">karijere</text>
+<ellipse cx="510.0" cy="379.0" rx="90.0" ry="29.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="510.0" y="380.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Označavanje karijere</text>
+<text x="510.0" y="398.20000000000005" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">kao omiljene</text>
+<ellipse cx="410.0" cy="531.0" rx="105.0" ry="31.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="410.0" y="532.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pregled korisničkog</text>
+<text x="410.0" y="550.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">profila</text>
+<ellipse cx="330.0" cy="622.0" rx="110.0" ry="32.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="330.0" y="623.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Upravljanje sopstvenim</text>
+<text x="330.0" y="641.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">veštinama</text>
+<ellipse cx="512.5" cy="622.0" rx="87.5" ry="32.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="512.5" y="623.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Podešavanje nivoa</text>
+<text x="512.5" y="641.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">znanja (1–5)</text>
+<ellipse cx="410.0" cy="791.0" rx="110.0" ry="31.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="410.0" y="792.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pregled privatnih</text>
+<text x="410.0" y="810.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">favorita</text>
+<ellipse cx="320.0" cy="899.0" rx="95.0" ry="29.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="320.0" y="900.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pregled omiljenih</text>
+<text x="320.0" y="918.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">karijera</text>
+<ellipse cx="515.0" cy="899.0" rx="95.0" ry="29.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="515.0" y="900.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pregled omiljenih</text>
+<text x="515.0" y="918.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">oglasa</text>
+<ellipse cx="315.0" cy="999.0" rx="95.0" ry="29.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="315.0" y="1000.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Uklanjanje karijere</text>
+<text x="315.0" y="1018.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">iz favorita</text>
+<ellipse cx="515.0" cy="999.0" rx="95.0" ry="29.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="515.0" y="1000.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Uklanjanje oglasa</text>
+<text x="515.0" y="1018.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">iz favorita</text>
+<ellipse cx="925.0" cy="194.0" rx="105.0" ry="34.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="925.0" y="195.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pokretanje analize</text>
+<text x="925.0" y="213.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">veština</text>
+<ellipse cx="762.5" cy="316.0" rx="107.5" ry="31.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="762.5" y="317.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Izbor veština</text>
+<text x="762.5" y="335.20000000000005" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">i nivoa</text>
+<ellipse cx="1160.0" cy="317.0" rx="130.0" ry="32.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="1160.0" y="318.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Izračunavanje i rangiranje</text>
+<text x="1160.0" y="336.20000000000005" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">podudaranja sa karijerama</text>
+<ellipse cx="780.0" cy="441.0" rx="115.0" ry="31.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="780.0" y="442.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Izračunavanje podudaranja</text>
+<text x="780.0" y="460.20000000000005" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">sa oglasima</text>
+<ellipse cx="1140.0" cy="441.0" rx="95.0" ry="31.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="1140.0" y="447.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pregled skill gap-a</text>
+<ellipse cx="770.0" cy="561.0" rx="115.0" ry="31.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="770.0" y="562.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Čuvanje rezultata</text>
+<text x="770.0" y="580.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">analize</text>
+<ellipse cx="1127.5" cy="561.0" rx="107.5" ry="31.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="1127.5" y="562.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pregled sačuvane</text>
+<text x="1127.5" y="580.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">analize</text>
+<ellipse cx="930.0" cy="794.0" rx="110.0" ry="34.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="930.0" y="795.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Učenje nedostajućih</text>
+<text x="930.0" y="813.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">veština</text>
+<ellipse cx="775.0" cy="937.0" rx="125.0" ry="32.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="775.0" y="938.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pregled preporučenih</text>
+<text x="775.0" y="956.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">kurseva i resursa</text>
+<ellipse cx="1110.0" cy="937.0" rx="130.0" ry="32.0" fill="#f8fafc" stroke="#374151" stroke-width="2"/>
+<text x="1110.0" y="938.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">Pregled i preuzimanje</text>
+<text x="1110.0" y="956.2" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="normal" fill="#374151">projekata za vežbu</text>
+<rect x="1165" y="720" width="330" height="250" rx="0" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.8"/>
+<polygon points="1467,720 1495,748 1467,748" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1.4"/>
+<text x="1183" y="738" text-anchor="start" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#111827">Napomene:</text>
+<text x="1181" y="762.0" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#111827">• Gost može da pregleda karijere,</text>
+<text x="1181" y="783.7" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#111827">  ali nema pristup privatnim funkcionalnostima.</text>
+<text x="1181" y="805.4" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#111827">• Firma nema pristup pametnoj analizi.</text>
+<text x="1181" y="827.1" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#111827">• Prijava i pretplate su u UC_01.</text>
+<text x="1181" y="848.8" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#111827">• Oglasi i prijave su u UC_03.</text>
+<text x="1181" y="870.5" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="#111827">• Admin upravljanje karijerama je u UC_04.</text>
+<polyline points="114,230 310,192" fill="none" stroke="#374151" stroke-width="2.3"/>
+<polyline points="114,656 310,192.0" fill="none" stroke="#374151" stroke-width="2.3"/>
+<polyline points="114,656 305,531.0" fill="none" stroke="#374151" stroke-width="2.3"/>
+<polyline points="114,656 300,791.0" fill="none" stroke="#374151" stroke-width="2.3"/>
+<polyline points="114,656 820,194.0" fill="none" stroke="#374151" stroke-width="2.3"/>
+<polyline points="114,656 1020,561.0" fill="none" stroke="#374151" stroke-width="2.3"/>
+<polyline points="325.0,299.0 410.0,192.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="409.0443761857116,203.9618887775119 410.0,192.0 398.56430320920066,195.63659716065743" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="367.5" y="239.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«extend»</text>
+<polyline points="515.0,299.0 410.0,192.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="421.7530149105557,194.42211488419852 410.0,192.0 412.1999485238883,203.79661928233008" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="462.5" y="239.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«extend»</text>
+<polyline points="317.5,379.0 410.0,192.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="411.5821669458316,203.8952405505529 410.0,192.0 399.58523553925846,197.96092956067042" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="363.75" y="279.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«extend»</text>
+<polyline points="510.0,379.0 410.0,192.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="420.59849848829424,197.6277730758822 410.0,192.0 408.79572159229195,203.93941847481392" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="460.0" y="279.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«extend»</text>
+<polyline points="330.0,622.0 410.0,531.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="408.44954813060036,542.8994159100636 410.0,531.0 398.3973097415581,534.0622832603561" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="370.0" y="570.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«extend»</text>
+<polyline points="512.5,622.0 330.0,622.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="339.9606424228227,615.307795391303 330.0,622.0 339.9606424228227,628.692204608697" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="421.25" y="616.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«include»</text>
+<polyline points="320.0,899.0 410.0,791.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="408.7644460980934,802.9362224575233 410.0,791.0 398.48225812245204,794.3677324778222" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="365.0" y="839.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«include»</text>
+<polyline points="515.0,899.0 410.0,791.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="421.7416253163577,793.4767387690807 410.0,791.0 412.1450719161532,802.8067212415018" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="462.5" y="839.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«include»</text>
+<polyline points="315.0,999.0 320.0,899.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="326.18644425935923,909.2824076667792 320.0,899.0 312.8187342489888,908.6140221662607" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="317.5" y="943.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«extend»</text>
+<polyline points="515.0,999.0 515.0,899.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="521.692204608697,908.9606424228226 515.0,899.0 508.307795391303,908.9606424228226" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="515.0" y="943.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«extend»</text>
+<polyline points="762.5,316.0 925.0,194.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="921.05238516579,205.33209323649984 925.0,194.0 913.0164711560067,194.62851924805892" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="843.75" y="249.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«include»</text>
+<polyline points="1160.0,317.0 925.0,194.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="936.9282648063095,192.68984782923573 925.0,194.0 930.7215767217486,204.54815433225852" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="1042.5" y="249.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«include»</text>
+<polyline points="780.0,441.0 925.0,194.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="925.7285959796242,205.9778607396511 925.0,194.0 914.1861137280822,199.2019096203248" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="852.5" y="311.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«include»</text>
+<polyline points="770.0,561.0 925.0,194.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="927.2895685566178,205.77955329477933 925.0,194.0 914.9597225632483,200.57212515044068" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="847.5" y="371.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«include»</text>
+<polyline points="1140.0,441.0 1160.0,317.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="1165.0207621926822,327.89917184948155 1160.0,317.0 1151.8071230368255,325.76793972756917" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="1150.0" y="373.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«extend»</text>
+<polyline points="1127.5,561.0 1160.0,317.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="1165.31850831126,327.75701953809966 1160.0,317.0 1152.0512711396314,325.98986704597695" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="1143.75" y="433.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«extend»</text>
+<polyline points="930.0,794.0 1140.0,441.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="1140.6588401247243,452.9819000867998 1140.0,441.0 1129.1560078806087,446.1388554089974" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="1035.0" y="611.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«extend»</text>
+<polyline points="775.0,937.0 930.0,794.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="927.2169461643873,805.6728150567068 930.0,794.0 918.141204029771,795.8354721835213" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="852.5" y="859.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«include»</text>
+<polyline points="1110.0,937.0 930.0,794.0" fill="none" stroke="#6b7280" stroke-width="1.7" stroke-dasharray="7,6"/>
+<polyline points="941.9618583521037,794.9560045837795 930.0,794.0 933.6362331385449,805.4358125449024" fill="none" stroke="#6b7280" stroke-width="1.7"/>
+<text x="1020.0" y="859.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6b7280">«include»</text>
+</svg>

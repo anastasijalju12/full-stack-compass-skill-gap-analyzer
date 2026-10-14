@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Kompas - Company Registration{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="page-header text-center">
+        <h1 class="display-4">Registration</h1>
+    </div>
+
+    <div class="row justify-content-center mt-4 mb-5">
+        <div class="col-lg-8 col-12 customCard px-4 px-md-5 py-4 py-md-5">
+            <div class="section-title">Company registration</div>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.name.id_for_label }}" class="form-label">Company name</label>
+                        {{ form.name }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+                        {{ form.username }}
+                        <div id="username-feedback" class="mt-1"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.email.id_for_label }}" class="form-label">Contact email</label>
+                        {{ form.email }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.industry.id_for_label }}" class="form-label">Industry</label>
+                        {{ form.industry }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.contact.id_for_label }}" class="form-label">Contact</label>
+                    {{ form.contact }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
+                    {{ form.description }}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
+                        {{ form.password }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.password_confirm.id_for_label }}" class="form-label">Confirm password</label>
+                        {{ form.password_confirm }}
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <input type="submit" value="Continue to payment" class="custom-btn">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    var usernameInput = document.getElementById('id_username');
+    var feedback = document.getElementById('username-feedback');
+    var timeoutId = null;
+
+    if (!usernameInput) return;
+
+    usernameInput.addEventListener('input', function () {
+        var username = usernameInput.value.trim();
+
+        clearTimeout(timeoutId);
+
+        if (!username) {
+            feedback.textContent = '';
+            return;
+        }
+
+        timeoutId = setTimeout(function () {
+            fetch('{% url "check_username_availability" %}?username=' + encodeURIComponent(username))
+                .then(function (response) { return response.json(); })
+                .then(function (data) {
+                    if (data.available) {
+                        feedback.textContent = 'Username is available.';
+                        feedback.style.color = '#34d399';
+                    } else {
+                        feedback.textContent = 'This username is already taken.';
+                        feedback.style.color = '#f87171';
+                    }
+                });
+        }, 400);
+    });
+})();
+</script>
+{% endblock %}

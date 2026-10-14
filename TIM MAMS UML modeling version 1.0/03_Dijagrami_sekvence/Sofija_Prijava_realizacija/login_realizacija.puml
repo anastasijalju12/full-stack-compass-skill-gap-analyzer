@@ -1,0 +1,87 @@
+@startuml Prijava_dual_auth_realizacija
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 200
+skinparam BoxPadding 10
+skinparam ParticipantPadding 20
+
+title Dijagram sekvence realizacije: Prijava na sistem (dual authentication)\nKompas - accounts app
+
+actor "Korisnik / Firma\n(gost)" as Gost
+participant "login.html" as Template
+participant "login_view()" as View
+participant "LoginForm" as Form
+participant "User\n(model)" as UserModel
+participant "Company\n(model)" as CompanyModel
+participant "check_password()\n(Django hasher)" as Hasher
+participant "request.session" as Session
+
+Gost -> Template : GET /accounts-app/login/
+Template -> View : login_view(request)
+View -> Form : LoginForm()
+View --> Template : render(login.html, form)
+Template --> Gost : prikaz forme za prijavu
+
+Gost -> Template : unosi username i password,\nklikne "Log in"
+Template -> View : POST /accounts-app/login/\n(username, password)
+
+activate View
+View -> Form : LoginForm(request.POST)
+Form -> Form : is_valid()
+
+alt forma nije validna (prazna polja)
+    Form --> View : is_valid() == False
+    View --> Template : render(login.html, form + greske)
+    Template --> Gost : prikaz gresaka forme
+else forma je validna
+    Form --> View : cleaned_data (username, password)
+
+    View -> UserModel : User.objects.filter(username=username).first()
+    UserModel --> View : user ili None
+
+    alt korisnik pronadjen u User tabeli
+        View -> Hasher : check_password(password, user.password)
+        Hasher --> View : True / False
+
+        alt lozinka tacna
+            View -> Session : session['role'] = user.role\nsession['user_id'] = user.id
+            View -> Template : messages.success("Welcome, {ime}!")\nredirect('home')
+            Template --> Gost : preusmjeren na Home,\nulogovan kao User/Admin
+        else lozinka pogresna
+            View -> Template : messages.error("Incorrect username or password.")
+            Template --> Gost : prikaz greske na login.html
+        end
+
+    else korisnik NIJE pronadjen u User tabeli
+        View -> CompanyModel : Company.objects.filter(username=username).first()
+        CompanyModel --> View : company ili None
+
+        alt firma pronadjena
+            View -> Hasher : check_password(password, company.password)
+            Hasher --> View : True / False
+
+            alt lozinka tacna
+                alt company.status == 'pending'
+                    View -> Template : messages.warning(\n"Account not yet approved")\nredirect('login')
+                    Template --> Gost : prikaz upozorenja,\nnazad na login
+                else company.status == 'rejected'
+                    View -> Template : messages.error(\n"Request rejected: {razlog}")\nredirect('login')
+                    Template --> Gost : prikaz razloga odbijanja,\nnazad na login
+                else company.status == 'active'
+                    View -> Session : session['role'] = 'company'\nsession['company_id'] = company.id
+                    View -> Template : messages.success("Welcome, {naziv firme}!")\nredirect('home')
+                    Template --> Gost : preusmjeren na Home,\nulogovan kao Company
+                end
+            else lozinka pogresna
+                View -> Template : messages.error("Incorrect username or password.")
+                Template --> Gost : prikaz greske na login.html
+            end
+
+        else firma NIJE pronadjena
+            View -> Template : messages.error("Incorrect username or password.")
+            Template --> Gost : prikaz greske na login.html
+        end
+    end
+end
+deactivate View
+
+@enduml

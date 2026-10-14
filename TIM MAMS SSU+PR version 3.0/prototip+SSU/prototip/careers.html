@@ -1,0 +1,384 @@
+<!----------------MINA OSTOJIC--------------------->
+
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="careers.css">
+
+</head>
+
+<body>
+    
+
+    <div class="container mt-4 careersContainer">
+
+        <h2 class="mb-4">IT zanimanja</h2>
+
+        <div class="search-sort-bar mb-4">
+            
+            <div class="search-group">
+                <input type="text" id="careerSearchInput" class="form-control" placeholder="Pretraži zanimanja...">
+                <button id="careerSearchButton" class="buttonSearch">Pretraži</button>
+            </div>
+
+            <div class="sort-group">
+                <label for="careerSortSelect">Sortiraj:</label>
+                <select id="careerSortSelect" class="form-select">
+                    <option value="default">Podrazumevano</option>
+                    <option value="titleAsc">Naziv A-Z</option>
+                    <option value="titleDesc">Naziv Z-A</option>
+                    <option value="marketHigh">Tržišna vrednost - najviša prvo</option>
+                    <option value="marketLow">Tržišna vrednost - najniža prvo</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="row g-4" id="careersRow">
+
+            <!-- WEB DEV -->
+            <div class="col-lg-4 col-md-6 col-12 career-item" 
+                 data-title="Web Developer" 
+                 data-market="2">
+
+                <div class="careerCard p-4">
+
+                    <div class="careerHeader">
+                        <h3 class="mt-0">Web Developer</h3>
+
+                        <div class="careerStar">
+                            <input type="checkbox" id="careerStar1" class="favoriteCheckbox" hidden>
+                            <label for="careerStar1" class="starBtn" title="Označi kao omiljeno">★</label>
+                        </div>
+                    </div>
+
+                    <div class="careerBody">
+                        <p class="desc">
+                            Razvija i održava web aplikacije i sajtove. Radi sa frontend i backend tehnologijama.
+                        </p>
+
+                        <p><strong>Tržišna vrednost:</strong> Visoka</p>
+
+                        <div class="skills">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                            <span>React</span><span>Node.js</span><span>Git</span>
+                        </div>
+                    </div>
+
+                    <div class="careerActions">
+                        <a href="careerDetails.html?career=web-developer" class="buttonDetails">Detaljnije</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- WEB DESIGNER -->
+            <div class="col-lg-4 col-md-6 col-12 career-item" 
+                 data-title="Web Designer" 
+                 data-market="1" id="webDesigner">
+
+                <div class="careerCard p-4">
+
+                    <div class="careerHeader">
+                        <h3 class="mt-0">Web Designer</h3>
+
+                        <div class="careerStar">
+                            <input type="checkbox" id="careerStar7" class="favoriteCheckbox" hidden>
+                            <label for="careerStar7" class="starBtn" title="Označi kao omiljeno">★</label>
+                        </div>
+                    </div>
+
+                    <div class="careerBody">
+                        <p class="desc">
+                            Web designer osmišljava izgled i doživljaj veb sajtova.
+                        </p>
+
+                        <p><strong>Tržišna vrednost:</strong> Srednja</p>
+
+                        <div class="skills">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                    </div>
+
+                    <div class="careerActions">
+                        <a href="careerDetails.html?career=web-designer" class="buttonDetails">Detaljnije</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- BACKEND -->
+            <div class="col-lg-4 col-md-6 col-12 career-item" 
+                 data-title="Backend Developer" 
+                 data-market="3">
+
+                <div class="careerCard p-4">
+
+                    <div class="careerHeader">
+                        <h3 class="mt-0">Backend Developer</h3>
+
+                        <div class="careerStar">
+                            <input type="checkbox" id="careerStar2" class="favoriteCheckbox" hidden>
+                            <label for="careerStar2" class="starBtn" title="Označi kao omiljeno">★</label>
+                        </div>
+                    </div>
+
+                    <div class="careerBody">
+                        <p class="desc">
+                            Razvija serversku logiku, baze podataka i API-je za aplikacije.
+                        </p>
+
+                        <p><strong>Tržišna vrednost:</strong> Veoma visoka</p>
+
+                        <div class="skills">
+                            <span>Java</span><span>Python</span><span>Django</span>
+                            <span>MySQL</span><span>MongoDB</span><span>Docker</span>
+                        </div>
+                    </div>
+
+                    <div class="careerActions">
+                        <a href="careerDetails.html?career=backend-developer" class="buttonDetails">Detaljnije</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FRONTEND -->
+            <div class="col-lg-4 col-md-6 col-12 career-item" 
+                 data-title="Frontend Developer" 
+                 data-market="2">
+
+                <div class="careerCard p-4">
+
+                    <div class="careerHeader">
+                        <h3 class="mt-0">Frontend Developer</h3>
+
+                        <div class="careerStar">
+                            <input type="checkbox" id="careerStar3" class="favoriteCheckbox" hidden>
+                            <label for="careerStar3" class="starBtn" title="Označi kao omiljeno">★</label>
+                        </div>
+                    </div>
+
+                    <div class="careerBody">
+                        <p class="desc">
+                            Fokusira se na korisnički interfejs i iskustvo korisnika.
+                        </p>
+
+                        <p><strong>Tržišna vrednost:</strong> Visoka</p>
+
+                        <div class="skills">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                            <span>React</span><span>Figma</span>
+                        </div>
+                    </div>
+
+                    <div class="careerActions">
+                        <a href="careerDetails.html?career=frontend-developer" class="buttonDetails">Detaljnije</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- MOBILE -->
+            <div class="col-lg-4 col-md-6 col-12 career-item" 
+                 data-title="Mobile Developer" 
+                 data-market="2">
+
+                <div class="careerCard p-4">
+
+                    <div class="careerHeader">
+                        <h3 class="mt-0">Mobile Developer</h3>
+
+                        <div class="careerStar">
+                            <input type="checkbox" id="careerStar4" class="favoriteCheckbox" hidden>
+                            <label for="careerStar4" class="starBtn" title="Označi kao omiljeno">★</label>
+                        </div>
+                    </div>
+
+                    <div class="careerBody">
+                        <p class="desc">
+                            Razvija mobilne aplikacije za Android i iOS platforme.
+                        </p>
+
+                        <p><strong>Tržišna vrednost:</strong> Visoka</p>
+
+                        <div class="skills">
+                            <span>Kotlin</span><span>Java</span><span>React Native</span>
+                        </div>
+                    </div>
+
+                    <div class="careerActions">
+                        <a href="careerDetails.html?career=mobile-developer" class="buttonDetails">Detaljnije</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- DATA -->
+            <div class="col-lg-4 col-md-6 col-12 career-item" 
+                 data-title="Data Analyst" 
+                 data-market="1">
+
+                <div class="careerCard p-4">
+
+                    <div class="careerHeader">
+                        <h3 class="mt-0">Data Analyst</h3>
+
+                        <div class="careerStar">
+                            <input type="checkbox" id="careerStar5" class="favoriteCheckbox" hidden>
+                            <label for="careerStar5" class="starBtn" title="Označi kao omiljeno">★</label>
+                        </div>
+                    </div>
+
+                    <div class="careerBody">
+                        <p class="desc">
+                            Analizira podatke i donosi poslovne uvide na osnovu njih.
+                        </p>
+
+                        <p><strong>Tržišna vrednost:</strong> Srednja do visoka</p>
+
+                        <div class="skills">
+                            <span>Python</span><span>Excel</span><span>SQL</span>
+                        </div>
+                    </div>
+
+                    <div class="careerActions">
+                        <a href="careerDetails.html?career=data-analyst" class="buttonDetails">Detaljnije</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- DEVOPS -->
+            <div class="col-lg-4 col-md-6 col-12 career-item" 
+                 data-title="DevOps Engineer" 
+                 data-market="3">
+
+                <div class="careerCard p-4">
+
+                    <div class="careerHeader">
+                        <h3 class="mt-0">DevOps Engineer</h3>
+
+                        <div class="careerStar">
+                            <input type="checkbox" id="careerStar6" class="favoriteCheckbox" hidden>
+                            <label for="careerStar6" class="starBtn" title="Označi kao omiljeno">★</label>
+                        </div>
+                    </div>
+
+                    <div class="careerBody">
+                        <p class="desc">
+                            Automatizuje razvoj i deployment procesa.
+                        </p>
+
+                        <p><strong>Tržišna vrednost:</strong> Veoma visoka</p>
+
+                        <div class="skills">
+                            <span>Docker</span><span>Git</span><span>Linux</span>
+                        </div>
+                    </div>
+
+                    <div class="careerActions">
+                        <a href="careerDetails.html?career=devops-engineer" class="buttonDetails">Detaljnije</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+
+    <script>
+        const careerSearchInput = document.getElementById("careerSearchInput");
+        const careerSearchButton = document.getElementById("careerSearchButton");
+        const careerSortSelect = document.getElementById("careerSortSelect");
+        const careersRow = document.getElementById("careersRow");
+
+        const originalCareerCards = Array.from(document.querySelectorAll(".career-item"));
+
+        function filterCareers() {
+            const searchValue = careerSearchInput.value.toLowerCase().trim();
+
+            originalCareerCards.forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+
+                if (cardText.includes(searchValue)) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        function sortCareers() {
+            const sortValue = careerSortSelect.value;
+
+            let cards = Array.from(document.querySelectorAll(".career-item"));
+
+            cards.sort((a, b) => {
+                const titleA = a.dataset.title.toLowerCase();
+                const titleB = b.dataset.title.toLowerCase();
+
+                const marketA = Number(a.dataset.market);
+                const marketB = Number(b.dataset.market);
+
+                if (sortValue === "titleAsc") {
+                    return titleA.localeCompare(titleB);
+                }
+
+                if (sortValue === "titleDesc") {
+                    return titleB.localeCompare(titleA);
+                }
+
+                if (sortValue === "marketHigh") {
+                    return marketB - marketA;
+                }
+
+                if (sortValue === "marketLow") {
+                    return marketA - marketB;
+                }
+
+                return 0;
+            });
+
+            if (sortValue === "default") {
+                cards = originalCareerCards;
+            }
+
+            cards.forEach(card => {
+                careersRow.appendChild(card);
+            });
+        }
+
+        careerSearchButton.addEventListener("click", filterCareers);
+
+        careerSearchInput.addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                filterCareers();
+            }
+        });
+
+        careerSearchInput.addEventListener("input", filterCareers);
+
+        careerSortSelect.addEventListener("change", function() {
+            sortCareers();
+            filterCareers();
+        });
+        
+    </script>
+
+</body>
+</html>

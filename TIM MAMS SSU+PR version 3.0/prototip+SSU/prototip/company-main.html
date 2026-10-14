@@ -1,0 +1,223 @@
+<!----------------MINA OSTOJIC--------------------->
+
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="company-main.css">
+</head>
+
+<body>
+    
+
+
+    <!-- WELCOME -->
+    <div class="container mt-4">
+
+        <div class="p-4 mb-4" style="background:#f2a65a; border-radius:20px;">
+            <h2>Dobrodošli nazad 👋</h2>
+            <p>Upravljaj svojim oglasima i kandidatima na jednom mestu.</p>
+        </div>
+
+        <!-- STATS -->
+        <div class="row g-3">
+
+            <div class="col-md-3 col-6">
+                <div class="customCard p-3">
+                    <h4>5</h4>
+                    <p>Aktivni oglasi</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="customCard p-3">
+                    <h4>27</h4>
+                    <p>Kandidati</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="customCard p-3">
+                    <h4>8</h4>
+                    <p>Novi danas</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="customCard p-3">
+                    <h4>1</h4>
+                    <p>Istek roka</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <h4 class="mt-5">Brze akcije</h4>
+
+        <div class="row g-3">
+
+            <div class="col-md-3 col-6">
+                <button class="customCard p-3 text-center w-100 buttonQuickAccess" onclick="openModal()">
+                    ➕ Novi oglas
+                </button>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="customCard p-3 text-center buttonQuickAccess">
+                    👥 Kandidati
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="customCard p-3 text-center">
+                    <a href="company-ads.html" class="buttonQuickAccess">
+                        📄 Moji oglasi
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="customCard p-3 text-center buttonQuickAccess">
+                    📊 Statistika
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ACTIVE ADS PREVIEW -->
+        <h4 class="mt-5">Aktivni oglasi</h4>
+
+        <div class="row g-3">
+
+            <div class="col-lg-6">
+
+                <div class="customCard p-3">
+                    <h5>Junior Backend Developer</h5>
+                    <p>12 kandidata</p>
+                    <button class="buttonModifyAd">Pregled</button>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="customCard p-3">
+                    <h5>Frontend Intern</h5>
+                    <p>5 kandidata</p>
+                    <button class="buttonModifyAd">Pregled</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RECENT CANDIDATES -->
+        <h4 class="mt-5">Novi kandidati</h4>
+
+        <div class="customCard p-3">
+            <p><strong>Marko Marković</strong> - Backend Developer</p>
+            <p><strong>Jelena Jovanović</strong> - Frontend Intern</p>
+        </div>
+
+    </div>
+
+
+    <!-- NEW AD POP UP -->
+    <div class="overlay" id="overlay">
+
+        <div class="modalBox">
+
+            <span class="close" onclick="closeModal()">✕</span>
+
+            <h2>Kreiraj novi oglas</h2>
+
+            <label>Naziv oglasa</label>
+            <br>
+            <input type="text" placeholder="npr. Junior Backend Developer" />
+            <br>
+            <label>Tip oglasa</label>
+            <div class="toggle">
+                <button type="button" id="praksaBtn" class="active" onclick="setType('praksa')">Praksa</button>
+                <button type="button" id="posaoBtn" onclick="setType('posao')">Posao</button>
+            </div>
+
+            <label>Potrebne veštine</label>
+            <div class="skillsBox">
+
+                <label><input type="checkbox"> Java</label>
+                <label><input type="checkbox"> Python</label>
+                <label><input type="checkbox"> C</label>
+                <label><input type="checkbox"> C++</label>
+                <label><input type="checkbox"> C#</label>
+                <label><input type="checkbox"> JavaScript</label>
+                <label><input type="checkbox"> React</label>
+                <label><input type="checkbox"> Node.js</label>
+                <label><input type="checkbox"> Django</label>
+                <label><input type="checkbox"> MySQL</label>
+                <label><input type="checkbox"> MongoDB</label>
+                <label><input type="checkbox"> HTML</label>
+                <label><input type="checkbox"> CSS</label>
+                <label><input type="checkbox"> Git</label>
+                <label><input type="checkbox"> Docker</label>
+                <label><input type="checkbox"> Kotlin</label>
+                <label><input type="checkbox"> Figma</label>
+                <label><input type="checkbox"> Excel</label>
+
+            </div>
+
+            <label>Rok za prijavu</label>
+            <input type="datetime-local" />
+            <br>
+            <label>Lokacija</label>
+            <input type="text" placeholder="npr. Beograd / Remote" />
+            <br>
+            <label>Opis oglasa</label>
+            <textarea placeholder="Opiši detalje pozicije..."></textarea>
+
+            <button class="submitBtn">
+                Objavi oglas
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="navbar.js"></script>
+
+    <script>
+    function openModal() {
+        document.getElementById("overlay").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("overlay").style.display = "none";
+    }
+
+    function setType(type) {
+        const praksa = document.getElementById("praksaBtn");
+        const posao = document.getElementById("posaoBtn");
+
+        if (type === "praksa") {
+            praksa.classList.add("active");
+            posao.classList.remove("active");
+        } else {
+            posao.classList.add("active");
+            praksa.classList.remove("active");
+        }
+    }
+    </script>
+</body>
+
+</html>

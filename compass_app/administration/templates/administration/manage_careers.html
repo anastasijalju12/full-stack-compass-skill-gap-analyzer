@@ -1,0 +1,539 @@
+<!-- Author: Milica Pavlovic, student ID: 2023/0148 -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Kompas - Careers & skills{% endblock %}
+
+{% block extra_head %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-manage-careers.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'administration/admin-theme.css' %}"
+    >
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-subnav-wrap">
+    <div class="container-fluid">
+        <div class="admin-subnav">
+            <div class="admin-subnav-title">Administration</div>
+
+            <div class="admin-subnav-links">
+                <a
+                    href="{% url 'administration:dashboard' %}"
+                    class="admin-subnav-link"
+                >
+                    Admin panel
+                </a>
+
+                <a
+                    href="{% url 'administration:create_account' %}"
+                    class="admin-subnav-link"
+                >
+                    Create accounts
+                </a>
+
+                <a
+                    href="{% url 'administration:company_requests' %}"
+                    class="admin-subnav-link"
+                >
+                    Company registrations
+                </a>
+
+                <a
+                    href="{% url 'administration:moderation' %}"
+                    class="admin-subnav-link"
+                >
+                    Job moderation
+                </a>
+
+                <a
+                    href="{% url 'administration:manage_accounts' %}"
+                    class="admin-subnav-link"
+                >
+                    Accounts & roles
+                </a>
+
+                <a
+                    href="{% url 'administration:manage_careers' %}"
+                    class="admin-subnav-link active"
+                >
+                    Careers & skills
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-header text-center">
+    <h1 class="display-4">Careers & skills</h1>
+</div>
+
+<div class="container pb-5">
+
+    {% if messages %}
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-12">
+
+                {% for message in messages %}
+                    <div class="alert
+                        {% if message.tags == 'success' %}
+                            alert-success
+                        {% elif message.tags == 'error' %}
+                            alert-danger
+                        {% else %}
+                            alert-info
+                        {% endif %}
+                    ">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+            <div class="sectionTitle">
+                Careers in the system
+            </div>
+
+            <div class="row g-3">
+
+                {% for career in careers %}
+
+                    <div class="col-lg-4 col-md-6">
+                        <a
+                            href="{% url 'administration:manage_careers' %}?career={{ career.id }}"
+                            class="careerCardLink"
+                        >
+                            <div class="careerCard
+                                {% if selected_career and selected_career.id == career.id %}
+                                    selectedCard
+                                {% endif %}
+                            ">
+
+                                <div class="careerName">
+                                    {{ career.name }}
+                                </div>
+
+                                <div class="careerShortDescription">
+                                    {{ career.description|default:"No description provided"|truncatechars:110 }}
+                                </div>
+
+                                <div class="careerSkills">
+                                    <strong>Required skills:</strong>
+
+                                    <div>
+                                        {% for career_skill in career.career_skills.all %}
+
+                                            <span class="skillBadge">
+                                                {{ career_skill.skill.name }}
+                                                · level
+                                                {{ career_skill.required_level }}
+                                            </span>
+
+                                        {% empty %}
+
+                                            <span class="helpText">
+                                                No linked skills.
+                                            </span>
+
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+
+                {% empty %}
+
+                    <div class="col-12">
+                        <div class="selectionInfo emptyState">
+                            There are currently no careers in the system.
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+                <div class="col-lg-4 col-md-6">
+                    <a
+                        href="{% url 'administration:manage_careers' %}?new=1"
+                        class="careerCardLink"
+                    >
+                        <div class="careerCard addNewCard
+                            {% if new_career_selected %}
+                                selectedCard
+                            {% endif %}
+                        ">
+
+                            <div class="careerName">
+                                + New career
+                            </div>
+
+                            <div class="careerShortDescription">
+                                Add a new career to the system
+                            </div>
+
+                            <div class="careerSkills">
+                                Click to open the creation form.
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {% if not selected_career and not new_career_selected %}
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Choose an action
+                </div>
+
+                <div class="selectionInfo emptyState">
+                    Select an existing career above to edit or delete it.
+
+                    You can also select the
+                    <strong>New career</strong> card
+                    to add a new one.
+                </div>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if new_career_selected %}
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Add a new career
+                </div>
+
+                <form
+                    method="post"
+                    action="{% url 'administration:create_career' %}"
+                >
+                    {% csrf_token %}
+
+                    <div class="row g-3">
+
+                        <div class="col-12">
+                            <label
+                                for="newCareerName"
+                                class="labelTitle"
+                            >
+                                Career name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="newCareerName"
+                                name="name"
+                                maxlength="150"
+                                placeholder="For example: Backend Developer"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-12">
+                            <label
+                                for="newCareerDescription"
+                                class="labelTitle"
+                            >
+                                Career description
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="newCareerDescription"
+                                name="description"
+                                rows="5"
+                                placeholder="Describe the responsibilities, tasks, and field of work"
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label
+                                for="newCareerSkills"
+                                class="labelTitle"
+                            >
+                                Required skills
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="newCareerSkills"
+                                name="skills"
+                                rows="6"
+                                placeholder="Python | 5 | 1.00&#10;SQL | 4 | 0.80&#10;Git | 3 | 1.00"
+                                required
+                            ></textarea>
+
+                            <span class="helpText">
+                                Enter each skill on a new line:
+                                name | required level | weight.
+                                The level must be between 1 and 5.
+                                You can also enter comma-separated names only;
+                                level 3 and weight 1.00 will then be used.
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd"
+                        >
+                            Save new career
+                        </button>
+
+                        <a
+                            href="{% url 'administration:manage_careers' %}"
+                            class="buttonAboutJoabAd secondaryBtn text-decoration-none text-center"
+                        >
+                            Cancel
+                        </a>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if selected_career %}
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Selected career
+                </div>
+
+                <div class="selectionInfo">
+
+                    Selected career:
+
+                    <strong>{{ selected_career.name }}</strong>
+
+                    <br><br>
+
+                    <div class="careerDescription">
+                        {{ selected_career.description|default:"No description provided." }}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Required skills
+                </div>
+
+                <div class="skillDetailsTable">
+
+                    <div class="skillDetailsRow skillDetailsHeader">
+                        <div>Skill</div>
+                        <div>Required level</div>
+                        <div>Weight</div>
+                    </div>
+
+                    {% for career_skill in selected_career.career_skills.all %}
+
+                        <div class="skillDetailsRow">
+                            <div>
+                                {{ career_skill.skill.name }}
+                            </div>
+
+                            <div>
+                                {{ career_skill.required_level }}
+                            </div>
+
+                            <div>
+                                {{ career_skill.weight }}
+                            </div>
+                        </div>
+
+                    {% empty %}
+
+                        <div class="skillDetailsRow">
+                            <div>
+                                This career currently has no linked skills.
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Edit career
+                </div>
+
+                <form
+                    method="post"
+                    action="{% url 'administration:update_career' selected_career.id %}"
+                >
+                    {% csrf_token %}
+
+                    <div class="row g-3">
+
+                        <div class="col-12">
+                            <label
+                                for="editCareerName"
+                                class="labelTitle"
+                            >
+                                Career name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="editCareerName"
+                                name="name"
+                                maxlength="150"
+                                value="{{ selected_career.name }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-12">
+                            <label
+                                for="editCareerDescription"
+                                class="labelTitle"
+                            >
+                                Career description
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="editCareerDescription"
+                                name="description"
+                                rows="5"
+                                required
+                            >{{ selected_career.description|default:'' }}</textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label
+                                for="editCareerSkills"
+                                class="labelTitle"
+                            >
+                                Required skills
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="editCareerSkills"
+                                name="skills"
+                                rows="7"
+                                required
+                            >{{ selected_skills_text }}</textarea>
+
+                            <span class="helpText">
+                                Format for each row:
+                                name | required level | weight.
+                                Removing a row removes that skill
+                                from the career.
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+
+                        <button
+                            type="submit"
+                            class="buttonAboutJoabAd"
+                        >
+                            Save changes
+                        </button>
+
+                        <a
+                            href="{% url 'administration:manage_careers' %}"
+                            class="buttonAboutJoabAd secondaryBtn text-decoration-none text-center"
+                        >
+                            Close
+                        </a>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-12 customCard px-4 py-4">
+
+                <div class="sectionTitle">
+                    Delete career
+                </div>
+
+                <div class="dangerNotice">
+                    Deleting this career will also remove its links
+                    to required skills, favourites, and other
+                    related data.
+
+                    The global skills catalogue will not be deleted.
+                    This action cannot be undone.
+                </div>
+
+                <form
+                    method="post"
+                    action="{% url 'administration:delete_career' selected_career.id %}"
+                    class="mt-4 text-center"
+                    onsubmit="return confirm('Are you sure you want to permanently delete this career?');"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="buttonAboutJoabAd deleteBtn"
+                    >
+                        Delete career
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

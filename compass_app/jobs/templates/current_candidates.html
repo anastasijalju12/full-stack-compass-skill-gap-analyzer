@@ -1,0 +1,50 @@
+{% load static %}
+
+<div id="modalOverlayCC" class="modal-overlay" style="display: none;">
+
+    <div class="modal-content">
+
+        <button class="btn-close" onclick="closeCandidatesModal()">&times;</button>
+
+        <h3 class="modal-title">Published job ads and applied candidates</h3>
+
+        {% for ad in active_ads_with_cands %}
+            <div class="dropdown-container" id="myDropdown-{{ ad.id }}">
+
+            <div class="dropdown-header" onclick="toggleDropdown(this)">
+                <span>{{ ad.name }}</span>
+                <i class="arrow"></i>
+            </div>
+
+            <div class="dropdown-content">
+                <ul class="dropdown-list">
+                    {% for cand in ad.candidates %}
+                        <li class="current-candidate-item">
+
+                            <span>
+                                {{ cand.user.first_name }} {{ cand.user.last_name }}
+                            </span>
+
+                            <span
+                                class="candidate-favorite-indicator {% if not cand.is_favorite_candidate %}candidate-favorite-indicator--hidden{% endif %}"
+                                data-favorite-user-id="{{ cand.user.id }}"
+                                data-favorite-job-ad-id="{{ ad.id }}"
+                            >
+                                ★
+                            </span>
+
+                        </li>
+                    {% empty %}
+                        <p>There are currently no applied candidates.</p>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+        </div>
+        {% empty %}
+            <p>You have no published job ads.</p>
+        {% endfor %}
+    </div>
+
+</div>

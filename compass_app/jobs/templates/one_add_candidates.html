@@ -1,0 +1,124 @@
+{% load static %}
+
+<div id="modalOverlayOAC-{{ ad.id }}" class="modal-overlay">
+
+    <div id="modalPair-{{ ad.id }}" class="modal-pair">
+
+        <!-- LEFT MODAL - ALL CANDIDATES THAT APPLIED FOR THIS AD -->
+        <div class="modal-content">
+
+            <button class="btn-close" onclick="closeCandidatesModalOAC({{ ad.id }})">&times;</button>
+
+            <h3 class="modal-title">Candidates who applied for this job ad</h3>
+
+            <div class="dropdown-container">
+
+                <div class="dropdown-header" onclick="toggleDropdownOAC(this)">
+                    <span>Accepted candidates</span>
+                    <i class="arrow"></i>
+                </div>
+
+                <div class="dropdown-content">
+                    <ul class="dropdown-list" data-status-list="accepted">
+                        {% for application in ad.accepted_applications %}
+                            <li id="applicationItem-{{ ad.id }}-{{ application.id }}">
+                                <button
+                                    type="button"
+                                    class="candidate-item"
+                                    onclick="showCandidateDetails('{{ ad.id }}', '{{ application.id }}')">
+                                    {{ application.user.first_name }} {{ application.user.last_name }}
+                                </button>
+                            </li>
+                        {% empty %}
+                            <li class="empty-candidates">
+                                There are currently no accepted candidates.
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="dropdown-container">
+
+                    <div class="dropdown-header" onclick="toggleDropdownOAC(this)">
+                        <span>Candidates under review</span>
+                        <i class="arrow"></i>
+                    </div>
+
+                    <div class="dropdown-content">
+                        <ul class="dropdown-list" data-status-list="active">
+                            {% for application in ad.active_applications %}
+                                <li id="applicationItem-{{ ad.id }}-{{ application.id }}">
+                                    <button
+                                    type="button"
+                                    class="candidate-item"
+                                    onclick="showCandidateDetails('{{ ad.id }}', '{{ application.id }}')">
+                                    {{ application.user.first_name }} {{ application.user.last_name }}
+                                    </button>
+                                </li>
+                            {% empty %}
+                                <li class="empty-candidates">
+                                    There are currently no candidates under review.
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            <div class="dropdown-container">
+
+                    <div class="dropdown-header" onclick="toggleDropdownOAC(this)">
+                        <span>Rejected candidates</span>
+                        <i class="arrow"></i>
+                    </div>
+
+                    <div class="dropdown-content">
+                        <ul class="dropdown-list" data-status-list="denied">
+                            {% for application in ad.denied_applications %}
+                                <li id="applicationItem-{{ ad.id }}-{{ application.id }}">
+                                    <button
+                                    type="button"
+                                    class="candidate-item"
+                                    onclick="showCandidateDetails('{{ ad.id }}', '{{ application.id }}')">
+                                    {{ application.user.first_name }} {{ application.user.last_name }}
+                                    </button>
+                                </li>
+                            {% empty %}
+                                <li class="empty-candidates">
+                                    There are currently no rejected candidates.
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+
+                </div>
+
+        </div>
+
+        <!-- RIGHT MODAL - SELECTED CANDIDATE DETAILS -->
+        <div id="candidateDetailsPanel-{{ ad.id }}" class="modal-content candidate-details-panel">
+
+            <button class="close-details-btn" onclick="closeCandidateDetails('{{ ad.id }}')">&times;</button>
+
+            {% for application in ad.accepted_applications %}
+                {% include 'candidate_details.html' with application=application ad=ad %}
+            {% endfor %}
+
+            {% for application in ad.active_applications %}
+                {% include 'candidate_details.html' with application=application ad=ad %}
+            {% endfor %}
+
+            {% for application in ad.denied_applications %}
+                {% include 'candidate_details.html' with application=application ad=ad %}
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>

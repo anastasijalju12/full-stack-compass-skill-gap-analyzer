@@ -1,0 +1,208 @@
+/* ---------- Company dashboard ---------- */
+
+.dashboard__welcome {
+    position: relative;
+    margin-bottom: 28px;
+    padding: clamp(24px, 4vw, 40px);
+    overflow: hidden;
+    background:
+        radial-gradient(34rem 16rem at 100% 0%, rgba(34, 211, 238, 0.2), transparent 70%),
+        linear-gradient(180deg, rgba(14, 30, 58, 0.9), rgba(6, 14, 30, 0.9));
+    border: 1px solid var(--k-border);
+    border-radius: 26px;
+    box-shadow: var(--k-shadow);
+}
+
+.dashboard__welcome::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: var(--k-gradient-line);
+}
+
+.dashboard__welcome h2 {
+    margin-bottom: 8px;
+    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.dashboard__welcome p {
+    margin: 0;
+    color: var(--k-text-soft);
+}
+
+.dashboard__section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 44px;
+    margin-bottom: 4px;
+    font-size: 1.25rem;
+}
+
+.dashboard__section-title::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--k-cyan);
+    box-shadow: 0 0 12px rgba(34, 211, 238, 0.9);
+    transform: rotate(45deg);
+}
+
+/* ---------- Card ---------- */
+
+.dashboard-card {
+    position: relative;
+    margin-top: 10px;
+    color: var(--k-text);
+    font-size: 1rem;
+    background: var(--k-card-bg);
+    border: 1px solid var(--k-border);
+    border-radius: 18px;
+    box-shadow: var(--k-shadow-sm);
+    transition: transform 0.35s var(--k-ease), border-color 0.25s ease, box-shadow 0.35s ease;
+}
+
+.dashboard-card:hover {
+    border-color: rgba(34, 211, 238, 0.3);
+}
+
+/* stat cards */
+.dashboard-card > h4 {
+    margin-bottom: 4px;
+    font-size: 2.3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    background: var(--k-gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.dashboard-card p {
+    color: var(--k-text-soft);
+}
+
+.dashboard-card p:last-child {
+    margin-bottom: 0;
+}
+
+.dashboard-card h5 {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.dashboard-card--button {
+    color: var(--k-text);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s var(--k-ease), border-color 0.25s ease, box-shadow 0.3s ease, background 0.25s ease;
+}
+
+.dashboard-card--button:hover {
+    color: #ffffff;
+    transform: translateY(-3px);
+    background: rgba(34, 211, 238, 0.08);
+    border-color: rgba(34, 211, 238, 0.5);
+    box-shadow: var(--k-glow);
+}
+
+.dashboard-card__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: var(--k-text);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.dashboard-card__link:hover {
+    color: var(--k-cyan);
+}
+
+.ad-card__button {
+    padding: 8px 16px;
+    color: var(--k-text);
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--k-border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.ad-card__button:hover {
+    color: #ffffff;
+    background: rgba(34, 211, 238, 0.1);
+    border-color: rgba(34, 211, 238, 0.5);
+}
+
+/* ---------- Form (job ad modal) ---------- */
+
+label {
+    display: block;
+    margin-top: 14px;
+    color: var(--k-text-soft);
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px 14px;
+    color: var(--k-text);
+    font-size: 0.95rem;
+    font-weight: 400;
+    background: var(--k-input-bg);
+    border: 1px solid rgba(125, 211, 252, 0.18);
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--k-cyan);
+    background: rgba(3, 9, 22, 0.85);
+    box-shadow: var(--k-ring);
+}
+
+textarea {
+    resize: none;
+    height: 90px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(135, 152, 182, 0.75);
+}
+
+.current-candidate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.candidate-favorite-indicator {
+    color: var(--k-star) !important;
+    font-size: 20px;
+    line-height: 1;
+    flex-shrink: 0;
+    text-shadow: 0 0 12px rgba(252, 211, 77, 0.7);
+}
+
+.candidate-favorite-indicator--hidden {
+    display: none !important;
+}

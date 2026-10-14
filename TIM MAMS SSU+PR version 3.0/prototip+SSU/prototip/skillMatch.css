@@ -1,0 +1,50 @@
+/*autor: Anastasija Ljubičić 0312/2023*/
+.skillField {
+    display: inline-block;
+    padding: 8px 18px;
+    margin: 6px;
+    border: 2px solid #f2a65a;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #fff;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.skillField:hover { background: #8b7878; }
+.skillField.selected {
+    background: #f2a65a;
+    color: #fff;
+}
+.customCard{
+    background-color:#f2a65a;
+    color:#000000;
+    border-radius: 20px;
+    border: solid #000000 3px;
+    font-weight: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.careerStar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+.starBtn {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    position: static;
+
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+}
+
+.favoriteCheckbox:checked + .starBtn {
+    color: gold;
+    -webkit-text-stroke: 0px;
+}

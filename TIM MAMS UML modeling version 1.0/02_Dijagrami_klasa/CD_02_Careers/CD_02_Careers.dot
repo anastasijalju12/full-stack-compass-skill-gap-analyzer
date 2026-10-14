@@ -1,0 +1,22 @@
+digraph CD_02_Careers {
+  graph [label="CD_02 – Careers modeli", labelloc=t, rankdir=LR];
+  node [shape=record];
+
+  User [label="{external User|id}"];
+  Career [label="{Career|name; description}"];
+  Skill [label="{Skill|name; description}"];
+  CareerSkill [label="{CareerSkill|composite PK; required_level; weight}"];
+  UserSkill [label="{UserSkill|composite PK; level}"];
+  Resource [label="{Resource|name; url; level}"];
+  CareerProject [label="{CareerProject|name; description; level; file_path}"];
+  FavoriteCareer [label="{FavoriteCareer|composite PK}"];
+
+  Career -> CareerSkill [label="1 : 0..*"];
+  Skill -> CareerSkill [label="1 : 0..*"];
+  User -> UserSkill [label="1 : 0..*"];
+  Skill -> UserSkill [label="1 : 0..*"];
+  Skill -> Resource [label="1 : 0..*"];
+  Career -> CareerProject [label="1 : 0..*"];
+  User -> FavoriteCareer [label="1 : 0..*"];
+  Career -> FavoriteCareer [label="1 : 0..*"];
+}

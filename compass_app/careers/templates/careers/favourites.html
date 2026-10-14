@@ -1,0 +1,117 @@
+<!-- author: Anastasija Ljubičić 0312/2023 -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Kompas - Favorites{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/favourites.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header text-center">
+        <h1 class="display-4">Favorites</h1>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('oglasi')">Job ads</button>
+        <button class="tab-btn" onclick="switchTab('karijere')">Careers</button>
+    </div>
+
+    <div id="panelJoabAds" class="tab-panel active">
+        {% for favourite in favourite_job_ads %}
+        <div class="row justify-content-center mt-3">
+                <div class="col-lg-9 col-12 custom-card d-flex align-items-center gap-4 mb-3 px-4 py-3" id="job-card-{{ favourite.job_ad.id }}">
+
+                <div class="flex-grow-1">
+                    <ul class="list-unstyled mb-0">
+                        <li><h2 class="mt-0 career-name">{{ favourite.job_ad.name }}</h2></li>
+                        <li>Company: <strong>{{ favourite.job_ad.company.name }}</strong></li>
+                        <li>Type: <strong>{{ favourite.job_ad.type }}</strong> &nbsp;|&nbsp; Location: <strong>{{ favourite.job_ad.location }}</strong></li>
+                        {% if favourite.job_ad.application_deadline %}
+                        <li>Deadline: <span class="fw-bold fav-deadline">{{ favourite.job_ad.application_deadline }}</span></li>
+                        {% endif %}
+                        {% if favourite.job_ad.description %}
+                        <li class="mt-2">{{ favourite.job_ad.description }}</li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <div class="d-flex flex-column align-items-center gap-2" style="min-width:130px;">
+                    <button
+                        type="button"
+                        class="button-about-joab-ad pe-3 ps-3 d-block mx-auto"
+                        onclick="toggleFavourite('job', {{ favourite.job_ad.id }}, false); document.getElementById('job-card-{{ favourite.job_ad.id }}').closest('.row').remove();">
+                        Remove
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button-about-joab-ad pe-3 ps-3 d-block mx-auto"
+                        onclick="window.location.href='{% url 'job_ads_candidate_view' %}#job-ad-{{ favourite.job_ad.id }}';">
+                        View
+                    </button>
+                </div>
+
+            </div>
+        </div>
+                    {% empty %}
+        <div class="row justify-content-center mt-3">
+            <div class="col-lg-9 col-12 k-empty">You have no favorite job ads yet.</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="panelCareers" class="tab-panel" style="display:none;">
+        {% for favourite in favourite_careers %}
+        <div class="row justify-content-center mt-3">
+            <div class="col-lg-9 col-12 custom-card d-flex align-items-center gap-4 mb-3 px-4 py-3" id="career-card-{{ favourite.career.id }}">
+
+                <div class="flex-grow-1">
+                    <ul class="list-unstyled mb-0">
+                        <li><h2 class="mt-0 career-name">{{ favourite.career.name }}</h2></li>
+                        {% if favourite.career.description %}
+                        <li class="mt-2">{{ favourite.career.description }}</li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <div class="d-flex flex-column align-items-center gap-2" style="min-width:130px;">
+                    <button
+                        type="button"
+                        class="button-about-joab-ad pe-3 ps-3 d-block mx-auto"
+                        onclick="toggleFavourite('career', {{ favourite.career.id }}, false); document.getElementById('career-card-{{ favourite.career.id }}').closest('.row').remove();">
+                        Remove
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button-about-joab-ad pe-3 ps-3 d-block mx-auto"
+                        onclick="window.location.href='{% url 'careers' %}#career-{{ favourite.career.id }}';">
+                        View
+                    </button>
+                </div>
+
+            </div>
+        </div>
+                    {% empty %}
+        <div class="row justify-content-center mt-3">
+            <div class="col-lg-9 col-12 k-empty">You have no favorite careers yet.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    {% endblock %}
+
+    {% block extra_scripts %}
+    <script>
+    function switchTab(tab) {
+        document.getElementById('panelJoabAds').style.display = (tab === 'oglasi') ? 'block' : 'none';
+        document.getElementById('panelCareers').style.display = (tab === 'karijere') ? 'block' : 'none';
+
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+    </script>
+    <script src="{% static 'js/skill_match.js' %}?v=2"></script>
+    {% endblock %}
